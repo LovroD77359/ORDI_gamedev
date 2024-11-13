@@ -45,7 +45,7 @@ namespace DefaultNamespace
             //movemenmt and jumping
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
 
-            if (Input.GetButtonDown("Jump") && Mathf.Approximately(rb.velocity.y, 0))//
+            if (Input.GetButtonDown("Jump"))// && Mathf.Approximately(rb.velocity.y, 0))
             {
                 rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
             }
