@@ -2,23 +2,38 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+
 
 //materijal playera treba bit zero friction
 
 
-namespace DefaultNamespace
-{
+//namespace DefaultNamespace
+//{
     
-    public class PlayerMovement : MonoBehaviour
+    public class Player2Movement : MonoBehaviour
     {
         private Rigidbody rb;
+        private Collider col;
+        private float distanceToGround;
+        
         [SerializeField] float speed = 10;
         [SerializeField] float jump = 400;
         [SerializeField] Transform cam;
+        
+        
 
+        Boolean isGrounded()
+        {
+            return Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f);
+        }
+        
         void Start()
         {
+            
             rb = GetComponent<Rigidbody>();
+            col = GetComponent<Collider>();
+            distanceToGround = col.bounds.extents.y;
         }
 
 
@@ -26,8 +41,8 @@ namespace DefaultNamespace
         {
             
             //inputs
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
+            float horizontalInput = Input.GetAxis("Horizontal2");
+            float verticalInput = Input.GetAxis("Vertical2");
             
             //camera direction
             Vector3 camForward = cam.forward;
@@ -45,7 +60,7 @@ namespace DefaultNamespace
             //movemenmt and jumping
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
 
-            if (Input.GetButtonDown("Jump") && Mathf.Approximately(rb.velocity.y, 0))//
+            if (Input.GetKeyDown(KeyCode.X) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
             {
                 rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
             }
@@ -57,4 +72,4 @@ namespace DefaultNamespace
         }
 
     }
-}
+//}
