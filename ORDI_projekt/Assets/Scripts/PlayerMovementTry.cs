@@ -4,14 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
-
 //materijal playera treba bit zero friction
 
 
 //namespace DefaultNamespace
 //{
     
-    public class PlayerMovement : MonoBehaviour
+    public class Player1MovementTry : MonoBehaviour
     {
         private Rigidbody rb;
         private Collider col;
@@ -20,7 +19,6 @@ using UnityEngine.InputSystem;
         [SerializeField] float speed = 10;
         [SerializeField] float jump = 400;
         [SerializeField] Transform cam;
-        [SerializeField] String playerTag;
         
         
 
@@ -31,31 +29,44 @@ using UnityEngine.InputSystem;
         
         void Start()
         {
+            InputAssigments newInput = new InputAssigments();
+            newInput.ActMap.Enable();
+            newInput.ActMap.JumpSpace.performed += PlayerJump;
+
+            newInput.ActMap.moveUp.performed += MoveUp;
             
             rb = GetComponent<Rigidbody>();
             col = GetComponent<Collider>();
+            
             distanceToGround = col.bounds.extents.y;
         }
 
+        void MoveUp(InputAction.CallbackContext obj)
+        {
+            
+            Debug.Log("Up pressed");
+        }
 
+
+        private void PlayerJump(InputAction.CallbackContext obj)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+            {
+                rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+                Debug.Log("Jump pressed");
+            }
+            
+        }
+        
+        
+        
+        
         void Update()
         {
             
             //inputs
-            float horizontalInput = 0;
-            float verticalInput = 0; 
-
-            if (playerTag == "Player1")
-            {
-                horizontalInput = Input.GetAxis("Horizontal1");
-                verticalInput = Input.GetAxis("Vertical1"); 
-                
-            }else if (playerTag == "Player2")
-            {
-                horizontalInput = Input.GetAxis("Horizontal2");
-                verticalInput = Input.GetAxis("Vertical2"); 
-            }
-            
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
             
             //camera direction
             Vector3 camForward = cam.forward;
@@ -73,21 +84,11 @@ using UnityEngine.InputSystem;
             //movemenmt and jumping
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
 
-            if (playerTag == "Player1")
-            {
-                if (Input.GetKeyDown(KeyCode.RightShift) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
-                {
-                    rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
-                }
-            }else if (playerTag == "Player2")
-            {
-                if (Input.GetKeyDown(KeyCode.Space) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
-                {
-                    rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
-                }
-            }
-            
-            
+            // if (Input.GetKeyDown(KeyCode.Space) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+            // {
+            //     
+            //     // rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+            // }
             
             if (movementDirection != Vector3.zero)
             {
