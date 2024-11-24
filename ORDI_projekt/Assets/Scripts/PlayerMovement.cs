@@ -95,5 +95,20 @@ using UnityEngine.InputSystem;
             }
         }
 
+        public float getSpeed() {
+            return speed;
+        }
+
+        public float getJump() {
+            return jump;
+        }
+
+        public void setSpeed(float newSpeed) {
+            speed = newSpeed;
+        }
+
+        public void setJump(float newJump){
+            jump = newJump;
+        }
     }
 //}
