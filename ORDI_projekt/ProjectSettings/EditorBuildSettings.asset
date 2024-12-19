@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 44ce9712994b2cc4e93f81886ebb6ca1
   - enabled: 1
+    path: Assets/Scenes/Load Level.unity
+    guid: 03832bf70fd41d9449d10c305635ad17
+  - enabled: 1
     path: Assets/Scenes/Level Predlozak.unity
     guid: 66dd35f881ce8bc44b12e0ec8e6321ea
   m_configObjects: {}
