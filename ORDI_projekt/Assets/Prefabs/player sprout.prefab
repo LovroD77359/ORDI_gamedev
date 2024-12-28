@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4779b3338ec04e2baad1b2fb92b6652b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jump: 8
+  speed: 4.5
+  jump: 8.5
   cam: {fileID: 0}
   playerTag: Player2
 --- !u!114 &7590007903917061335

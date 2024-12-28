@@ -31,7 +31,7 @@ public class SunClimb : MonoBehaviour
 
                         if (climbPosition.y != -1)      // ako imamo validni climb position ide climb, NOTE: dodati neki bool koji kaze da se dogodio climb, da se izbjegne reject animacija
                         {
-                            climb(collider.transform.position);
+                            climb(collider.transform.position, climbPosition);
                         }
                         break;
                     }
@@ -42,13 +42,14 @@ public class SunClimb : MonoBehaviour
     }
 
     // Funkcija koja ostvaruje penjanje
-    void climb(Vector3 sproutPosition)
+    void climb(Vector3 sproutPosition, Vector3 climbPosition)
     {
         //mozda prvo lerp malo blize biljci ako je moguce bit daleko NOTE: je, a treba i rotirat
+        
         // play climb animation
-        transform.position += new Vector3(0, 2, 0);
+        transform.position += new Vector3(0, 2, 0);     // NOTE: ovdje ide lerp prema gore
 
-        // lerp sunce na tu poziciju
+        // lerp sunce na poziciju za silazak
 
     }
 
