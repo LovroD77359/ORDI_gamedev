@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class LoadLevel : MonoBehaviour
 {
+
+    public void Load1()
+    {
+        SceneManager.LoadSceneAsync(2);
+    }
     public void Back() 
     {
         SceneManager.LoadSceneAsync(0);
