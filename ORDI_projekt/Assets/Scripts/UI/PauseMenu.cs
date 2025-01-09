@@ -9,6 +9,11 @@ public class PauseMenu : MonoBehaviour
     public static bool IsGamePaused = false;
     public GameObject PauseMenuUI;
 
+    private void Start()
+    {
+        Resume();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -42,6 +47,13 @@ public class PauseMenu : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
+        IsGamePaused = false;
+    }
+
+    public void Reset()
+    {
+        Scene sceneIndex = SceneManager.GetActiveScene();
+        SceneManager.LoadSceneAsync(sceneIndex.buildIndex);
         IsGamePaused = false;
     }
 }

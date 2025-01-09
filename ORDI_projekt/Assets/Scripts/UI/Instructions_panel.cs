@@ -13,6 +13,8 @@ public class Instructions_panel : MonoBehaviour
     public GameObject Panel2;
     public GameObject Panel3;
     public GameObject Panel4;
+    public GameObject Panel5;
+    public GameObject Panel6;
 
 
     public void Forward() 
@@ -30,6 +32,18 @@ public class Instructions_panel : MonoBehaviour
         panel_number = 1;
     }
 
+    private void Start()
+    {
+        Panel1.gameObject.SetActive(true);
+        Panel2.gameObject.SetActive(false);
+        Panel3.gameObject.SetActive(false);
+        Panel4.gameObject.SetActive(false);
+        Panel5.gameObject.SetActive(false);
+        Panel6.gameObject.SetActive(false);
+        ForwardsButton.gameObject.SetActive(true);
+        BackwardsButton.gameObject.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -40,6 +54,8 @@ public class Instructions_panel : MonoBehaviour
                 Panel2.gameObject.SetActive(false);
                 Panel3.gameObject.SetActive(false);
                 Panel4.gameObject.SetActive(false);
+                Panel5.gameObject.SetActive(false);
+                Panel6.gameObject.SetActive(false);
                 ForwardsButton.gameObject.SetActive(true);
                 BackwardsButton.gameObject.SetActive(false);
                 break;
@@ -48,6 +64,8 @@ public class Instructions_panel : MonoBehaviour
                 Panel2.gameObject.SetActive(true);
                 Panel3.gameObject.SetActive(false);
                 Panel4.gameObject.SetActive(false);
+                Panel5.gameObject.SetActive(false);
+                Panel6.gameObject.SetActive(false);
                 ForwardsButton.gameObject.SetActive(true);
                 BackwardsButton.gameObject.SetActive(true);
                 break;
@@ -56,6 +74,8 @@ public class Instructions_panel : MonoBehaviour
                 Panel2.gameObject.SetActive(false);
                 Panel3.gameObject.SetActive(true);
                 Panel4.gameObject.SetActive(false);
+                Panel5.gameObject.SetActive(false);
+                Panel6.gameObject.SetActive(false);
                 ForwardsButton.gameObject.SetActive(true);
                 BackwardsButton.gameObject.SetActive(true);
                 break;
@@ -64,6 +84,28 @@ public class Instructions_panel : MonoBehaviour
                 Panel2.gameObject.SetActive(false);
                 Panel3.gameObject.SetActive(false);
                 Panel4.gameObject.SetActive(true);
+                Panel5.gameObject.SetActive(false);
+                Panel6.gameObject.SetActive(false);
+                ForwardsButton.gameObject.SetActive(true);
+                BackwardsButton.gameObject.SetActive(true);
+                break;
+            case 5:
+                Panel1.gameObject.SetActive(false);
+                Panel2.gameObject.SetActive(false);
+                Panel3.gameObject.SetActive(false);
+                Panel4.gameObject.SetActive(false);
+                Panel5.gameObject.SetActive(true);
+                Panel6.gameObject.SetActive(false);
+                ForwardsButton.gameObject.SetActive(true);
+                BackwardsButton.gameObject.SetActive(true);
+                break;
+            case 6:
+                Panel1.gameObject.SetActive(false);
+                Panel2.gameObject.SetActive(false);
+                Panel3.gameObject.SetActive(false);
+                Panel4.gameObject.SetActive(false);
+                Panel5.gameObject.SetActive(false);
+                Panel6.gameObject.SetActive(true);
                 ForwardsButton.gameObject.SetActive(false);
                 BackwardsButton.gameObject.SetActive(true);
                 break;
