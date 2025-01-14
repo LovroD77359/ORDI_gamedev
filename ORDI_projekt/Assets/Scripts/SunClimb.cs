@@ -7,10 +7,14 @@ using UnityEngine.UIElements;
 
 public class SunClimb : MonoBehaviour
 {
+    private Animator animator;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -47,6 +51,7 @@ public class SunClimb : MonoBehaviour
         //mozda prvo lerp malo blize biljci ako je moguce bit daleko NOTE: je, a treba i rotirat
         
         // play climb animation
+        animator.SetTrigger("isClimbing");
         transform.position += new Vector3(0, 2, 0);     // NOTE: ovdje ide lerp prema gore
 
         // lerp sunce na poziciju za silazak
