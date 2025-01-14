@@ -16,6 +16,10 @@ using UnityEngine.InputSystem;
         private Rigidbody rb;
         private Collider col;
         private float distanceToGround;
+
+        //ANIMACIJE KOD:
+        private Animator animator;
+        //private bool isRunning = false;
         
         [SerializeField] float speed = 10;
         [SerializeField] float jump = 400;
@@ -26,7 +30,10 @@ using UnityEngine.InputSystem;
 
         Boolean isGrounded()
         {
-            return Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f);
+            Vector3 raycastOrigin = transform.position - new Vector3(0, col.bounds.extents.y, 0);
+            return Physics.Raycast(raycastOrigin, Vector3.down, 0.1f);
+
+
         }
         
         void Start()
@@ -35,6 +42,9 @@ using UnityEngine.InputSystem;
             rb = GetComponent<Rigidbody>();
             col = GetComponent<Collider>();
             distanceToGround = col.bounds.extents.y;
+
+            //ANIMACIJE KOD:
+            animator = GetComponent<Animator>();
         }
 
 
@@ -70,29 +80,58 @@ using UnityEngine.InputSystem;
             
             Vector3 movementDirection = forwardRelative + rightRelative;
 
-            //movemenmt and jumping
+            //movement and jumping
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
+            if (movementDirection.magnitude > 0.1f)
+            {
+                movementDirection = -movementDirection;
+                Quaternion targetRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10);
+            }
+
 
             if (playerTag == "Player1")
             {
                 if (Input.GetKeyDown(KeyCode.RightShift) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
                 {
                     rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+                    animator.SetTrigger("isJumping");
+                    
+
+                }
+
+                //TEST SHINING ANIMACIJA 
+                if (Input.GetKeyDown(KeyCode.LeftShift)){ //PROMIJENI KOJU TIPKU CE STISNUTI
+                    animator.SetTrigger("isShining");
                 }
             }else if (playerTag == "Player2")
             {
                 if (Input.GetKeyDown(KeyCode.Space) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
                 {
                     rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+                    animator.SetTrigger("isJumping");
+                    
                 }
             }
-            
-            
-            
-            if (movementDirection != Vector3.zero)
-            {
-                transform.forward = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+            if (!(isGrounded())){
+                animator.SetTrigger("startFlying");
             }
+            if(isGrounded()){
+                animator.SetTrigger("stopFlying");
+            }
+
+            //kod za animacije:
+            bool isMoving = horizontalInput != 0 || verticalInput != 0;
+            if (isMoving)
+            {
+                animator.SetTrigger("startRunning");
+            }
+            else
+            {
+            animator.SetTrigger("stopRunning");
+            }
+
         }
 
         public float getSpeed() {

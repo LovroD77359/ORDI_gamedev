@@ -4,18 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SproutGrow : MonoBehaviour
+
 {
+
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
+    
+
         {
+
+            //animator.SetTrigger("isGrowing");
+
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f), col => !col.transform.CompareTag("Player")))
             {
@@ -31,6 +41,9 @@ public class SproutGrow : MonoBehaviour
                     transform.rotation = Quaternion.Slerp(transform.rotation, rotateTo, 1);     // NOTE: ovaj slerp je trenutno instant, treba ga namistit da bude animacija kao
 
                     // playaj animaciju rasta biljke NOTE: i naravno dodaj popratne efekte, hitbox ako treba, pa da ude u neko stanje iz kojeg ce ga izbaciti prvi pokret, da se postavi bool neki da je narasla
+                    //ANIMACIJE KOD:
+                    animator.SetTrigger("isGrowing");
+
 
                 }
 
