@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 
 
 //materijal playera treba bit zero friction
+//dodaj veliki colider za glavu
 
+// kamjenje mora imat tag Rock
+// playeri moraju imat tag Player
 
 //namespace DefaultNamespace
 //{
@@ -14,8 +17,20 @@ using UnityEngine.InputSystem;
     public class PlayerMovement : MonoBehaviour
     {
         private Rigidbody rb;
-        private Collider col;
+        public Collider col;
+        //public Collider col2;
+        
+        private List<Collider> colliders = new List<Collider>();
+        
         private float distanceToGround;
+        public Vector3 boxSize;
+        public float maxDistance;
+        public LayerMask groundLayer;
+
+        //public float XCoordOfColiderSphere;
+        public float YCoordOfColiderSphere;
+        //public float ZCoordOfColiderSphere;
+        
 
         //ANIMACIJE KOD:
         private Animator animator;
@@ -25,15 +40,60 @@ using UnityEngine.InputSystem;
         [SerializeField] float jump = 400;
         [SerializeField] Transform cam;
         [SerializeField] String playerTag;
-        
-        
+
+
+        Boolean jumpingAllowed()
+        {
+            if (colliders.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+       
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Rock") || other.CompareTag("Player"))
+            {
+                colliders.Add(other);
+                
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Rock") || other.CompareTag("Player"))
+            {
+                colliders.Remove(other);
+                
+            }
+        }
+    
 
         Boolean isGrounded()
         {
-            Vector3 raycastOrigin = transform.position - new Vector3(0, col.bounds.extents.y, 0);
-            return Physics.Raycast(raycastOrigin, Vector3.down, 0.1f);
-
-
+            
+            boxSize = col.bounds.extents;
+            maxDistance = 0.1f;
+            
+            
+            bool grounded = Physics.BoxCast(transform.position, boxSize, -transform.up, transform.rotation, maxDistance, groundLayer);
+            
+            if (grounded)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+         
         }
         
         void Start()
@@ -44,7 +104,7 @@ using UnityEngine.InputSystem;
             distanceToGround = col.bounds.extents.y;
 
             //ANIMACIJE KOD:
-            animator = GetComponent<Animator>();
+             animator = GetComponent<Animator>();//komentirano za testiranje
         }
 
 
@@ -92,10 +152,22 @@ using UnityEngine.InputSystem;
 
             if (playerTag == "Player1")
             {
-                if (Input.GetKeyDown(KeyCode.RightShift) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+                if (Input.GetKeyDown(KeyCode.RightShift) && isGrounded())
                 {
-                    rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
-                    animator.SetTrigger("isJumping");
+
+                    if (jumpingAllowed())
+                    {
+                        rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+                        animator.SetTrigger("isJumping");
+                    }
+                    else
+                    {
+                        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                        
+                    }
+                    
+                    
+                    
                     
 
                 }
@@ -106,7 +178,7 @@ using UnityEngine.InputSystem;
                 }
             }else if (playerTag == "Player2")
             {
-                if (Input.GetKeyDown(KeyCode.Space) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+                if (Input.GetKeyDown(KeyCode.Space) && isGrounded() && jumpingAllowed())//Input.GetButtonDown("Jump") && isGrounded()
                 {
                     rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
                     animator.SetTrigger("isJumping");
