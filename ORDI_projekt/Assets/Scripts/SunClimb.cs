@@ -7,16 +7,25 @@ using UnityEngine.UIElements;
 
 public class SunClimb : MonoBehaviour
 {
+    public GameObject sprout;
+    public bool isClimbing = false;
+
+    private bool climbSuccess = false;
+    private Animator animator;
+    private SproutGrow sproutGrow;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        sproutGrow = sprout.GetComponent<SproutGrow>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.RightShift))
         {
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad sunca neki objekt koji nije player (jer ce sunce uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f), col => !col.transform.CompareTag("Player")))
@@ -24,75 +33,85 @@ public class SunClimb : MonoBehaviour
                 Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);        // trazimo collidere oko sunca NOTE: igrat se s ovim radijusom
                 foreach (Collider collider in colliders)
                 {
-                    if (collider.transform.CompareTag("Player") && collider.transform != transform)     // ako je objekt player i nije sunce (sebe detektira) NOTE: dodati uvjet da je biljka narasla
+                    if (collider.transform.CompareTag("Player") && collider.transform != transform)     // ako je objekt player i nije sunce (sebe detektira)
                     {
-                        // nadi prihvatljivu poziciju za "sici" s biljke na pod
-                        Vector3 climbPosition = findClimbPosition(collider.transform.position);     // NOTE: possibly mozemo ovo sve olaksati i climb position utvrditi kod biljke, pa ga nekako passati tu
-
-                        if (climbPosition.y != -1)      // ako imamo validni climb position ide climb, NOTE: dodati neki bool koji kaze da se dogodio climb, da se izbjegne reject animacija
+                        if (sproutGrow.isGrown)         // i ako je biljka narasla
                         {
-                            climb(collider.transform.position, climbPosition);
+                            // dohvati prihvatljivu poziciju za "sici" s biljke na pod
+                            Vector3 climbPosition = sproutGrow.climbPosition;
+
+                            if (climbPosition.y != -1)      // ako imamo validni climb position ide climb
+                            {
+                                StartCoroutine(climb(collider.transform.position, climbPosition));
+                                climbSuccess = true;
+                            }
                         }
+                        else { Debug.Log("biljka nije narasla"); }
                         break;
                     }
                 }
             }
             else { Debug.Log("iznad glave"); }
+            if (!climbSuccess)
+            {
+                // NOTE: tu ide reject animacija
+            }
+            climbSuccess = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            transform.position = transform.position + new Vector3(0, 1.25f, 0);
         }
     }
 
     // Funkcija koja ostvaruje penjanje
-    void climb(Vector3 sproutPosition, Vector3 climbPosition)
+    IEnumerator climb(Vector3 sproutPosition, Vector3 climbPosition)
     {
-        //mozda prvo lerp malo blize biljci ako je moguce bit daleko NOTE: je, a treba i rotirat
-        
+        isClimbing = true;
+
+        // NOTE: animacija koja priblizi biljci? / lerp za pocetak penjanja
+        Vector3 sproutDirection = (sproutPosition - transform.position).normalized;
+        sproutDirection.y = 0;
+        Quaternion rotateTo = Quaternion.LookRotation(sproutDirection);
+        Quaternion initialRotation = transform.rotation;
+        for (int i = 0; i < 60; i++)
+        {
+            transform.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema biljci (rotacija)
+            yield return null;
+        }
+        //int rotationDirection;        // neki attempt za rb move, al why fix it
+        //if ((rotateTo.y - transform.rotation.y + 360) % 360 < 180)
+        //{
+        //    rotationDirection = 1;
+        //}
+        //else { rotationDirection = -1; }
+        //Quaternion deltaRotation = Quaternion.Euler(rotationDirection * new Vector3(0, 90, 0) * Time.fixedDeltaTime);
+        //while (Math.Abs(transform.rotation.y - rotateTo.y) > 0.5)
+        //{
+        //    rb.MoveRotation(transform.rotation * deltaRotation);
+        //    yield return null;
+        //}
+
         // play climb animation
-        transform.position += new Vector3(0, 2, 0);     // NOTE: ovdje ide lerp prema gore
-
-        // lerp sunce na poziciju za silazak
-
-    }
-
-    // Funkcija koja trazi prihvatljivu poziciju za popeti se, odnosno "sici" s biljke
-    Vector3 findClimbPosition(Vector3 position)
-    {
-        // sortiramo smjerove (x+-, z+-) po tome koji je najblizi trenutnoj poziciji biljke
-        Vector3[] directions;
-        var x_dif = Mathf.Round(position.x) - position.x;   // utvrdujemo je li diferencijal od najblize cijele koord po x/z osi pozitivan ili negativan
-        var z_dif = Mathf.Round(position.z) - position.z;
-
-        if (Mathf.Abs(x_dif) < Mathf.Abs(z_dif))    // utvrdujemo koji je manji diferencijal
+        //animator.SetTrigger("isClimbing");
+        Vector3 initialPosition = transform.position;
+        for (int i = 0; i < 240; i++)
         {
-            directions = new Vector3[]
-            {
-                    new(x_dif/Mathf.Abs(x_dif), 1, 0), new(0, 1, z_dif/Mathf.Abs(z_dif)),       // punimo polje s vektorima (1, 1.5, 0), (-1, 1.5, 0), (0, 1.5, 1) i (0, 1.5, -1), sortirano po udaljenosti
-                    new(0, 1, -z_dif/Mathf.Abs(z_dif)), new(-x_dif/Mathf.Abs(x_dif), 1, 0)
-            };
-        }
-        else
-        {
-            directions = new Vector3[]
-            {
-                    new(0, 1, z_dif/Mathf.Abs(z_dif)), new(x_dif/Mathf.Abs(x_dif), 1, 0),
-                    new(-x_dif/Mathf.Abs(x_dif), 1, 0), new(0, 1, -z_dif/Mathf.Abs(z_dif))
-            };
+            transform.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), (float)(i + 1) / 240);     // lerp prema gore
+            yield return null;
         }
 
-        position = centerPosition(position);
-
-        // provjeravamo sad u tim smjerovima jesu li ostvareni uvjeti da se tamo moze popeti
-        for (int i = 0; i < directions.Length; i++)
+        // play dismount animation
+        initialPosition = transform.position;
+        for (int i = 0; i < 120; i++)
         {
-            if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("ClimbableTerrain")) &&    // da postoji blok koji je climbable terrain NOTE: treba dodat tagove
-                Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f).Length == 0)     // da ne postoji collider iznad koji bi blokirao, moze se stavit not exists not tag decoration npr
-            {
-                Debug.Log("climbing pozicija na: " + (position + directions[i] + new Vector3(0, 1, 0)).ToString());
-                return position + directions[i] + new Vector3(0, 1, 0);     // vracamo odgovarajucu poziciju
-            }
+            transform.position = Vector3.Lerp(initialPosition, climbPosition, (float)(i+1) / 120);     // lerp sunce na poziciju za silazak
+            yield return null;
         }
 
-        Debug.Log("nema climbing pozicije");
-        return new Vector3(-1, -1, -1);     // nema prikladne pozicije za penjanje
+        isClimbing = false;
+
     }
 
     // Funkcija koja centrira danu poziciju (na 0.5)

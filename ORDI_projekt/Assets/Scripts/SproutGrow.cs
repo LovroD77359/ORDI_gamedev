@@ -5,22 +5,30 @@ using UnityEngine;
 
 public class SproutGrow : MonoBehaviour
 {
+    public bool isGrown = false;
+    [HideInInspector] public Vector3 climbPosition = new Vector3(-1, -1, -1);
+
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
+            //animator.SetTrigger("isGrowing");
+
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f), col => !col.transform.CompareTag("Player")))
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
-                Vector3 climbPosition = findClimbPosition(transform.position);
+                climbPosition = findClimbPosition(transform.position);
 
                 if (climbPosition.y != -1)      // ako postoji validni climb position
                 {
@@ -30,14 +38,18 @@ public class SproutGrow : MonoBehaviour
                     Quaternion rotateTo = Quaternion.LookRotation(climbDirection);
                     transform.rotation = Quaternion.Slerp(transform.rotation, rotateTo, 1);     // NOTE: ovaj slerp je trenutno instant, treba ga namistit da bude animacija kao
 
-                    // playaj animaciju rasta biljke NOTE: i naravno dodaj popratne efekte, hitbox ako treba, pa da ude u neko stanje iz kojeg ce ga izbaciti prvi pokret, da se postavi bool neki da je narasla
-
+                    // playaj animaciju rasta biljke NOTE: i naravno dodaj popratne efekte, hitbox ako treba, pa da ude u neko stanje iz kojeg ce ga izbaciti prvi pokret
+                    isGrown = true;
+                    //ANIMACIJE KOD:
+                    animator.SetTrigger("isGrowing");
                 }
-
-                transform.position = transform.position + new Vector3(0, 1, 0);
             }
 
 
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            transform.position = transform.position + new Vector3(0, 1.25f, 0);
         }
     }
 
@@ -53,7 +65,7 @@ public class SproutGrow : MonoBehaviour
         {
             directions = new Vector3[]
             {
-                    new(x_dif/Mathf.Abs(x_dif), 1, 0), new(0, 1, z_dif/Mathf.Abs(z_dif)),       // punimo polje s vektorima (1, 1.5, 0), (-1, 1.5, 0), (0, 1.5, 1) i (0, 1.5, -1), sortirano po udaljenosti
+                    new(x_dif/Mathf.Abs(x_dif), 1, 0), new(0, 1, z_dif/Mathf.Abs(z_dif)),       // punimo polje s vektorima (1, 1, 0), (-1, 1, 0), (0, 1, 1) i (0, 1, -1), sortirano po udaljenosti
                     new(0, 1, -z_dif/Mathf.Abs(z_dif)), new(-x_dif/Mathf.Abs(x_dif), 1, 0)
             };
         }
@@ -71,6 +83,7 @@ public class SproutGrow : MonoBehaviour
         // provjeravamo sad u tim smjerovima jesu li ostvareni uvjeti da se tamo moze sunce popeti
         for (int i = 0; i < directions.Length; i++)
         {
+            Debug.Log(directions[i]);
             if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("ClimbableTerrain")) &&    // da postoji blok koji je climbable terrain NOTE: treba dodat tagove
                 Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f).Length == 0)     // da ne postoji collider iznad koji bi blokirao, moze se stavit not exists not tag decoration npr
             {

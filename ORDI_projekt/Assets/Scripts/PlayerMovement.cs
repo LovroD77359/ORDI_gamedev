@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 
 
 //materijal playera treba bit zero friction
+//dodaj veliki colider za glavu
 
+// kamjenje mora imat tag Rock
+// playeri moraju imat tag Player
 
 //namespace DefaultNamespace
 //{
@@ -14,27 +17,110 @@ using UnityEngine.InputSystem;
     public class PlayerMovement : MonoBehaviour
     {
         private Rigidbody rb;
-        private Collider col;
+        public Collider col;
+        //public Collider col2;
+        
+        private List<Collider> colliders = new List<Collider>();
+        
         private float distanceToGround;
+        private Vector3 boxSize;
+        private float maxDistance;
+        private int isGrounded = 0;
+        private bool jumpingAllowed = true;
+        public LayerMask groundLayer;
+
+        //public float XCoordOfColiderSphere;
+        //public float YCoordOfColiderSphere;
+        //public float ZCoordOfColiderSphere;
+        
+
+        //ANIMACIJE KOD:
+        private Animator animator;
+        //private bool isRunning = false;
         
         [SerializeField] float speed = 10;
         [SerializeField] float jump = 400;
         [SerializeField] Transform cam;
         [SerializeField] String playerTag;
+
+
+        // Boolean jumpingAllowed()
+        // {
+        //     if (colliders.Count == 0)
+        //     {
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         return false;
+        //     }
+        // }
+        
+       
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Rock") || other.CompareTag("Player") )
+            {
+                //colliders.Add(other);
+                jumpingAllowed = false;
+                isGrounded++;
+            }
+        
+            if (other.CompareTag("Ground"))
+            {
+                isGrounded++;
+            }
+        }
         
         
 
-        Boolean isGrounded()
+        private void OnTriggerExit(Collider other)
         {
-            return Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f);
+            if (other.CompareTag("Rock") || other.CompareTag("Player"))
+            {
+                //colliders.Remove(other);
+                jumpingAllowed = true;
+                isGrounded--;
+
+            }
+            
+            if (other.CompareTag("Ground"))
+            {
+                isGrounded--;
+            }
         }
         
+
+        // Boolean isGrounded()
+        // {
+        //     boxSize = col.bounds.extents;
+        //     
+        //     maxDistance = 0.1f;
+        //     bool grounded = Physics.BoxCast(col.transform.position, 
+        //                                     boxSize, 
+        //                                     -transform.up, 
+        //                                     transform.rotation, 
+        //                                     maxDistance, 
+        //                                     groundLayer);
+        //     if (grounded)
+        //     {
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         return false;
+        //     }
+        // }
+        //
         void Start()
         {
             
             rb = GetComponent<Rigidbody>();
             col = GetComponent<Collider>();
             distanceToGround = col.bounds.extents.y;
+
+            //ANIMACIJE KOD:
+             animator = GetComponent<Animator>();//komentirano za testiranje
         }
 
 
@@ -70,29 +156,73 @@ using UnityEngine.InputSystem;
             
             Vector3 movementDirection = forwardRelative + rightRelative;
 
-            //movemenmt and jumping
+            //movement and jumping
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
+            if (movementDirection.magnitude > 0.1f)
+            {
+                movementDirection = -movementDirection;
+                Quaternion targetRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10);
+            }
+
 
             if (playerTag == "Player1")
             {
-                if (Input.GetKeyDown(KeyCode.RightShift) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+                if (Input.GetKeyDown(KeyCode.Return) && isGrounded != 0)//Input.GetButtonDown("Jump") && isGrounded()
                 {
-                    rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+
+                    if (jumpingAllowed)
+                    {
+                        rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+                        animator.SetTrigger("isJumping");
+                    }
+                    else
+                    {
+                        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                        
+                    }
+                    
+                }
+
+                //TEST SHINING ANIMACIJA 
+                if (Input.GetKeyDown(KeyCode.LeftShift)){ //PROMIJENI KOJU TIPKU CE STISNUTI
+                    animator.SetTrigger("isShining");
                 }
             }else if (playerTag == "Player2")
             {
-                if (Input.GetKeyDown(KeyCode.Space) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+                if (Input.GetKeyDown(KeyCode.Space) && isGrounded != 0)//Input.GetButtonDown("Jump") && isGrounded()
                 {
-                    rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+                    if (jumpingAllowed)
+                    {
+                        rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+                        animator.SetTrigger("isJumping");
+                    }
+                    else
+                    {
+                        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                        
+                    }
                 }
             }
-            
-            
-            
-            if (movementDirection != Vector3.zero)
-            {
-                transform.forward = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+            if (isGrounded == 0){
+                animator.SetTrigger("startFlying");
             }
+            if(isGrounded != 0){
+                animator.SetTrigger("stopFlying");
+            }
+
+            //kod za animacije:
+            bool isMoving = horizontalInput != 0 || verticalInput != 0;
+            if (isMoving)
+            {
+                animator.SetTrigger("startRunning");
+            }
+            else
+            {
+            animator.SetTrigger("stopRunning");
+            }
+
         }
 
         public float getSpeed() {
