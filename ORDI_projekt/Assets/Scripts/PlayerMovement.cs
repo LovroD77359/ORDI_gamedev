@@ -92,7 +92,7 @@ using UnityEngine.InputSystem;
 
             if (playerTag == "Player1")
             {
-                if (Input.GetKeyDown(KeyCode.RightShift) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+                if (Input.GetKeyDown(KeyCode.Return) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
                 {
                     rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
                     animator.SetTrigger("isJumping");
