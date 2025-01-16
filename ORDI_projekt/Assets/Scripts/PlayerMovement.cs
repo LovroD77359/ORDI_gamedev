@@ -168,7 +168,7 @@ using UnityEngine.InputSystem;
 
             if (playerTag == "Player1")
             {
-                if (Input.GetKeyDown(KeyCode.Return) && isGrounded())//Input.GetButtonDown("Jump") && isGrounded()
+                if (Input.GetKeyDown(KeyCode.Return) && isGrounded != 0)//Input.GetButtonDown("Jump") && isGrounded()
                 {
 
                     if (jumpingAllowed)
