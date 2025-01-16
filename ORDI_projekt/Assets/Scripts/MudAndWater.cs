@@ -39,10 +39,10 @@ public class DiscriminativeMediums : MonoBehaviour
         if (collider.gameObject == affectedPlayer)
         {
             playerMovement.setSpeed(ogSpeed);
-            playerMovement.setJump(ogJump);
-        }
+            playerMovement.setJump(ogJump); 
+        }
         //else{
         //    Physics.IgnoreCollision(collider, objectCollider, false);
         //}
-    }
+        }
 }
