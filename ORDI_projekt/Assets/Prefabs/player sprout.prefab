@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1772470361566927847}
   - component: {fileID: 6615155675192303237}
   - component: {fileID: 7590007903917061335}
+  - component: {fileID: 8582927049238696904}
   m_Layer: 0
   m_Name: player sprout
   m_TagString: Player
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4.5
-  jump: 8.5
+  jump: 8
   cam: {fileID: 0}
   playerTag: Player2
 --- !u!114 &7590007903917061335
@@ -179,3 +180,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960d03d77a3210349b02895f7c8138c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrown: 0
+  climbPosition: {x: -1, y: -1, z: -1}
+--- !u!114 &8582927049238696904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7733978788795416297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db45b6bd493d5a44c81398b87e148696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClimbing: 0

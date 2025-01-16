@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 389646991689999236}
   - component: {fileID: 2977970551108784710}
   - component: {fileID: 8442111169716243715}
+  - component: {fileID: 8457511115805478194}
   m_Layer: 0
   m_Name: player sun
   m_TagString: Player
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4.5
-  jump: 8.5
+  jump: 8
   cam: {fileID: 0}
   playerTag: Player1
 --- !u!114 &8442111169716243715
@@ -177,5 +178,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa186db88468f8048b5e428baf29174d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprout: {fileID: 0}
+  isClimbing: 0
+--- !u!114 &8457511115805478194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8452516046131386992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1d8c3919921d24f893bd28961ffb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
