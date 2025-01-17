@@ -84,7 +84,7 @@ public class SproutGrow : MonoBehaviour
         for (int i = 0; i < directions.Length; i++)
         {
             Debug.Log(directions[i]);
-            if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("ClimbableTerrain")) &&    // da postoji blok koji je climbable terrain NOTE: treba dodat tagove
+            if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("Ground")) &&    // da postoji blok koji je climbable terrain
                 Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f).Length == 0)     // da ne postoji collider iznad koji bi blokirao, moze se stavit not exists not tag decoration npr
             {
                 Debug.Log("climbing pozicija na: " + (position + directions[i] + new Vector3(0, 1, 0)).ToString());
