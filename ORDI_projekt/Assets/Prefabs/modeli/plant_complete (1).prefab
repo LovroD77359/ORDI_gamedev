@@ -18,35 +18,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.147528
+      value: 7.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.76540905
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.044191685
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6398449
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.05286391
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 7.776
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -79.692
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -358.59
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       propertyPath: m_Name
@@ -78,6 +78,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       insertIndex: -1
       addedObject: {fileID: 42318235146706949}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2395667864718765581}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8538454219374838882}
@@ -118,7 +121,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &42318235146706949
 BoxCollider:
@@ -139,8 +142,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8364848, y: 3.424822, z: 1.6116428}
-  m_Center: {x: 0.04189003, y: -0.02517605, z: 0.0002212524}
+  m_Size: {x: 1.25, y: 3.5, z: 1}
+  m_Center: {x: 0.04, y: -0.7, z: 0}
+--- !u!65 &2395667864718765581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456859200796673777}
+  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.25, y: 0.3, z: 1}
+  m_Center: {x: 0.04, y: -2.45, z: 0}
 --- !u!114 &8538454219374838882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +177,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4779b3338ec04e2baad1b2fb92b6652b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jump: 13
+  col: {fileID: 2395667864718765581}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  speed: 4.5
+  jump: 8
   cam: {fileID: 0}
   playerTag: Player2
 --- !u!95 &441481678741490998
@@ -190,3 +218,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960d03d77a3210349b02895f7c8138c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrown: 0
+  climbPosition: {x: -1, y: -1, z: -1}

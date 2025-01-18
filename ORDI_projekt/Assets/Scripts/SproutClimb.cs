@@ -37,8 +37,9 @@ public class SproutClimb : MonoBehaviour
                         if (hookPlantScript.isGrown)         // i ako je hook plant narastao
                         {
                             // dohvati prihvatljivu poziciju za "sici" na pod pored hook planta
-                            Vector3 climbPosition = centerPosition(collider.transform.position);
-                            StartCoroutine(climb(collider.transform.position, climbPosition));      // ide climb
+                            Vector3 climbPosition = centerPosition(collider.transform.position) + new Vector3(0, 0.625f, 0);
+                            Debug.Log(climbPosition);
+                            StartCoroutine(climb(climbPosition));      // ide climb
                             climbSuccess = true;
                         }
                         else { Debug.Log("hook plant nije narastao"); }
@@ -56,34 +57,34 @@ public class SproutClimb : MonoBehaviour
     }
 
     // Funkcija koja ostvaruje penjanje
-    IEnumerator climb(Vector3 hookPlantPosition, Vector3 climbPosition)
+    IEnumerator climb(Vector3 climbPosition)
     {
         isClimbing = true;
 
-        Vector3 hookPlantDirection = (hookPlantPosition - transform.position).normalized;
-        hookPlantDirection.y = 0;
-        Quaternion rotateTo = Quaternion.LookRotation(hookPlantDirection);
-        Quaternion initialRotation = transform.rotation;
+        Vector3 climbDirection = (climbPosition - transform.position).normalized;
+        climbDirection.y = 0;
+        Quaternion rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(climbDirection).eulerAngles.y - 180, 0));
+        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotateTo, 1);
+        Quaternion initialRotation = transform.parent.rotation;
         for (int i = 0; i < 60; i++)
         {
-            transform.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema hook plantu (rotacija)
+            transform.parent.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema hook plantu (rotacija)
             yield return null;
         }
 
         // play climb animation
         //animator.SetTrigger("isClimbing");
-        Vector3 initialPosition = transform.position;
+        Vector3 initialPosition = transform.parent.position;
         for (int i = 0; i < 240; i++)
         {
-            transform.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), (float)(i + 1) / 240);     // lerp prema gore
+            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), (float)(i + 1) / 240);     // lerp prema gore
             yield return null;
         }
 
         // play dismount animation
-        initialPosition = transform.position;
         for (int i = 0; i < 120; i++)
         {
-            transform.position = Vector3.Lerp(initialPosition, climbPosition, (float)(i+1) / 120);     // lerp sunce na poziciju za silazak
+            transform.parent.position = Vector3.Lerp(initialPosition + new Vector3(0, 2, 0), climbPosition, (float)(i+1) / 120);     // lerp sunce na poziciju za silazak
             yield return null;
         }
 

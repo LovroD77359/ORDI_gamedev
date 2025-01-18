@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class SunClimb : MonoBehaviour
 {
-    public GameObject sprout;
+    public GameObject sproutScriptCarrier;
     public bool isClimbing = false;
 
     private bool climbSuccess = false;
@@ -19,7 +19,7 @@ public class SunClimb : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        sproutGrow = sprout.GetComponent<SproutGrow>();
+        sproutGrow = sproutScriptCarrier.GetComponent<SproutGrow>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class SunClimb : MonoBehaviour
                 Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);        // trazimo collidere oko sunca NOTE: igrat se s ovim radijusom
                 foreach (Collider collider in colliders)
                 {
-                    if (collider.transform.CompareTag("Player") && collider.transform != transform)     // ako je objekt player i nije sunce (sebe detektira)
+                    if (collider.transform.CompareTag("Player") && collider.transform != transform.parent)     // ako je objekt player i nije sunce (sebe detektira)
                     {
                         if (sproutGrow.isGrown)         // i ako je biljka narasla
                         {
@@ -42,7 +42,7 @@ public class SunClimb : MonoBehaviour
 
                             if (climbPosition.y != -1)      // ako imamo validni climb position ide climb
                             {
-                                StartCoroutine(climb(collider.transform.position, climbPosition));
+                                StartCoroutine(climb(sproutScriptCarrier.transform.position, climbPosition));
                                 climbSuccess = true;
                             }
                         }
@@ -58,11 +58,6 @@ public class SunClimb : MonoBehaviour
             }
             climbSuccess = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            transform.position = transform.position + new Vector3(0, 1.25f, 0);
-        }
     }
 
     // Funkcija koja ostvaruje penjanje
@@ -73,40 +68,32 @@ public class SunClimb : MonoBehaviour
         // NOTE: animacija koja priblizi biljci? / lerp za pocetak penjanja
         Vector3 sproutDirection = (sproutPosition - transform.position).normalized;
         sproutDirection.y = 0;
-        Quaternion rotateTo = Quaternion.LookRotation(sproutDirection);
-        Quaternion initialRotation = transform.rotation;
+        Quaternion rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(sproutDirection).eulerAngles.y - 180, 0));
+        Quaternion initialRotation = transform.parent.rotation;
         for (int i = 0; i < 60; i++)
         {
-            transform.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema biljci (rotacija)
+            transform.parent.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema biljci (rotacija)
             yield return null;
         }
-        //int rotationDirection;        // neki attempt za rb move, al why fix it
-        //if ((rotateTo.y - transform.rotation.y + 360) % 360 < 180)
-        //{
-        //    rotationDirection = 1;
-        //}
-        //else { rotationDirection = -1; }
-        //Quaternion deltaRotation = Quaternion.Euler(rotationDirection * new Vector3(0, 90, 0) * Time.fixedDeltaTime);
-        //while (Math.Abs(transform.rotation.y - rotateTo.y) > 0.5)
-        //{
-        //    rb.MoveRotation(transform.rotation * deltaRotation);
-        //    yield return null;
-        //}
 
         // play climb animation
         //animator.SetTrigger("isClimbing");
-        Vector3 initialPosition = transform.position;
+        Vector3 initialPosition = transform.parent.position;
         for (int i = 0; i < 240; i++)
         {
-            transform.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), (float)(i + 1) / 240);     // lerp prema gore
+            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2.38f, 0), (float)(i + 1) / 240);     // lerp prema gore
             yield return null;
         }
 
+        Vector3 climbDirection = (climbPosition - transform.position).normalized;
+        climbDirection.y = 0;
+        rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(climbDirection).eulerAngles.y - 180, 0));
+        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotateTo, 1);
+
         // play dismount animation
-        initialPosition = transform.position;
         for (int i = 0; i < 120; i++)
         {
-            transform.position = Vector3.Lerp(initialPosition, climbPosition, (float)(i+1) / 120);     // lerp sunce na poziciju za silazak
+            transform.parent.position = Vector3.Lerp(initialPosition + new Vector3(0, 2.38f, 0), climbPosition, (float)(i + 1) / 120);     // lerp sunce na poziciju za silazak
             yield return null;
         }
 

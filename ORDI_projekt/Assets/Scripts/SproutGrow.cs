@@ -35,8 +35,8 @@ public class SproutGrow : MonoBehaviour
                     // rotiraj biljku prema zidu na koji ce se sunce penjati
                     Vector3 climbDirection = (climbPosition - transform.position).normalized;
                     climbDirection.y = 0;
-                    Quaternion rotateTo = Quaternion.LookRotation(climbDirection);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, rotateTo, 1);     // NOTE: ovaj slerp je trenutno instant, treba ga namistit da bude animacija kao
+                    Quaternion rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(climbDirection).eulerAngles.y - 180, 0));
+                    transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotateTo, 1);     // NOTE: ovaj slerp je trenutno instant, treba ga namistit da bude animacija kao
 
                     // playaj animaciju rasta biljke NOTE: i naravno dodaj popratne efekte, hitbox ako treba, pa da ude u neko stanje iz kojeg ce ga izbaciti prvi pokret
                     isGrown = true;
@@ -46,10 +46,6 @@ public class SproutGrow : MonoBehaviour
             }
 
 
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            transform.position = transform.position + new Vector3(0, 1.25f, 0);
         }
     }
 
@@ -83,12 +79,11 @@ public class SproutGrow : MonoBehaviour
         // provjeravamo sad u tim smjerovima jesu li ostvareni uvjeti da se tamo moze sunce popeti
         for (int i = 0; i < directions.Length; i++)
         {
-            Debug.Log(directions[i]);
             if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("Ground")) &&    // da postoji blok koji je climbable terrain
-                Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f).Length == 0)     // da ne postoji collider iznad koji bi blokirao, moze se stavit not exists not tag decoration npr
+                !Array.Exists(Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f), col => col.transform.CompareTag("Ground")))     // da ne postoji blok iznad koji bi blokirao
             {
                 Debug.Log("climbing pozicija na: " + (position + directions[i] + new Vector3(0, 1, 0)).ToString());
-                return position + directions[i] + new Vector3(0, 1, 0);     // vracamo odgovarajucu poziciju
+                return position + directions[i] + new Vector3(0, 1.38f, 0);     // vracamo odgovarajucu poziciju
             }
         }
 

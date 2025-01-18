@@ -184,11 +184,8 @@ using UnityEngine.InputSystem;
                     
                 }
 
-                //TEST SHINING ANIMACIJA 
-                if (Input.GetKeyDown(KeyCode.LeftShift)){ //PROMIJENI KOJU TIPKU CE STISNUTI
-                    animator.SetTrigger("isShining");
-                }
-            }else if (playerTag == "Player2")
+            } 
+            else if (playerTag == "Player2")
             {
                 if (Input.GetKeyDown(KeyCode.Space) && isGrounded != 0)//Input.GetButtonDown("Jump") && isGrounded()
                 {
