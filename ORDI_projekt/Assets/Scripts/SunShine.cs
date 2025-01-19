@@ -11,6 +11,7 @@ public class SunShine : MonoBehaviour
     private Light light;
     private bool isShining = false;
     private HookPlantTrack hookPlantScript;
+    private Animator hookPlantAnimator;
 
 
     // Start is called before the first frame update
@@ -33,8 +34,7 @@ public class SunShine : MonoBehaviour
             {
                 if (collider.transform.CompareTag("HookPlant"))     // ako smo nasli hook plant
                 {
-                    hookPlantScript = collider.GetComponent<HookPlantTrack>();      // postavljamo mu isGrown na true
-                    hookPlantScript.isGrown = true;
+                    StartCoroutine(growPlant(collider));
                 }
             }
         }
@@ -61,6 +61,15 @@ public class SunShine : MonoBehaviour
         }
 
         isShining = false;
+    }
+
+    IEnumerator growPlant(Collider collider)
+    {
+        hookPlantAnimator = collider.GetComponent<Animator>();
+        hookPlantAnimator.SetTrigger("isGrowing");
+        yield return new WaitForSeconds(3);
+        hookPlantScript = collider.GetComponent<HookPlantTrack>();      // postavljamo mu isGrown na true
+        hookPlantScript.isGrown = true;
     }
 }
 

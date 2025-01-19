@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db45b6bd493d5a44c81398b87e148696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isClimbing: 0
 --- !u!1001 &4780599792904077801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,7 +265,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  speed: 4.5
+  inputDisabled: 0
+  speed: 3.75
   jump: 8
   cam: {fileID: 0}
   playerTag: Player2

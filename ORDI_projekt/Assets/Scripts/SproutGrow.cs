@@ -14,7 +14,6 @@ public class SproutGrow : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame

@@ -8,17 +8,20 @@ using UnityEngine.UIElements;
 public class SunClimb : MonoBehaviour
 {
     public GameObject sproutScriptCarrier;
-    public bool isClimbing = false;
 
-    private bool climbSuccess = false;
     private Animator animator;
+    private PlayerMovement movementScript;
+    private PlayerMovement sproutMovementScript;
     private SproutGrow sproutGrow;
+    private bool climbSuccess = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        movementScript = GetComponentInParent<PlayerMovement>();
+        sproutMovementScript = sproutScriptCarrier.GetComponentInParent<PlayerMovement>();
         sproutGrow = sproutScriptCarrier.GetComponent<SproutGrow>();
     }
 
@@ -63,7 +66,8 @@ public class SunClimb : MonoBehaviour
     // Funkcija koja ostvaruje penjanje
     IEnumerator climb(Vector3 sproutPosition, Vector3 climbPosition)
     {
-        isClimbing = true;
+        movementScript.inputDisabled = true;
+        sproutMovementScript.inputDisabled = true;
 
         // NOTE: animacija koja priblizi biljci? / lerp za pocetak penjanja
         Vector3 sproutDirection = (sproutPosition - transform.position).normalized;
@@ -97,7 +101,8 @@ public class SunClimb : MonoBehaviour
             yield return null;
         }
 
-        isClimbing = false;
+        movementScript.inputDisabled = false;
+        sproutMovementScript.inputDisabled = false;
 
     }
 

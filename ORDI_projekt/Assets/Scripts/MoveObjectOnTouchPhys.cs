@@ -9,8 +9,9 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
     public float targetZ;                // Ciljna pozicija Z osi
     public float moveSpeed = 2.0f;       // Brzina pomicanja platforme
 
-    private float correctionOffset;
+    private Animator animator;
     private Rigidbody rb;
+    private float correctionOffset;
     private Vector3 initialPosition;     // Početna pozicija platforme
     private Vector3 targetPosition;      // Ciljna pozicija platforme
     private Vector3 vectorToTarget;
@@ -18,17 +19,17 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
     
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        rb = platform.GetComponent<Rigidbody>();
+
         correctionOffset = moveSpeed * 0.03f;
 
         // Spremamo početnu poziciju platforme
         initialPosition = platform.transform.position;
-
         // Definiramo ciljnu poziciju na temelju unesenih koordinata
         targetPosition = new Vector3(targetX, targetY, targetZ);
 
         vectorToTarget = (targetPosition - initialPosition).normalized;
-
-        rb = platform.GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -67,6 +68,11 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (buttonPressCount == 0)
+        {
+            animator.SetTrigger("pressed");
+        }
+
         // Kada bilo koji objekt dotakne gumb, povecavamo button press count
         buttonPressCount++;
     }
@@ -75,5 +81,10 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
     {
         // Kada objekt napusti gumb, smanjujemo button press count
         buttonPressCount--;
+
+        if (buttonPressCount == 0)
+        {
+            animator.SetTrigger("unpressed");
+        }
     }
 }

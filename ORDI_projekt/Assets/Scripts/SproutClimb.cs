@@ -7,8 +7,7 @@ using UnityEngine.UIElements;
 
 public class SproutClimb : MonoBehaviour
 {
-    public bool isClimbing = false;
-
+    private PlayerMovement movementScript;
     private bool climbSuccess = false;
     private Animator animator;
     private HookPlantTrack hookPlantScript;
@@ -18,6 +17,7 @@ public class SproutClimb : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        movementScript = GetComponentInParent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class SproutClimb : MonoBehaviour
                         if (hookPlantScript.isGrown)         // i ako je hook plant narastao
                         {
                             // dohvati prihvatljivu poziciju za "sici" na pod pored hook planta
-                            Vector3 climbPosition = centerPosition(collider.transform.position) + new Vector3(0, 0.625f, 0);
+                            Vector3 climbPosition = centerPosition(collider.transform.position) + new Vector3(0, 1.625f, 0);
                             Debug.Log(climbPosition);
                             StartCoroutine(climb(climbPosition));      // ide climb
                             climbSuccess = true;
@@ -59,7 +59,7 @@ public class SproutClimb : MonoBehaviour
     // Funkcija koja ostvaruje penjanje
     IEnumerator climb(Vector3 climbPosition)
     {
-        isClimbing = true;
+        movementScript.inputDisabled = true;
 
         Vector3 climbDirection = (climbPosition - transform.position).normalized;
         climbDirection.y = 0;
@@ -84,11 +84,11 @@ public class SproutClimb : MonoBehaviour
         // play dismount animation
         for (int i = 0; i < 120; i++)
         {
-            transform.parent.position = Vector3.Lerp(initialPosition + new Vector3(0, 2, 0), climbPosition, (float)(i+1) / 120);     // lerp sunce na poziciju za silazak
+            transform.parent.position = Vector3.Lerp(initialPosition + new Vector3(0, 2, 0), climbPosition + climbDirection, (float)(i+1) / 120);     // lerp sunce na poziciju za silazak
             yield return null;
         }
 
-        isClimbing = false;
+        movementScript.inputDisabled = false;
 
     }
 

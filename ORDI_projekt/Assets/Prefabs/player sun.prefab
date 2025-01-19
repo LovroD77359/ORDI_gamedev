@@ -58,7 +58,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sproutScriptCarrier: {fileID: 0}
-  isClimbing: 0
 --- !u!1001 &9030549712223620433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,7 +267,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  speed: 4.5
+  inputDisabled: 0
+  speed: 3.75
   jump: 8
   cam: {fileID: 0}
   playerTag: Player1
