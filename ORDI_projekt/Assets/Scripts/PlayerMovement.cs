@@ -130,6 +130,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) && isGrounded != 0)
                 {
+                    sproutGrow.isGrown = false;     // NOTE: tu ide sprout degrow animacija
+                    rb.constraints = RigidbodyConstraints.None;
+                    rb.freezeRotation = true;
+
                     if (jumpingAllowed)
                     {
                         rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
@@ -139,8 +143,6 @@ public class PlayerMovement : MonoBehaviour
                     {
                         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);    
                     }
-
-                    sproutGrow.isGrown = false;     // NOTE: tu ide sprout degrow animacija
                 }
             }
 
@@ -162,6 +164,8 @@ public class PlayerMovement : MonoBehaviour
                 if (playerTag == "Player2" && sproutGrow.isGrown)
                 {
                     sproutGrow.isGrown = false;     // NOTE: tu ide sprout degrow animacija
+                    rb.constraints = RigidbodyConstraints.None;
+                    rb.freezeRotation = true;
                 }
             }
             else
