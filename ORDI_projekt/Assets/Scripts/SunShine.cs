@@ -26,7 +26,7 @@ public class SunShine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightControl) && !isShining && movementScript.isGrounded != 0 && movementScript.jumpingAllowed)
+        if (Input.GetKeyDown(KeyCode.RightControl) && !isShining && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
         {
             animator.SetTrigger("isShining");
             StartCoroutine(shine());
@@ -45,7 +45,7 @@ public class SunShine : MonoBehaviour
     IEnumerator shine()
     {
         isShining = true;
-        movementScript.jumpingAllowed = false;
+        movementScript.jumpingForbidden++;
 
         for (int i = 0; i < 40; i ++)
         {
@@ -64,7 +64,7 @@ public class SunShine : MonoBehaviour
         }
 
         isShining = false;
-        movementScript.jumpingAllowed = true;
+        movementScript.jumpingForbidden--;
     }
 
     IEnumerator growPlant(Collider collider)

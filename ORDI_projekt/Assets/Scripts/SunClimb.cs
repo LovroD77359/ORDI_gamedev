@@ -19,7 +19,7 @@ public class SunClimb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
         movementScript = GetComponentInParent<PlayerMovement>();
         sproutMovementScript = sproutScriptCarrier.GetComponentInParent<PlayerMovement>();
         sproutGrow = sproutScriptCarrier.GetComponent<SproutGrow>();
@@ -28,7 +28,7 @@ public class SunClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightShift) && movementScript.isGrounded != 0 && movementScript.jumpingAllowed)
+        if (Input.GetKeyDown(KeyCode.RightShift) && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
         {
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad sunca neki objekt koji nije player (jer ce sunce uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
@@ -86,7 +86,7 @@ public class SunClimb : MonoBehaviour
         Vector3 initialPosition = transform.parent.position;
         for (int i = 0; i < 240; i++)
         {
-            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2.38f, 0), (float)(i + 1) / 240);     // lerp prema gore
+            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2f, 0), (float)(i + 1) / 240);     // lerp prema gore
             yield return null;
         }
 
@@ -96,9 +96,14 @@ public class SunClimb : MonoBehaviour
         transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotateTo, 1);
 
         // play dismount animation
+        initialPosition += new Vector3(0, 2f, 0);
+        Vector3 arcCenter = (initialPosition + climbPosition) * 0.5F - new Vector3(0, 1, 0);
+        Vector3 startToCenter = initialPosition - arcCenter;
+        Vector3 endToCenter = climbPosition - arcCenter;
+        animator.SetTrigger("isJumping");
         for (int i = 0; i < 120; i++)
         {
-            transform.parent.position = Vector3.Lerp(initialPosition + new Vector3(0, 2.38f, 0), climbPosition, (float)(i + 1) / 120);     // lerp sunce na poziciju za silazak
+            transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, (float)(i + 1) / 120);     // slerp sunce na poziciju za silazak
             yield return null;
         }
 

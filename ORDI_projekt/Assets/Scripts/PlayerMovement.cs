@@ -9,10 +9,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public Collider col;
     public LayerMask groundLayer;
+    public float speed = 10;
+    public float jump = 400;
     [HideInInspector] public bool inputDisabled = false;
-    [HideInInspector] public bool jumpingAllowed = true;
+    [HideInInspector] public int jumpingForbidden = 0;
     [HideInInspector] public int isGrounded = 0;
-        
+    [HideInInspector] public bool isTouchingRock = false;
+
     private Rigidbody rb;
 
     private float horizontalInput = 0;
@@ -26,9 +29,7 @@ public class PlayerMovement : MonoBehaviour
     //ANIMACIJE KOD:
     private Animator animator;
     //private bool isRunning = false;
-        
-    [SerializeField] float speed = 10;
-    [SerializeField] float jump = 400;
+     
     [SerializeField] Transform cam;
     [SerializeField] String playerTag;
 
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
         {
-            jumpingAllowed = false;
+            jumpingForbidden++;
         }
     }
 
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
         {
-            jumpingAllowed = true;
+            jumpingForbidden--;
         }
     }
 
@@ -113,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Return) && isGrounded != 0)
                 {
-                    if (jumpingAllowed)
+                    if (jumpingForbidden == 0)
                     {
                         rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
                         animator.SetTrigger("isJumping");
@@ -135,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
                         rb.freezeRotation = true;
                     }
 
-                    if (jumpingAllowed)
+                    if (jumpingForbidden == 0)
                     {
                         rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
                         animator.SetTrigger("isJumping");
@@ -160,7 +161,14 @@ public class PlayerMovement : MonoBehaviour
             bool isMoving = horizontalInput != 0 || verticalInput != 0;
             if (isMoving)
             {
-                animator.SetTrigger("startRunning");
+                if (isTouchingRock)
+                {
+                    animator.SetTrigger("startPushing");
+                }
+                else
+                {
+                    animator.SetTrigger("startRunning");
+                }
 
                 if (playerTag == "Player2" && sproutGrow.isGrown)
                 {
@@ -171,24 +179,15 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("stopRunning");
+                if (isTouchingRock)
+                {
+                    animator.SetTrigger("stopPushing");
+                }
+                else
+                {
+                    animator.SetTrigger("stopRunning");
+                }
             }
         }
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    public float getJump() {
-        return jump;
-    }
-
-    public void setSpeed(float newSpeed) {
-        speed = newSpeed;
-    }
-
-    public void setJump(float newJump){
-        jump = newJump;
     }
 }

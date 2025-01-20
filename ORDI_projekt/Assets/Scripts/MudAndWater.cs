@@ -9,23 +9,21 @@ public class DiscriminativeMediums : MonoBehaviour
     public GameObject affectedPlayer;       // lik koji propadne
     private PlayerMovement playerMovement;
     private Collider objectCollider;
-    private float ogSpeed;    
-    private float newSpeed;   
+    private float ogJump;
 
     private void Start()
     {      
         objectCollider = GetComponent<Collider>();
         playerMovement = affectedPlayer.GetComponent<PlayerMovement>();
-        ogSpeed = playerMovement.getSpeed();
-        newSpeed = 0.5f * ogSpeed;
+        ogJump = playerMovement.jump;
     }
 
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject == affectedPlayer)
         {
-            playerMovement.setSpeed(newSpeed);
-            playerMovement.jumpingAllowed = false;
+            playerMovement.speed *= 0.5f;
+            playerMovement.jump = 0;
         }
         //else{
         //    Physics.IgnoreCollision(collider, objectCollider, false);
@@ -36,8 +34,8 @@ public class DiscriminativeMediums : MonoBehaviour
     {
         if (collider.gameObject == affectedPlayer)
         {
-            playerMovement.setSpeed(ogSpeed);
-            playerMovement.jumpingAllowed = true;
+            playerMovement.speed *= 2;
+            playerMovement.jump = ogJump;
         }
         //else{
         //    Physics.IgnoreCollision(collider, objectCollider, false);

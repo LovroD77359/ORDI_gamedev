@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class SproutClimb : MonoBehaviour
 {
     private Animator animator;
+    private Rigidbody rb;
     private PlayerMovement movementScript;
     private HookPlantTrack hookPlantScript;
     private bool climbSuccess = false;
@@ -16,14 +17,15 @@ public class SproutClimb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
+        rb = GetComponentInParent<Rigidbody>();
         movementScript = GetComponentInParent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && movementScript.isGrounded != 0 && movementScript.jumpingAllowed)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
         {
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
@@ -83,12 +85,19 @@ public class SproutClimb : MonoBehaviour
         }
 
         // play dismount animation
+        initialPosition += new Vector3(0, 2f, 0);
+        climbPosition += climbDirection;
+        Vector3 arcCenter = (initialPosition + climbPosition) * 0.5F - new Vector3(0, 1, 0);
+        Vector3 startToCenter = initialPosition - arcCenter;
+        Vector3 endToCenter = climbPosition - arcCenter;
+        animator.SetTrigger("isJumping");
         for (int i = 0; i < 120; i++)
         {
-            transform.parent.position = Vector3.Lerp(initialPosition + new Vector3(0, 2, 0), climbPosition + climbDirection, (float)(i+1) / 120);     // lerp sunce na poziciju za silazak
+            transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, (float)(i + 1) / 120);     // slerp sunce na poziciju za silazak
             yield return null;
         }
 
+        rb.velocity = Vector3.zero;
         movementScript.inputDisabled = false;
 
     }
