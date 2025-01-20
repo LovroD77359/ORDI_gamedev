@@ -9,11 +9,13 @@ public class SproutGrow : MonoBehaviour
     [HideInInspector] public Vector3 climbPosition = new Vector3(-1, -1, -1);
 
     private Animator animator;
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponentInParent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,6 +41,7 @@ public class SproutGrow : MonoBehaviour
 
                     // playaj animaciju rasta biljke NOTE: i naravno dodaj popratne efekte, hitbox ako treba, pa da ude u neko stanje iz kojeg ce ga izbaciti prvi pokret
                     isGrown = true;
+                    rb.constraints = RigidbodyConstraints.FreezeAll;
                     //ANIMACIJE KOD:
                     animator.SetTrigger("isGrowing");
                 }
