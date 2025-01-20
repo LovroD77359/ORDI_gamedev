@@ -164,8 +164,8 @@ MonoBehaviour:
   - m_Vertices: 060000000d00000014000000
   m_SharedTextures: []
   m_Positions:
-  - {x: 0, y: 1, z: -1}
-  - {x: 2, y: 1, z: -1}
+  - {x: 0, y: 1, z: -0.99343586}
+  - {x: 2.0000002, y: 1, z: -0.99343586}
   - {x: 2, y: 1, z: 3}
   - {x: 0, y: 1, z: 3}
   - {x: 2, y: 0, z: 0}
@@ -174,23 +174,23 @@ MonoBehaviour:
   - {x: 2, y: 0, z: 3}
   - {x: 2, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 2, y: 1, z: -1}
-  - {x: 0, y: 1, z: -1}
+  - {x: 2.0000002, y: 1, z: -0.99343586}
+  - {x: 0, y: 1, z: -0.99343586}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 3}
-  - {x: 0, y: 1, z: -1}
+  - {x: 0, y: 1, z: -0.99343586}
   - {x: 0, y: 1, z: 3}
   - {x: 2, y: 0, z: 3}
   - {x: 2, y: 0, z: 0}
   - {x: 2, y: 1, z: 3}
-  - {x: 2, y: 1, z: -1}
+  - {x: 2.0000002, y: 1, z: -0.99343586}
   - {x: 0, y: 0, z: 3}
   - {x: 2, y: 0, z: 3}
   - {x: 0, y: 1, z: 3}
   - {x: 2, y: 1, z: 3}
   m_Textures0:
-  - {x: 0, y: -1}
-  - {x: 2, y: -1}
+  - {x: 0, y: -0.99343586}
+  - {x: 2.0000002, y: -0.99343586}
   - {x: 2, y: 3}
   - {x: 0, y: 3}
   - {x: -2, y: 0}
@@ -199,16 +199,16 @@ MonoBehaviour:
   - {x: -2, y: 3}
   - {x: 2, y: 0}
   - {x: 0, y: 0}
-  - {x: 2, y: 1.4142137}
-  - {x: 0, y: 1.4142137}
+  - {x: 2.0000002, y: 1.4095796}
+  - {x: 0, y: 1.4095796}
   - {x: 0, y: 0}
   - {x: -3, y: 0}
-  - {x: 1, y: 1}
+  - {x: 0.99343586, y: 1}
   - {x: -3, y: 1}
   - {x: 3, y: 0}
   - {x: 0, y: 0}
   - {x: 3, y: 1}
-  - {x: -1, y: 1}
+  - {x: -0.99343586, y: 1}
   - {x: 0, y: 0}
   - {x: -2, y: 0}
   - {x: 0, y: 1}
@@ -233,9 +233,9 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0, y: 0, z: 1, w: -1}
-  - {x: 0, y: 0, z: 1, w: -1}
-  - {x: 0, y: 0, z: 1, w: -1}
-  - {x: 0, y: 0, z: 1, w: -1}
+  - {x: -0.00000002985131, y: 0, z: 1, w: -1}
+  - {x: -0.00000002985131, y: 0, z: 1, w: -1}
+  - {x: -0.00000005970262, y: 0, z: 1, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 94
+  m_VersionIndex: 191
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -308,7 +308,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
