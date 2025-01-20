@@ -9,7 +9,6 @@ public class DiscriminativeMediums : MonoBehaviour
     public GameObject affectedPlayer;       // lik koji propadne
     private PlayerMovement playerMovement;
     private Collider objectCollider;
-    private float ogJump;     
     private float ogSpeed;    
     private float newSpeed;   
 
@@ -17,7 +16,6 @@ public class DiscriminativeMediums : MonoBehaviour
     {      
         objectCollider = GetComponent<Collider>();
         playerMovement = affectedPlayer.GetComponent<PlayerMovement>();
-        ogJump = playerMovement.getJump();
         ogSpeed = playerMovement.getSpeed();
         newSpeed = 0.5f * ogSpeed;
     }
@@ -27,7 +25,7 @@ public class DiscriminativeMediums : MonoBehaviour
         if (collider.gameObject == affectedPlayer)
         {
             playerMovement.setSpeed(newSpeed);
-            playerMovement.setJump(0);
+            playerMovement.jumpingAllowed = false;
         }
         //else{
         //    Physics.IgnoreCollision(collider, objectCollider, false);
@@ -39,7 +37,7 @@ public class DiscriminativeMediums : MonoBehaviour
         if (collider.gameObject == affectedPlayer)
         {
             playerMovement.setSpeed(ogSpeed);
-            playerMovement.setJump(ogJump); 
+            playerMovement.jumpingAllowed = true;
         }
         //else{
         //    Physics.IgnoreCollision(collider, objectCollider, false);

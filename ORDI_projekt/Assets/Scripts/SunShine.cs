@@ -8,23 +8,25 @@ using UnityEngine.UIElements;
 public class SunShine : MonoBehaviour
 {
     private Animator animator;
+    private PlayerMovement movementScript;
     private Light light;
     private bool isShining = false;
-    private HookPlantTrack hookPlantScript;
     private Animator hookPlantAnimator;
+    private HookPlantTrack hookPlantScript;
 
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponentInParent<Animator>();
+        movementScript = GetComponentInParent<PlayerMovement>();
         light = GetComponentInParent<Light>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightControl) && !isShining)
+        if (Input.GetKeyDown(KeyCode.RightControl) && !isShining && movementScript.isGrounded != 0 && movementScript.jumpingAllowed)
         {
             animator.SetTrigger("isShining");
             StartCoroutine(shine());
@@ -43,6 +45,7 @@ public class SunShine : MonoBehaviour
     IEnumerator shine()
     {
         isShining = true;
+        movementScript.jumpingAllowed = false;
 
         for (int i = 0; i < 40; i ++)
         {
@@ -61,6 +64,7 @@ public class SunShine : MonoBehaviour
         }
 
         isShining = false;
+        movementScript.jumpingAllowed = true;
     }
 
     IEnumerator growPlant(Collider collider)

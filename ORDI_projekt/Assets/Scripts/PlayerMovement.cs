@@ -10,10 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public Collider col;
     public LayerMask groundLayer;
     [HideInInspector] public bool inputDisabled = false;
+    [HideInInspector] public bool jumpingAllowed = true;
+    [HideInInspector] public int isGrounded = 0;
         
     private Rigidbody rb;
-    private int isGrounded = 0;
-    private bool jumpingAllowed = true;
 
     private float horizontalInput = 0;
     private float verticalInput = 0;
@@ -54,27 +54,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Rock") || other.CompareTag("Player") || other.CompareTag("HookPlant"))
+        if (!other.CompareTag("MudAndWater"))
         {
-            jumpingAllowed = false;
             isGrounded++;
         }
-        if (other.CompareTag("Ground"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
         {
-            isGrounded++;
+            jumpingAllowed = false;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Rock") || other.CompareTag("Player") || other.CompareTag("HookPlant"))
+        if (!other.CompareTag("MudAndWater"))
         {
-            jumpingAllowed = true;
             isGrounded--;
         }
-        if (other.CompareTag("Ground"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
         {
-            isGrounded--;
+            jumpingAllowed = true;
         }
     }
 

@@ -7,10 +7,10 @@ using UnityEngine.UIElements;
 
 public class SproutClimb : MonoBehaviour
 {
-    private PlayerMovement movementScript;
-    private bool climbSuccess = false;
     private Animator animator;
+    private PlayerMovement movementScript;
     private HookPlantTrack hookPlantScript;
+    private bool climbSuccess = false;
 
 
     // Start is called before the first frame update
@@ -23,10 +23,11 @@ public class SproutClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && movementScript.isGrounded != 0 && movementScript.jumpingAllowed)
         {
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
-            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f), col => !col.transform.CompareTag("Player")))
+            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration"))))
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position + new Vector3(0, 1, 0), 1f);        // trazimo collidere iznad  biljke NOTE: igrat se s ovim radijusom
                 foreach (Collider collider in colliders)

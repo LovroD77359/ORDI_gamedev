@@ -70,7 +70,7 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
     {
         if (buttonPressCount == 0)
         {
-            animator.SetTrigger("pressed");
+            animator.SetBool("isPressed", true);
         }
 
         // Kada bilo koji objekt dotakne gumb, povecavamo button press count
@@ -84,7 +84,7 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
 
         if (buttonPressCount == 0)
         {
-            animator.SetTrigger("unpressed");
+            animator.SetBool("isPressed", false);
         }
     }
 }

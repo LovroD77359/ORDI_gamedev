@@ -10,23 +10,26 @@ public class SproutGrow : MonoBehaviour
 
     private Animator animator;
     private Rigidbody rb;
+    private PlayerMovement movementScript;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody>();
+        movementScript = GetComponentInParent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && movementScript.isGrounded != 0 && movementScript.jumpingAllowed)
         {
             //animator.SetTrigger("isGrowing");
 
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
-            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f), col => !col.transform.CompareTag("Player")))
+            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration"))))
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
                 climbPosition = findClimbPosition(transform.position);
@@ -46,8 +49,6 @@ public class SproutGrow : MonoBehaviour
                     animator.SetTrigger("isGrowing");
                 }
             }
-
-
         }
     }
 

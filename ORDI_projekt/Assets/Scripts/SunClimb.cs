@@ -28,17 +28,18 @@ public class SunClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.RightShift) && movementScript.isGrounded != 0 && movementScript.jumpingAllowed)
         {
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad sunca neki objekt koji nije player (jer ce sunce uhvatit svoj collider), dakle gore je prazno
-            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f), col => !col.transform.CompareTag("Player")))
+            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration"))))
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);        // trazimo collidere oko sunca NOTE: igrat se s ovim radijusom
                 foreach (Collider collider in colliders)
                 {
                     if (collider.transform.CompareTag("Player") && collider.transform != transform.parent)     // ako je objekt player i nije sunce (sebe detektira)
                     {
-                        if (sproutGrow.isGrown)         // i ako je biljka narasla
+                        if (sproutGrow.isGrown && centerPosition(sproutScriptCarrier.transform.position).y == centeredPosition.y)         // i ako je biljka narasla te ako su na istoj visini
                         {
                             // dohvati prihvatljivu poziciju za "sici" s biljke na pod
                             Vector3 climbPosition = sproutGrow.climbPosition;
@@ -49,7 +50,7 @@ public class SunClimb : MonoBehaviour
                                 climbSuccess = true;
                             }
                         }
-                        else { Debug.Log("biljka nije narasla"); }
+                        else { Debug.Log("biljka nije narasla/visina nije ista"); }
                         break;
                     }
                 }

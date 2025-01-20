@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Rock
   - Ground
-  - ClimbableTerrain
   - HookPlant
+  - Decoration
+  - MudAndWater
   layers:
   - Default
   - TransparentFX

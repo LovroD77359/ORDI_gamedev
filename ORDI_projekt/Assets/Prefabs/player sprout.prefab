@@ -172,6 +172,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7574374326080566407}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1935933882441584697}
   m_SourcePrefab: {fileID: 100100000, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
 --- !u!4 &5031263313487980034 stripped
 Transform:
@@ -227,7 +230,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.25, y: 3.5, z: 1}
   m_Center: {x: 0.04, y: -0.75, z: 0}
@@ -248,9 +251,9 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1.25, y: 0.035, z: 1}
+  m_Size: {x: 1.24, y: 0.035, z: 0.99}
   m_Center: {x: 0.04, y: -2.515, z: 0}
 --- !u!114 &4287239988604080320
 MonoBehaviour:
@@ -269,6 +272,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   inputDisabled: 0
+  jumpingAllowed: 1
+  isGrounded: 0
   speed: 3.75
   jump: 8
   cam: {fileID: 0}
@@ -313,7 +318,30 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.6
+  m_Height: 3.5
   m_Direction: 1
-  m_Center: {x: 0.04, y: -2.025, z: 0}
+  m_Center: {x: 0.04, y: -0.775, z: 0}
+--- !u!136 &1935933882441584697
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5663685546276797624}
+  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.59
+  m_Height: 3.5
+  m_Direction: 1
+  m_Center: {x: 0.04, y: -0.8, z: 0}
