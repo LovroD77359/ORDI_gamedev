@@ -189,6 +189,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9049852585617291083, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1f5e788f1d512d4aa648d8f51f3e488, type: 2}
     m_RemovedComponents:
     - {fileID: 2399956963574342261, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
     - {fileID: 3650795490553327812, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
@@ -271,6 +275,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9049852585617291083, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1f5e788f1d512d4aa648d8f51f3e488, type: 2}
     m_RemovedComponents:
     - {fileID: 2399956963574342261, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
     - {fileID: 3650795490553327812, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
@@ -517,6 +525,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9049852585617291083, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1f5e788f1d512d4aa648d8f51f3e488, type: 2}
     m_RemovedComponents:
     - {fileID: 2399956963574342261, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
     - {fileID: 3650795490553327812, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
@@ -599,6 +611,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9049852585617291083, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1f5e788f1d512d4aa648d8f51f3e488, type: 2}
     m_RemovedComponents:
     - {fileID: 2399956963574342261, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}
     - {fileID: 3650795490553327812, guid: bc3880e39de968345bcb03fbc03ae35c, type: 3}

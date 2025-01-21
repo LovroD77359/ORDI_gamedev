@@ -17,7 +17,7 @@ public class PushRock : MonoBehaviour
         {
             movementScript = other.GetComponent<PlayerMovement>();
             movementScript.isTouchingRock = true;
-            movementScript.speed *= 0.25f;
+            //movementScript.speed *= 0.4f; 
         }
     }
 
@@ -27,7 +27,7 @@ public class PushRock : MonoBehaviour
         {
             movementScript = other.GetComponent<PlayerMovement>();
             movementScript.isTouchingRock = false;
-            movementScript.speed *= 4;
+            //movementScript.speed *= 2.5f;
         }
     }
 }

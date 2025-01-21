@@ -9,6 +9,7 @@ TagManager:
   - HookPlant
   - Decoration
   - MudAndWater
+  - GroundCollider
   layers:
   - Default
   - TransparentFX

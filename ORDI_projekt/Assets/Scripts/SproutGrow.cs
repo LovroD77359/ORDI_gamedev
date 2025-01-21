@@ -29,7 +29,7 @@ public class SproutGrow : MonoBehaviour
 
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
-                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration"))))
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))))
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
                 climbPosition = findClimbPosition(transform.position);
@@ -91,11 +91,15 @@ public class SproutGrow : MonoBehaviour
         climbDirection.y = 0;
         Quaternion rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(climbDirection).eulerAngles.y - 180, 0));
         Quaternion initialRotation = transform.parent.rotation;
-        for (int i = 0; i < 60; i++)
+        float startTime = Time.time;
+        float timeDif;
+        while (Quaternion.Angle(transform.parent.rotation, rotateTo) > 5)
         {
-            transform.parent.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema zidu (rotacija)
+            timeDif = Time.time - startTime;
+            transform.parent.rotation = Quaternion.Slerp(initialRotation, rotateTo, timeDif * 2);     // slerp prema zidu (rotacija)
             yield return null;
         }
+        transform.parent.rotation = rotateTo;
 
         // playaj animaciju rasta biljke
         // animator.SetTrigger("isGrowing");

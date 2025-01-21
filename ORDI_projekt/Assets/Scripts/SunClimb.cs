@@ -10,6 +10,7 @@ public class SunClimb : MonoBehaviour
     public GameObject sproutScriptCarrier;
 
     private Animator animator;
+    private Rigidbody rb;
     private PlayerMovement movementScript;
     private PlayerMovement sproutMovementScript;
     private SproutGrow sproutGrow;
@@ -20,6 +21,7 @@ public class SunClimb : MonoBehaviour
     void Start()
     {
         animator = GetComponentInParent<Animator>();
+        rb = GetComponentInParent<Rigidbody>();
         movementScript = GetComponentInParent<PlayerMovement>();
         sproutMovementScript = sproutScriptCarrier.GetComponentInParent<PlayerMovement>();
         sproutGrow = sproutScriptCarrier.GetComponent<SproutGrow>();
@@ -32,7 +34,7 @@ public class SunClimb : MonoBehaviour
         {
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad sunca neki objekt koji nije player (jer ce sunce uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
-                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration"))))
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))))
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);        // trazimo collidere oko sunca NOTE: igrat se s ovim radijusom
                 foreach (Collider collider in colliders)
@@ -70,46 +72,54 @@ public class SunClimb : MonoBehaviour
         movementScript.inputDisabled = true;
         sproutMovementScript.inputDisabled = true;
 
-        // NOTE: animacija koja priblizi biljci? / lerp za pocetak penjanja
         Vector3 sproutDirection = (sproutPosition - transform.position).normalized;
         sproutDirection.y = 0;
         Quaternion rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(sproutDirection).eulerAngles.y - 180, 0));
         Quaternion initialRotation = transform.parent.rotation;
-        for (int i = 0; i < 60; i++)
+        float startTime = Time.time;
+        float timeDif;
+        while (Quaternion.Angle(transform.parent.rotation, rotateTo) > 5)
         {
-            transform.parent.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema biljci (rotacija)
+            timeDif = Time.time - startTime;
+            transform.parent.rotation = Quaternion.Slerp(initialRotation, rotateTo, timeDif * 2);     // slerp prema biljci (rotacija)
             yield return null;
         }
+        transform.parent.rotation = rotateTo;
 
         // play climb animation
         //animator.SetTrigger("isClimbing");
         Vector3 initialPosition = transform.parent.position;
-        for (int i = 0; i < 240; i++)
+        startTime = Time.time;
+        while (Vector3.Distance(transform.parent.position, initialPosition + new Vector3(0, 2, 0)) > 0.1f)
         {
-            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2f, 0), (float)(i + 1) / 240);     // lerp prema gore
+            timeDif = Time.time - startTime;
+            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), timeDif * 0.5f);      // lerp prema gore
             yield return null;
         }
+        transform.parent.position = initialPosition + new Vector3(0, 2, 0);
 
         Vector3 climbDirection = (climbPosition - transform.position).normalized;
         climbDirection.y = 0;
         rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(climbDirection).eulerAngles.y - 180, 0));
-        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotateTo, 1);
+        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotateTo, 1);           // brza rotacija prema climb positionu
 
         // play dismount animation
-        initialPosition += new Vector3(0, 2f, 0);
+        initialPosition += new Vector3(0, 2, 0);
         Vector3 arcCenter = (initialPosition + climbPosition) * 0.5F - new Vector3(0, 1, 0);
         Vector3 startToCenter = initialPosition - arcCenter;
         Vector3 endToCenter = climbPosition - arcCenter;
+        startTime = Time.time;
         animator.SetTrigger("isJumping");
-        for (int i = 0; i < 120; i++)
+        while (Vector3.Distance(transform.parent.position, climbPosition) > 0.1f)
         {
-            transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, (float)(i + 1) / 120);     // slerp sunce na poziciju za silazak
+            timeDif = Time.time - startTime;
+            transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, timeDif * 1.5f);     // slerp sunca na poziciju za silazak
             yield return null;
         }
+        transform.parent.position = climbPosition;
 
         movementScript.inputDisabled = false;
         sproutMovementScript.inputDisabled = false;
-
     }
 
     // Funkcija koja centrira danu poziciju (na 0.5)
