@@ -8,17 +8,39 @@ public class LoadLevel : MonoBehaviour
     public GameObject Level2button;
     public GameObject Imela;
 
+
     public void Load1()
     {
-        SceneManager.LoadSceneAsync(2);
+        if (LevelLoader.instance != null)
+        {
+            LevelLoader.instance.LoadNewLevel(2);
+        }
+        else
+        {
+            Debug.Log("LevelLoader reference is missing in LoadLevel!");
+        }
     }
     public void Load2()
     {
-        SceneManager.LoadSceneAsync(4);
+        if (LevelLoader.instance != null)
+        {
+            LevelLoader.instance.LoadNewLevel(4);
+        }
+        else
+        {
+            Debug.Log("LevelLoader reference is missing in LoadLevel!");
+        }
     }
     public void Back() 
     {
-        SceneManager.LoadSceneAsync(0);
+        if (LevelLoader.instance != null)
+        {
+            LevelLoader.instance.LoadNewLevel(0);
+        }
+        else
+        {
+            Debug.Log("LevelLoader reference is missing in LoadLevel!");
+        }
     }
 
     public void Reset()
@@ -31,6 +53,12 @@ public class LoadLevel : MonoBehaviour
 
     private void Start()
     {
+        // Directly access the singleton instance of LevelLoader
+        if (LevelLoader.instance == null)
+        {
+            Debug.LogError("LevelLoader instance not found!");
+        }
+
         // Get the number of levels completed from PlayerPrefs (default to 0 if no data exists)
         int levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
         Debug.Log("PlayerPrefs Saved (" + PlayerPrefs.GetInt("LevelsCompleted", 0) + ")");

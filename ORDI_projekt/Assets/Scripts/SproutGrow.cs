@@ -9,47 +9,36 @@ public class SproutGrow : MonoBehaviour
     [HideInInspector] public Vector3 climbPosition = new Vector3(-1, -1, -1);
 
     private Animator animator;
+    private Rigidbody rb;
+    private PlayerMovement movementScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-
+        animator = GetComponentInParent<Animator>();
+        rb = GetComponentInParent<Rigidbody>();
+        movementScript = GetComponentInParent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
         {
             //animator.SetTrigger("isGrowing");
 
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
-            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f), col => !col.transform.CompareTag("Player")))
+            if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration"))))
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
                 climbPosition = findClimbPosition(transform.position);
 
                 if (climbPosition.y != -1)      // ako postoji validni climb position
                 {
-                    // rotiraj biljku prema zidu na koji ce se sunce penjati
-                    Vector3 climbDirection = (climbPosition - transform.position).normalized;
-                    climbDirection.y = 0;
-                    Quaternion rotateTo = Quaternion.LookRotation(climbDirection);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, rotateTo, 1);     // NOTE: ovaj slerp je trenutno instant, treba ga namistit da bude animacija kao
-
-                    // playaj animaciju rasta biljke NOTE: i naravno dodaj popratne efekte, hitbox ako treba, pa da ude u neko stanje iz kojeg ce ga izbaciti prvi pokret
-                    isGrown = true;
-                    //ANIMACIJE KOD:
-                    animator.SetTrigger("isGrowing");
+                    StartCoroutine(grow(climbPosition));
                 }
             }
-
-
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            transform.position = transform.position + new Vector3(0, 1.25f, 0);
         }
     }
 
@@ -83,17 +72,36 @@ public class SproutGrow : MonoBehaviour
         // provjeravamo sad u tim smjerovima jesu li ostvareni uvjeti da se tamo moze sunce popeti
         for (int i = 0; i < directions.Length; i++)
         {
-            Debug.Log(directions[i]);
-            if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("ClimbableTerrain")) &&    // da postoji blok koji je climbable terrain NOTE: treba dodat tagove
-                Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f).Length == 0)     // da ne postoji collider iznad koji bi blokirao, moze se stavit not exists not tag decoration npr
+            if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("Ground")) &&    // da postoji blok koji je climbable terrain
+                !Array.Exists(Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f), col => col.transform.CompareTag("Ground")))     // da ne postoji blok iznad koji bi blokirao
             {
                 Debug.Log("climbing pozicija na: " + (position + directions[i] + new Vector3(0, 1, 0)).ToString());
-                return position + directions[i] + new Vector3(0, 1, 0);     // vracamo odgovarajucu poziciju
+                return position + directions[i] + new Vector3(0, 1.38f, 0);     // vracamo odgovarajucu poziciju
             }
         }
 
         Debug.Log("nema climbing pozicije");
         return new Vector3(-1, -1, -1);     // nema prikladne pozicije za penjanje
+    }
+
+    IEnumerator grow(Vector3 climbPosition)
+    {
+        // rotiraj biljku prema zidu na koji ce se sunce penjati
+        Vector3 climbDirection = (climbPosition - transform.position).normalized;
+        climbDirection.y = 0;
+        Quaternion rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(climbDirection).eulerAngles.y - 180, 0));
+        Quaternion initialRotation = transform.parent.rotation;
+        for (int i = 0; i < 60; i++)
+        {
+            transform.parent.rotation = Quaternion.Slerp(initialRotation, rotateTo, (float)(i + 1) / 60);     // slerp prema zidu (rotacija)
+            yield return null;
+        }
+
+        // playaj animaciju rasta biljke
+        // animator.SetTrigger("isGrowing");
+        yield return new WaitForSeconds(3);     // NOTE: ovo namistit ovisno o trajanju anim, ispod puknit hitbox change
+        isGrown = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     // Funkcija koja centrira danu poziciju (na 0.5)

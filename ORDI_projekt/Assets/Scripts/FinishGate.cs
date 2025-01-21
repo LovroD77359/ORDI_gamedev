@@ -21,7 +21,7 @@ public class FinishGate : MonoBehaviour
             {
                 int currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-                if (currentLevel == 3) // Assuming Level 1 is scene index 2
+                if (currentLevel == 3) // Assuming Level 1 is scene index 3
                 {
 
                     PlayerPrefs.SetInt("LevelsCompleted", 1); // Level 1 completed

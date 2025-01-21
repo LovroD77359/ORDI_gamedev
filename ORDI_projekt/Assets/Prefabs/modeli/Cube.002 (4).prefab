@@ -64,6 +64,9 @@ PrefabInstance:
       addedObject: {fileID: 3647578017541314068}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 998f040441a4b704094aba2acf6faf1a, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8129659867097175701}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 998f040441a4b704094aba2acf6faf1a, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 3112492274669884849}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 998f040441a4b704094aba2acf6faf1a, type: 3}
       insertIndex: -1
@@ -105,7 +108,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &3647578017541314068
 BoxCollider:
@@ -126,8 +129,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.836485, y: 3.424822, z: 1.611643}
-  m_Center: {x: 0.04189003, y: -0.02517605, z: 0.0002212524}
+  m_Size: {x: 1.25, y: 3.5, z: 1}
+  m_Center: {x: -0.05, y: -0.2, z: 0}
+--- !u!65 &8129659867097175701
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514610088300070774}
+  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.25, y: 0.3, z: 1}
+  m_Center: {x: -0.05, y: -1.9, z: 0}
 --- !u!95 &3112492274669884849
 Animator:
   serializedVersion: 5
@@ -161,8 +185,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4779b3338ec04e2baad1b2fb92b6652b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jump: 13
+  col: {fileID: 8129659867097175701}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  speed: 4.5
+  jump: 8
   cam: {fileID: 0}
   playerTag: Player1
 --- !u!114 &4613396790490329948
@@ -177,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa186db88468f8048b5e428baf29174d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprout: {fileID: 0}
+  isClimbing: 0
 --- !u!108 &7877569346288236194
 Light:
   m_ObjectHideFlags: 0
@@ -188,9 +218,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.9267699, g: 0.93207544, b: 0.13189735, a: 1}
+  m_Color: {r: 1, g: 0.8920879, b: 0.33490568, a: 1}
   m_Intensity: 2.5
-  m_Range: 4.234587
+  m_Range: 2.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

@@ -5,14 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        // Directly access the singleton instance of LevelLoader
+        if (LevelLoader.instance == null)
+        {
+            Debug.LogError("LevelLoader instance not found!");
+        }
+    }
+
     public void LoadLevelSelect()
     {
-        SceneManager.LoadSceneAsync(1);
+        if (LevelLoader.instance != null)
+        {
+            LevelLoader.instance.LoadNewLevel(1);
+        }
+        else
+        {
+            Debug.Log("LevelLoader reference is missing in MainMenu!");
+        }
     }
 
-    public void Quit() 
+    public void Quit()
     {
-        Application.Quit();   
+        Application.Quit();
     }
-
 }
