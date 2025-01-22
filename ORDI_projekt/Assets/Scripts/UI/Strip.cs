@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Strip : MonoBehaviour
 {
-    private void Start()
+    void Start()
     {
         StartCoroutine(StripCoroutine());
     }

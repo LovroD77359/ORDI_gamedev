@@ -13,11 +13,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuUI;
     public GameObject OptionsMenuUI;
 
-
     private void Start()
     {
         Resume();
-
     }
 
     // Update is called once per frame
@@ -34,7 +32,6 @@ public class PauseMenu : MonoBehaviour
                 Pause();;
             }
         }
-        
     }
 
     void Resume()
@@ -76,6 +73,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadSceneAsync(sceneIndex.buildIndex);
         IsGamePaused = false;
     }
+
     private void HideCursor()
     {
 #if UNITY_EDITOR
@@ -91,12 +89,12 @@ public class PauseMenu : MonoBehaviour
         });
 #endif
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;  // Lock cursor to the center
+        //Cursor.lockState = CursorLockMode.Locked;  // Lock cursor to the center
     }
 
     private void ShowCursor()
     {
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;  // Free the cursor
+        //Cursor.lockState = CursorLockMode.None;  // Free the cursor
     }
 }

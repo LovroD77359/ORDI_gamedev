@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public float speed = 10;
     public float jump = 400;
+    public Transform cam;
+    public string playerTag;
     [HideInInspector] public bool inputDisabled = false;
     [HideInInspector] public int jumpingForbidden = 0;
     [HideInInspector] public int isGrounded = 0;
@@ -29,9 +31,6 @@ public class PlayerMovement : MonoBehaviour
     //ANIMACIJE KOD:
     private Animator animator;
     //private bool isRunning = false;
-     
-    [SerializeField] Transform cam;
-    [SerializeField] String playerTag;
 
 
     void Start()

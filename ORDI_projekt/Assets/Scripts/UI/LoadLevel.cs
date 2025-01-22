@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadLevel : MonoBehaviour
 {
-    public GameObject Level2button;
-    public GameObject Imela;
-
+    public GameObject Level2Button;
+    public GameObject Mistletoe;
 
     public void Load1()
     {
@@ -46,8 +45,8 @@ public class LoadLevel : MonoBehaviour
     public void Reset()
     {
         PlayerPrefs.SetInt("LevelsCompleted", 0);
-        Level2button.SetActive(false);
-        Imela.SetActive(false);
+        Level2Button.SetActive(false);
+        Mistletoe.SetActive(false);
         Debug.Log("PlayerPrefs Saved (" + PlayerPrefs.GetInt("LevelsCompleted", 0) + ")");
     }
 
@@ -62,19 +61,19 @@ public class LoadLevel : MonoBehaviour
         // Get the number of levels completed from PlayerPrefs (default to 0 if no data exists)
         int levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
         Debug.Log("PlayerPrefs Saved (" + PlayerPrefs.GetInt("LevelsCompleted", 0) + ")");
-        Level2button.SetActive(false);
-        Imela.SetActive(false);
+        Level2Button.SetActive(false);
+        Mistletoe.SetActive(false);
 
         // If Level 1 is completed, enable Level 2 button
-        if (levelsCompleted >= 1 && Level2button != null)
+        if (levelsCompleted >= 1 && Level2Button != null)
         {
-            Level2button.SetActive(true); // Activate Level 2 access button
+            Level2Button.SetActive(true); // Activate Level 2 access button
         }
 
         // If both levels are completed, show the special object in LoadLevel
-        if (levelsCompleted == 2 && Imela != null)
+        if (levelsCompleted == 2 && Mistletoe != null)
         {
-            Imela.SetActive(true); // Activate the special object
+            Mistletoe.SetActive(true); // Activate the special object
         }
     }
 

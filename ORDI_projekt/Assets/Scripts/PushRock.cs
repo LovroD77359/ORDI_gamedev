@@ -7,10 +7,6 @@ public class PushRock : MonoBehaviour
 {
     private PlayerMovement movementScript;
 
-    private void Start()
-    {
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Player"))

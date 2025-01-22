@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class Instructions_panel : MonoBehaviour
 {
-
-    int panel_number = 0;
+    public int panelNumber = 0;
     public Button ForwardsButton;
     public Button BackwardsButton;
     public GameObject Panel1;
@@ -33,19 +32,19 @@ public class Instructions_panel : MonoBehaviour
 
     public void Forward() 
     {
-        panel_number++;
+        panelNumber++;
         updatePanels();
     }
 
     public void Backward() 
     {
-        panel_number--;
+        panelNumber--;
         updatePanels();
     }
 
     public void Back() 
     {
-        panel_number = 0;
+        panelNumber = 0;
         updatePanels();
     }
 
@@ -53,7 +52,7 @@ public class Instructions_panel : MonoBehaviour
     {
         for (int i = 0; i < panels.Length; i++)
         {
-            if (i == panel_number)
+            if (i == panelNumber)
             {
                 panels[i].SetActive(true);
             }
@@ -62,12 +61,12 @@ public class Instructions_panel : MonoBehaviour
                 panels[i].SetActive(false);
             } 
         }
-        if (panel_number == 0)
+        if (panelNumber == 0)
         {
             ForwardsButton.gameObject.SetActive(true);
             BackwardsButton.gameObject.SetActive(false);
         }
-        else if (panel_number == panels.Length - 1)
+        else if (panelNumber == panels.Length - 1)
         {
             ForwardsButton.gameObject.SetActive(false);
             BackwardsButton.gameObject.SetActive(true);
@@ -77,10 +76,5 @@ public class Instructions_panel : MonoBehaviour
             ForwardsButton.gameObject.SetActive(true);
             BackwardsButton.gameObject.SetActive(true);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }

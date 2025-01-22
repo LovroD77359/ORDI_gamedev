@@ -6,7 +6,7 @@ public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader instance;  // Singleton instance
 
-    public Animator transition;
+    private Animator animator;
 
     void Awake()
     {
@@ -22,6 +22,11 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
     public void LoadNewLevel(int buildIndex)
     {
         StartCoroutine(LoadLevel(buildIndex));
@@ -29,9 +34,9 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
-        transition.SetTrigger("Start");
+        animator.SetTrigger("Start");
         yield return new WaitForSeconds(1);
         SceneManager.LoadSceneAsync(levelIndex);
-        transition.SetTrigger("End");
+        animator.SetTrigger("End");
     }
 }
