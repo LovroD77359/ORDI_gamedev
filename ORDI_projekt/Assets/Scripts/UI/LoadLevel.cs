@@ -8,28 +8,18 @@ public class LoadLevel : MonoBehaviour
     public GameObject Level2Button;
     public GameObject Mistletoe;
 
-    public void Load1()
+    public void Load(int levelIndex)
     {
         if (LevelLoader.instance != null)
         {
-            LevelLoader.instance.LoadNewLevel(2);
+            LevelLoader.instance.LoadNewLevel(levelIndex);
         }
         else
         {
             Debug.Log("LevelLoader reference is missing in LoadLevel!");
         }
     }
-    public void Load2()
-    {
-        if (LevelLoader.instance != null)
-        {
-            LevelLoader.instance.LoadNewLevel(4);
-        }
-        else
-        {
-            Debug.Log("LevelLoader reference is missing in LoadLevel!");
-        }
-    }
+
     public void Back() 
     {
         if (LevelLoader.instance != null)
