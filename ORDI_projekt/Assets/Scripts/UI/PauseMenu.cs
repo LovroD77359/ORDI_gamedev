@@ -13,11 +13,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuUI;
     public GameObject OptionsMenuUI;
 
-
     private void Start()
     {
         Resume();
-
     }
 
     // Update is called once per frame
@@ -34,7 +32,6 @@ public class PauseMenu : MonoBehaviour
                 Pause();;
             }
         }
-        
     }
 
     void Resume()
@@ -43,7 +40,21 @@ public class PauseMenu : MonoBehaviour
         OptionsMenuUI.SetActive(false);
         Time.timeScale = 1f;
         IsGamePaused = false;
-        HideCursor();
+
+#if UNITY_EDITOR
+        var gameWindow = EditorWindow
+            .GetWindow(typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView"));
+        gameWindow.Focus();
+        gameWindow.SendEvent(new Event
+        {
+            button = 0,
+            clickCount = 1,
+            type = EventType.MouseDown,
+            mousePosition = gameWindow.rootVisualElement.contentRect.center
+        });
+#endif
+        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;  // Lock cursor to the center
     }
 
     void Pause() 
@@ -51,7 +62,9 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         IsGamePaused = true;
-        ShowCursor();
+
+        Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;  // Free the cursor
     }
 
     public void MainMenu()
@@ -75,28 +88,5 @@ public class PauseMenu : MonoBehaviour
         Scene sceneIndex = SceneManager.GetActiveScene();
         SceneManager.LoadSceneAsync(sceneIndex.buildIndex);
         IsGamePaused = false;
-    }
-    private void HideCursor()
-    {
-#if UNITY_EDITOR
-        var gameWindow = EditorWindow
-            .GetWindow(typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView"));
-        gameWindow.Focus();
-        gameWindow.SendEvent(new Event
-        {
-            button = 0,
-            clickCount = 1,
-            type = EventType.MouseDown,
-            mousePosition = gameWindow.rootVisualElement.contentRect.center
-        });
-#endif
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;  // Lock cursor to the center
-    }
-
-    private void ShowCursor()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;  // Free the cursor
     }
 }

@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class FinishGate : MonoBehaviour
 {
-    
     private int playerContact = 0;
 
-    private void OnTriggerEnter(Collider collision) 
+    private void OnTriggerEnter(Collider other) 
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             playerContact++;
         }
@@ -23,7 +22,6 @@ public class FinishGate : MonoBehaviour
 
                 if (currentLevel == 3) // Assuming Level 1 is scene index 3
                 {
-
                     PlayerPrefs.SetInt("LevelsCompleted", 1); // Level 1 completed
                     Debug.Log("Level 1 Completed");
                 }
@@ -33,21 +31,18 @@ public class FinishGate : MonoBehaviour
                     Debug.Log("Level 2 Completed");
                 }
 
-
                 PlayerPrefs.Save(); // Save the progress
                 Debug.Log("PlayerPrefs Saved (" + PlayerPrefs.GetInt("LevelsCompleted", 0) + ")");
             }
 
             LoadNextScene();
-
-            
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collider other)
     {
         // Decrease the count when a player leaves the collision zone
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             playerContact--;
         }

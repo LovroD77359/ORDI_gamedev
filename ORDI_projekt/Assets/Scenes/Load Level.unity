@@ -1120,8 +1120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f131dd17fdd524fbbbec3de539b8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level2button: {fileID: 1146580542}
-  Imela: {fileID: 1894401544}
+  Level2Button: {fileID: 1146580542}
+  Mistletoe: {fileID: 1894401544}
 --- !u!1 &1055367159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,12 +1281,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 990830958}
         m_TargetAssemblyTypeName: LoadLevel, Assembly-CSharp
-        m_MethodName: Load2
-        m_Mode: 1
+        m_MethodName: Load
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1686,12 +1686,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 990830958}
         m_TargetAssemblyTypeName: LoadLevel, Assembly-CSharp
-        m_MethodName: Load1
-        m_Mode: 1
+        m_MethodName: Load
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

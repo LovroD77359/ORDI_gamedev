@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 978cfffc8bf510741916725863634c76, type: 2}
+    - target: {fileID: -5754084199372789682, guid: c19d6236e89e64a45ab268ea05be18d2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4144181818542088033, guid: 203676dd2fbca1c43bbcaa1977ba135d, type: 3}
     - target: {fileID: 919132149155446097, guid: c19d6236e89e64a45ab268ea05be18d2, type: 3}
       propertyPath: m_Name
       value: wide_cap
@@ -202,7 +206,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.4059552, g: 0, b: 0.4811321, a: 1}
+  m_Color: {r: 0.57892704, g: 0, b: 0.6698113, a: 1}
   m_Intensity: 3
   m_Range: 3
   m_SpotAngle: 30
