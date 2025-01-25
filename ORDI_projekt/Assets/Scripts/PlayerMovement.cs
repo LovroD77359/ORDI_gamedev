@@ -128,11 +128,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) && isGrounded != 0)
                 {
-                    if (sproutGrow.isGrown)
+                    if (sproutGrow.isGrown || sproutGrow.isGrowing)
                     {
-                        sproutGrow.isGrown = false;     // NOTE: tu ide sprout degrow animacija
-                        rb.constraints = RigidbodyConstraints.None;
-                        rb.freezeRotation = true;
+                        Debug.Log("space");
+                        StartCoroutine(degrow());
                     }
 
                     if (jumpingForbidden == 0)
@@ -169,11 +168,10 @@ public class PlayerMovement : MonoBehaviour
                     animator.SetTrigger("startRunning");
                 }
 
-                if (playerTag == "Player2" && sproutGrow.isGrown)
+                if (playerTag == "Player2" && (sproutGrow.isGrown || sproutGrow.isGrowing))
                 {
-                    sproutGrow.isGrown = false;     // NOTE: tu ide sprout degrow animacija
-                    rb.constraints = RigidbodyConstraints.None;
-                    rb.freezeRotation = true;
+                    Debug.Log("move");
+                    StartCoroutine(degrow());
                 }
             }
             else
@@ -188,5 +186,20 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator degrow()
+    {
+        inputDisabled = true;
+        sproutGrow.isGrown = false;
+        sproutGrow.isGrowing = false;
+        animator.SetTrigger("isUngrowing");
+        yield return new WaitForSeconds(0.4f);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.None;
+        rb.freezeRotation = true;
+        jumpingForbidden--;
+        inputDisabled = false;
     }
 }

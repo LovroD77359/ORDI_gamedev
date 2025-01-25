@@ -6,6 +6,7 @@ using UnityEngine;
 public class SproutGrow : MonoBehaviour
 {
     public bool isGrown = false;
+    public bool isGrowing = false;
     [HideInInspector] public Vector3 climbPosition = new Vector3(-1, -1, -1);
 
     private Animator animator;
@@ -86,6 +87,9 @@ public class SproutGrow : MonoBehaviour
 
     IEnumerator grow(Vector3 climbPosition)
     {
+        movementScript.jumpingForbidden++;
+        movementScript.inputDisabled = true;
+
         // rotiraj biljku prema zidu na koji ce se sunce penjati
         Vector3 climbDirection = (climbPosition - transform.position).normalized;
         climbDirection.y = 0;
@@ -102,10 +106,17 @@ public class SproutGrow : MonoBehaviour
         transform.parent.rotation = rotateTo;
 
         // playaj animaciju rasta biljke
-        // animator.SetTrigger("isGrowing");
-        yield return new WaitForSeconds(3);     // NOTE: ovo namistit ovisno o trajanju anim, ispod puknit hitbox change
-        isGrown = true;
+        animator.SetTrigger("isGrowing");
         rb.constraints = RigidbodyConstraints.FreezeAll;
+        yield return new WaitForSeconds(0.5f);
+        movementScript.inputDisabled = false;
+        isGrowing = true;
+        yield return new WaitForSeconds(1.5f);     // NOTE: ovo namistit ovisno o trajanju anim, ispod puknit hitbox change
+        if (isGrowing)
+        {
+            isGrown = true;
+            isGrowing = false;
+        }
     }
 
     // Funkcija koja centrira danu poziciju (na 0.5)
