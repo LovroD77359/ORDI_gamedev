@@ -77,4 +77,6 @@ public class Instructions_panel : MonoBehaviour
             BackwardsButton.gameObject.SetActive(true);
         }
     }
+
+
 }
