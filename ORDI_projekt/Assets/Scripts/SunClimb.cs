@@ -30,11 +30,14 @@ public class SunClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightShift) && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
+        if (Input.GetKeyDown(KeyCode.RightShift) && movementScript.isGrounded != 0)
         {
+            movementScript.inputDisabled = true;
+            rb.velocity = Vector3.zero;
+
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad sunca neki objekt koji nije player (jer ce sunce uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
-                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))))
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))) && movementScript.jumpingForbidden == 0)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);        // trazimo collidere oko sunca NOTE: igrat se s ovim radijusom
                 foreach (Collider collider in colliders)
@@ -60,7 +63,7 @@ public class SunClimb : MonoBehaviour
             else { Debug.Log("iznad glave"); }
             if (!climbSuccess)
             {
-                // NOTE: tu ide reject animacija
+                StartCoroutine(deny());
             }
             climbSuccess = false;
         }
@@ -69,7 +72,6 @@ public class SunClimb : MonoBehaviour
     // Funkcija koja ostvaruje penjanje
     IEnumerator climb(Vector3 sproutPosition, Vector3 climbPosition)
     {
-        movementScript.inputDisabled = true;
         sproutMovementScript.inputDisabled = true;
 
         Vector3 sproutDirection = (sproutPosition - transform.position).normalized;
@@ -138,6 +140,13 @@ public class SunClimb : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         movementScript.inputDisabled = false;
         sproutMovementScript.inputDisabled = false;
+    }
+
+    IEnumerator deny()
+    {
+        animator.SetTrigger("deny");
+        yield return new WaitForSeconds(1);
+        movementScript.inputDisabled = false;
     }
 
     // Funkcija koja centrira danu poziciju (na 0.5)

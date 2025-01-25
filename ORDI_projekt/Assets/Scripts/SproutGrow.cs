@@ -25,13 +25,14 @@ public class SproutGrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && movementScript.isGrounded != 0)
         {
-            //animator.SetTrigger("isGrowing");
+            movementScript.inputDisabled = true;
+            rb.velocity = Vector3.zero;
 
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
-                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))))
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))) && movementScript.jumpingForbidden == 0)
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
                 climbPosition = findClimbPosition(transform.position);
@@ -40,6 +41,14 @@ public class SproutGrow : MonoBehaviour
                 {
                     StartCoroutine(grow(climbPosition));
                 }
+                else
+                {
+                    StartCoroutine(deny());
+                }
+            }
+            else
+            {
+                StartCoroutine(deny());
             }
         }
     }
@@ -89,7 +98,6 @@ public class SproutGrow : MonoBehaviour
     IEnumerator grow(Vector3 climbPosition)
     {
         movementScript.jumpingForbidden++;
-        movementScript.inputDisabled = true;
 
         // rotiraj biljku prema zidu na koji ce se sunce penjati
         Vector3 climbDirection = (climbPosition - transform.position).normalized;
@@ -112,13 +120,20 @@ public class SproutGrow : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         movementScript.inputDisabled = false;
         isGrowing = true;
-        yield return new WaitForSeconds(1.5f);     // NOTE: ovo namistit ovisno o trajanju anim, ispod puknit hitbox change
+        yield return new WaitForSeconds(1.5f);
         if (isGrowing)
         {
             isGrown = true;
             isGrowing = false;
             stemCol.enabled = true;
         }
+    }
+
+    IEnumerator deny()
+    {
+        animator.SetTrigger("deny");
+        yield return new WaitForSeconds(1);
+        movementScript.inputDisabled = false;
     }
 
     // Funkcija koja centrira danu poziciju (na 0.5)

@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     void cursorSet()
     {
         CursorMode mode = CursorMode.ForceSoftware;
-        int xspot = cursorTex.width / 2;
+        int xspot = cursorTex.width / 4;
         int yspot = cursorTex.height / 8;
         Vector2 hotSpot = new Vector2(xspot, yspot);
         Cursor.SetCursor(cursorTex, hotSpot, mode);

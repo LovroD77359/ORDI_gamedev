@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
 
     //ANIMACIJE KOD:
     private Animator animator;
-    //private bool isRunning = false;
 
 
     void Start()
@@ -73,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
         if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden--;
+        }
+
+        if (playerTag == "Player2" && isGrounded == 0 && (sproutGrow.isGrown || sproutGrow.isGrowing))
+        {
+            StartCoroutine(degrow());
         }
     }
 
@@ -146,15 +150,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (isGrounded == 0)
-            {
-                animator.SetTrigger("startFlying");
-            }
-            if(isGrounded != 0)
-            {
-                animator.SetTrigger("stopFlying");
-            }
-
             //kod za animacije:
             bool isMoving = horizontalInput != 0 || verticalInput != 0;
             if (isMoving)
@@ -180,6 +175,15 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isPushing", false);
                 animator.SetTrigger("stopRunning");
             }
+        }
+
+        if (isGrounded == 0)
+        {
+            animator.SetTrigger("startFlying");
+        }
+        if (isGrounded != 0)
+        {
+            animator.SetTrigger("stopFlying");
         }
     }
 
