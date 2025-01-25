@@ -87,16 +87,31 @@ public class SunClimb : MonoBehaviour
         transform.parent.rotation = rotateTo;
 
         // play climb animation
-        //animator.SetTrigger("isClimbing");
+        animator.SetTrigger("isClimbing");
         Vector3 initialPosition = transform.parent.position;
+        Vector3 endPosition = initialPosition + sproutDirection * (Vector3.Distance(initialPosition, sproutPosition) - 0.25f) + new Vector3(0, 1, 0);
+        Vector3 arcCenter = (initialPosition + endPosition) * 0.5f - new Vector3(0, 1, 0);
+        Vector3 startToCenter = initialPosition - arcCenter;
+        Vector3 endToCenter = endPosition - arcCenter;
         startTime = Time.time;
-        while (Vector3.Distance(transform.parent.position, initialPosition + new Vector3(0, 2, 0)) > 0.1f)
+        while (Vector3.Distance(transform.parent.position, endPosition) > 0.1f)
         {
             timeDif = Time.time - startTime;
-            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), timeDif * 0.5f);      // lerp prema gore
+            transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, timeDif * 1.5f);     // slerp sunca na biljku
             yield return null;
         }
-        transform.parent.position = initialPosition + new Vector3(0, 2, 0);
+        transform.parent.position = endPosition;
+
+        startTime = Time.time;
+        initialPosition = endPosition;
+        endPosition = initialPosition + new Vector3(0, 1, 0);
+        while (Vector3.Distance(transform.parent.position, endPosition) > 0.1f)
+        {
+            timeDif = Time.time - startTime;
+            transform.parent.position = Vector3.Lerp(initialPosition, endPosition, timeDif * 0.5f);      // lerp prema gore
+            yield return null;
+        }
+        transform.parent.position = endPosition;
 
         Vector3 climbDirection = (climbPosition - transform.position).normalized;
         climbDirection.y = 0;
@@ -104,20 +119,23 @@ public class SunClimb : MonoBehaviour
         transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotateTo, 1);           // brza rotacija prema climb positionu
 
         // play dismount animation
-        initialPosition += new Vector3(0, 2, 0);
-        Vector3 arcCenter = (initialPosition + climbPosition) * 0.5F - new Vector3(0, 1, 0);
-        Vector3 startToCenter = initialPosition - arcCenter;
-        Vector3 endToCenter = climbPosition - arcCenter;
+        initialPosition = endPosition;
+        endPosition = climbPosition;
+        arcCenter = (initialPosition + endPosition) * 0.5f - new Vector3(0, 1, 0);
+        startToCenter = initialPosition - arcCenter;
+        endToCenter = endPosition - arcCenter;
         startTime = Time.time;
         animator.SetTrigger("isJumping");
-        while (Vector3.Distance(transform.parent.position, climbPosition) > 0.1f)
+        while (Vector3.Distance(transform.parent.position, endPosition) > 0.1f)
         {
             timeDif = Time.time - startTime;
             transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, timeDif * 1.5f);     // slerp sunca na poziciju za silazak
             yield return null;
         }
-        transform.parent.position = climbPosition;
+        transform.parent.position = endPosition;
 
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         movementScript.inputDisabled = false;
         sproutMovementScript.inputDisabled = false;
     }

@@ -79,7 +79,7 @@ public class SproutClimb : MonoBehaviour
         transform.parent.rotation = rotateTo;
 
         // play climb animation
-        //animator.SetTrigger("isClimbing");
+        animator.SetTrigger("isClimbing");
         Vector3 initialPosition = transform.parent.position;
         startTime = Time.time;
         while (Vector3.Distance(transform.parent.position, initialPosition + new Vector3(0, 2, 0)) > 0.1f)

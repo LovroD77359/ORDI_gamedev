@@ -7,6 +7,7 @@ public class SproutGrow : MonoBehaviour
 {
     public bool isGrown = false;
     public bool isGrowing = false;
+    public Collider stemCol;
     [HideInInspector] public Vector3 climbPosition = new Vector3(-1, -1, -1);
 
     private Animator animator;
@@ -116,6 +117,7 @@ public class SproutGrow : MonoBehaviour
         {
             isGrown = true;
             isGrowing = false;
+            stemCol.enabled = true;
         }
     }
 

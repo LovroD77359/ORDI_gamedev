@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded++;
         }
-        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden++;
         }
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded--;
         }
-        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden--;
         }
@@ -161,10 +161,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (isTouchingRock)
                 {
-                    animator.SetTrigger("startPushing");
+                    animator.SetBool("isPushing", true);
                 }
                 else
                 {
+                    animator.SetBool("isPushing", false);
                     animator.SetTrigger("startRunning");
                 }
 
@@ -176,14 +177,8 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (isTouchingRock)
-                {
-                    animator.SetTrigger("stopPushing");
-                }
-                else
-                {
-                    animator.SetTrigger("stopRunning");
-                }
+                animator.SetBool("isPushing", false);
+                animator.SetTrigger("stopRunning");
             }
         }
     }
@@ -193,6 +188,7 @@ public class PlayerMovement : MonoBehaviour
         inputDisabled = true;
         sproutGrow.isGrown = false;
         sproutGrow.isGrowing = false;
+        sproutGrow.stemCol.enabled = false;
         animator.SetTrigger("isUngrowing");
         yield return new WaitForSeconds(0.4f);
         rb.velocity = Vector3.zero;
