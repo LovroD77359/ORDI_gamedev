@@ -8,6 +8,7 @@ public class SproutGrow : MonoBehaviour
     public bool isGrown = false;
     public bool isGrowing = false;
     public Collider stemCol;
+    public Collider detectCol;
     [HideInInspector] public Vector3 climbPosition = new Vector3(-1, -1, -1);
 
     private Animator animator;
@@ -19,6 +20,7 @@ public class SproutGrow : MonoBehaviour
     {
         animator = GetComponentInParent<Animator>();
         rb = GetComponentInParent<Rigidbody>();
+        detectCol = GetComponent<Collider>();
         movementScript = GetComponentInParent<PlayerMovement>();
     }
 
@@ -32,7 +34,8 @@ public class SproutGrow : MonoBehaviour
 
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
-                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))) && movementScript.jumpingForbidden == 0)
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider")
+                        && !col.transform.CompareTag("ScriptCollider"))) && movementScript.jumpingForbidden == 0)
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
                 climbPosition = findClimbPosition(transform.position);
@@ -50,6 +53,14 @@ public class SproutGrow : MonoBehaviour
             {
                 StartCoroutine(deny());
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((isGrowing || isGrown) && !other.CompareTag("Player") && !other.CompareTag("GroundCollider"))
+        {
+            StartCoroutine(movementScript.degrow());
         }
     }
 
@@ -117,10 +128,11 @@ public class SproutGrow : MonoBehaviour
         // playaj animaciju rasta biljke
         animator.SetTrigger("isGrowing");
         rb.constraints = RigidbodyConstraints.FreezeAll;
+        detectCol.enabled = true;
         yield return new WaitForSeconds(0.5f);
         movementScript.inputDisabled = false;
         isGrowing = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         if (isGrowing)
         {
             isGrown = true;

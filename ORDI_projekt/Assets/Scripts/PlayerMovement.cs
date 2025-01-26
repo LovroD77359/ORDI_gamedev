@@ -187,8 +187,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator degrow()
+    public IEnumerator degrow()
     {
+        sproutGrow.detectCol.enabled = false;
         inputDisabled = true;
         sproutGrow.isGrown = false;
         sproutGrow.isGrowing = false;
