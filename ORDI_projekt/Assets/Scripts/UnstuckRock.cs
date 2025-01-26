@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -11,27 +12,38 @@ public class UnstuckRock : MonoBehaviour
     private Rigidbody rb;
     private int moveXCount = 0;
     private int moveZCount = 0;
+    private List<GameObject> debuffedPlayers;
 
     private void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
+        debuffedPlayers = new List<GameObject>();
     }
 
     private void FixedUpdate()
     {
-        if (moveXCount != 0)
+        if (rb.useGravity)
         {
-            rb.MovePosition(transform.position + 0.5f * Time.fixedDeltaTime * new Vector3(1, 0, 0) * moveXCount);
-        }
-        if (moveZCount != 0)
-        {
-            rb.MovePosition(transform.position + 0.5f * Time.fixedDeltaTime * new Vector3(0, 0, 1) * moveZCount);
+            if (moveXCount != 0)
+            {
+                rb.MovePosition(transform.position + 0.5f * Time.fixedDeltaTime * new Vector3(1, 0, 0) * moveXCount);
+            }
+            if (moveZCount != 0)
+            {
+                rb.MovePosition(transform.position + 0.5f * Time.fixedDeltaTime * new Vector3(0, 0, 1) * moveZCount);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        if (other.CompareTag("MudAndWater"))
+        {
+            DiscriminativeMediums mudAndWaterScript = other.GetComponent<DiscriminativeMediums>();
+            debuffedPlayers.Add(mudAndWaterScript.affectedPlayer);
+        }
+        Debug.Log(debuffedPlayers.Count);
+        if (other.transform.CompareTag("Player") && !debuffedPlayers.Contains(other.gameObject))
         {
             moveXCount += xMod;
             moveZCount += zMod;
@@ -40,7 +52,12 @@ public class UnstuckRock : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        if (other.CompareTag("MudAndWater"))
+        {
+            DiscriminativeMediums mudAndWaterScript = other.GetComponent<DiscriminativeMediums>();
+            debuffedPlayers.Remove(mudAndWaterScript.affectedPlayer);
+        }
+        if (other.transform.CompareTag("Player") && !debuffedPlayers.Contains(other.gameObject))
         {
             moveXCount -= xMod;
             moveZCount -= zMod;
