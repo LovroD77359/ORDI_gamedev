@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public int isGrounded = 0;
     [HideInInspector] public bool isTouchingRock = false;
     [HideInInspector] public int isDebuffed = 0;
+    [HideInInspector] public int inMudOrWater = 0;
 
     private Rigidbody rb;
 
@@ -69,6 +70,10 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpingForbidden++;
         }
+        if (other.CompareTag("MudAndWater"))
+        {
+            inMudOrWater++;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -80,6 +85,10 @@ public class PlayerMovement : MonoBehaviour
         if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden--;
+        }
+        if (other.CompareTag("MudAndWater"))
+        {
+            inMudOrWater--;
         }
 
         if (playerTag == "Player2" && isGrounded == 0 && (sproutGrow.isGrown || sproutGrow.isGrowing))
