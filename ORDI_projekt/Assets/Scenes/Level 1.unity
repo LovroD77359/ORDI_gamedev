@@ -10314,6 +10314,14 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5992618212607800671, guid: bcd573bc933a24b4ba91ee38479cfba8, type: 3}
+      propertyPath: movingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2036d1ca5b5e5d242b2b0ac71f5e6f1a, type: 3}
+    - target: {fileID: 5992618212607800671, guid: bcd573bc933a24b4ba91ee38479cfba8, type: 3}
+      propertyPath: fadeDuration
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 7773247154206598409, guid: bcd573bc933a24b4ba91ee38479cfba8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.5
@@ -36924,6 +36932,14 @@ PrefabInstance:
     - target: {fileID: 2346669493171068828, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
       propertyPath: moveSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2346669493171068828, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
+      propertyPath: movingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2036d1ca5b5e5d242b2b0ac71f5e6f1a, type: 3}
+    - target: {fileID: 2346669493171068828, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
+      propertyPath: fadeDuration
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 6611992392913368055, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
       propertyPath: m_Name

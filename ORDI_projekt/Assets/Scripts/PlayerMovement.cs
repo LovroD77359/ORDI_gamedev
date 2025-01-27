@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float jump = 400;
     public Transform cam;
     public string playerTag;
-    public AudioClip walkingSound; // Dodan audiozapis hodanja
+
     [HideInInspector] public bool inputDisabled = false;
     [HideInInspector] public int jumpingForbidden = 0;
     [HideInInspector] public int isGrounded = 0;
@@ -18,9 +18,15 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public int isDebuffed = 0;
 
     private Rigidbody rb;
-    private AudioSource audioSource; // AudioSource za reprodukciju zvuka hodanja
+
     private float horizontalInput = 0;
     private float verticalInput = 0;
+
+    public AudioClip walkingSound;        // Zvuk hodanja po tlu
+    public AudioClip walkingInWaterSound; // Zvuk hodanja u vodi
+    public AudioClip walkingInMudSound;   // Zvuk hodanja u blatu
+
+    private AudioSource audioSource; // AudioSource za reprodukciju zvuka hodanja
 
     // Kamera smjerovi
     private Vector3 camForward;
@@ -49,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Postavljanje AudioSourcea
         audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.clip = walkingSound;
         audioSource.loop = true; // Postavi da se loopa
         audioSource.volume = 0.5f; // Po želji prilagodi glasnoću
     }
@@ -201,6 +206,81 @@ public class PlayerMovement : MonoBehaviour
             audioSource.Stop();
         }
     }
+
+    private void HandleSplashingSound (bool isMoving){
+
+
+        // ako je sunce usporeno, nalazi se u vodi: play voda zvuk
+        if(playerTag == "Player1" && isDebuffed == 1){ // && isinmudorwater
+            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
+                
+                PlayWalkingSound(walkingInWaterSound, isMoving);
+            }
+            else if (!isMoving || isGrounded == 0)
+            {
+                audioSource.Stop();
+            } 
+        }
+
+        //ako je sunce neusporeno, nalazi se u blatu: play blato zvuk
+        else if (playerTag == "Player1" && isDebuffed == 0){ // && isinmudorwater
+            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
+                
+                PlayWalkingSound(walkingInMudSound, isMoving);            }
+            else if (!isMoving || isGrounded == 0)
+            {
+                audioSource.Stop();
+            }
+        }
+
+        //ako je biljka usporena, nalazi se u blatu
+        else if (playerTag == "Player2" && isDebuffed == 1){ //&& isinmudorwater
+            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
+                
+                PlayWalkingSound(walkingInMudSound, isMoving);
+            }
+            else if (!isMoving || isGrounded == 0)
+            {
+                audioSource.Stop();
+            }
+        }
+
+        //ako ne onda je u vodi
+         else if (playerTag == "Player2" && isDebuffed == 0){ //&& isinmudorwater
+            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
+                
+                PlayWalkingSound(walkingInWaterSound, isMoving);
+            }
+            else if (!isMoving || isGrounded == 0)
+            {
+                audioSource.Stop();
+            }
+        }
+
+        
+    }
+
+    private void PlayWalkingSound(AudioClip clip, bool isMoving)
+    {
+        if (isMoving && isGrounded > 0)
+        {
+            if (audioSource.clip != clip) // Promijeni zvuk ako je drugačiji
+            {
+                audioSource.Stop();
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
+            else if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Stop();
+        }
+    }
+}
 
     public IEnumerator degrow()
     {
