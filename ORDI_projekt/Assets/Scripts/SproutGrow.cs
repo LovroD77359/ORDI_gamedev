@@ -35,7 +35,7 @@ public class SproutGrow : MonoBehaviour
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
                 col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider")
-                        && !col.transform.CompareTag("ScriptCollider"))) && movementScript.jumpingForbidden == 0)
+                        && !col.transform.CompareTag("ScriptCollider"))) && movementScript.jumpingForbidden == 0 && movementScript.inMudOrWater == 0)
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
                 climbPosition = findClimbPosition(transform.position);
