@@ -11,6 +11,8 @@ TagManager:
   - MudAndWater
   - GroundCollider
   - ScriptCollider
+  - Mud
+  - Water
   layers:
   - Default
   - TransparentFX
