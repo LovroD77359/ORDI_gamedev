@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public int jumpingForbidden = 0;
     [HideInInspector] public int isGrounded = 0;
     [HideInInspector] public bool isTouchingRock = false;
+    [HideInInspector] public int isDebuffed = 0;
 
     private Rigidbody rb;
     private AudioSource audioSource; // AudioSource za reprodukciju zvuka hodanja
@@ -55,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             isGrounded++;
         }
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             isGrounded--;
         }
