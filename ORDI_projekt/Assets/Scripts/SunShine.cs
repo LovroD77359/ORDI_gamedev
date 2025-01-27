@@ -28,7 +28,7 @@ public class SunShine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightControl) && !isShining && movementScript.isGrounded != 0)
+        if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.RightControl)) && !isShining && movementScript.isGrounded != 0)
         {
             if (movementScript.jumpingForbidden == 0)
             {
