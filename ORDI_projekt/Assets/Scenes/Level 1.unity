@@ -788,6 +788,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ca33df991d6c74f815c24edb52c87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &24080895 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 7574374326080566407, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
+  m_PrefabInstance: {fileID: 301546744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &25936550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6197,6 +6202,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 225238694}
     - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
+      propertyPath: col
+      value: 
+      objectReference: {fileID: 24080895}
+    - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: waterSound
       value: 
       objectReference: {fileID: 8300000, guid: d1ec8c6921b01b54dae64f3e25319fd3, type: 3}
@@ -6204,6 +6213,14 @@ PrefabInstance:
       propertyPath: walkingSound
       value: 
       objectReference: {fileID: 8300000, guid: ac50e3238f3e144b4afd3e73dfe5005f, type: 3}
+    - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
+      propertyPath: walkingInMudSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9db9336e9f17c9744847c5fe94c1650f, type: 3}
+    - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
+      propertyPath: walkingInWaterSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9db9336e9f17c9744847c5fe94c1650f, type: 3}
     - target: {fileID: 5031263313487980034, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -15594,6 +15611,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ca33df991d6c74f815c24edb52c87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &801165149 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 65459945306008628, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
+  m_PrefabInstance: {fileID: 2076714085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &805240248
 GameObject:
   m_ObjectHideFlags: 0
@@ -34689,6 +34711,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 225238694}
     - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
+      propertyPath: col
+      value: 
+      objectReference: {fileID: 801165149}
+    - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: waterSound
       value: 
       objectReference: {fileID: 8300000, guid: d1ec8c6921b01b54dae64f3e25319fd3, type: 3}
@@ -34696,6 +34722,14 @@ PrefabInstance:
       propertyPath: walkingSound
       value: 
       objectReference: {fileID: 8300000, guid: ac50e3238f3e144b4afd3e73dfe5005f, type: 3}
+    - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
+      propertyPath: walkingInMudSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9db9336e9f17c9744847c5fe94c1650f, type: 3}
+    - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
+      propertyPath: walkingInWaterSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9db9336e9f17c9744847c5fe94c1650f, type: 3}
     - target: {fileID: 7972576178043232912, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: sproutScriptCarrier
       value: 
