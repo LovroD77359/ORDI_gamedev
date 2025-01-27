@@ -3495,7 +3495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Button
+  m_text: 'Buttons
 
 '
   m_isRightToLeft: 0
