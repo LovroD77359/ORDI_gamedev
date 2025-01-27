@@ -3157,6 +3157,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3466018255988731544, guid: 216f48b77a0e1e54cb459b58a0692af5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 39.37195
+      objectReference: {fileID: 0}
     - target: {fileID: 6401380845954728632, guid: 216f48b77a0e1e54cb459b58a0692af5, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3164,6 +3168,10 @@ PrefabInstance:
     - target: {fileID: 9010313926615399678, guid: 216f48b77a0e1e54cb459b58a0692af5, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010313926615399678, guid: 216f48b77a0e1e54cb459b58a0692af5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11927,10 +11935,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1772470361566927847, guid: fd76087813f650743b7bba12d5634064, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6615155675192303237, guid: fd76087813f650743b7bba12d5634064, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1015277888}
+    - target: {fileID: 6615155675192303237, guid: fd76087813f650743b7bba12d5634064, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7733978788795416297, guid: fd76087813f650743b7bba12d5634064, type: 3}
       propertyPath: m_Name
       value: player sprout

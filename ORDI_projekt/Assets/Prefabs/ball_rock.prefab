@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.002, y: 0.02, z: 0.002}
-  m_Center: {x: -0.018, y: 0, z: 0.012}
+  m_Size: {x: 0.002, y: 0.02, z: 0.004}
+  m_Center: {x: -0.018, y: 0, z: 0.013}
 --- !u!114 &3100017839902809730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,8 +120,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.002, y: 0.02, z: 0.002}
-  m_Center: {x: -0.018, y: 0, z: -0.012}
+  m_Size: {x: 0.002, y: 0.02, z: 0.004}
+  m_Center: {x: -0.018, y: 0, z: -0.013}
 --- !u!114 &6428560564702992195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,8 +188,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.002, y: 0.002, z: 0.02}
-  m_Center: {x: -0.018, y: 0.012, z: 0}
+  m_Size: {x: 0.002, y: 0.004, z: 0.02}
+  m_Center: {x: -0.018, y: 0.013, z: 0}
 --- !u!114 &1225101506317572099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 649347789697320319}
   m_Layer: 0
   m_Name: push script collider
-  m_TagString: Untagged
+  m_TagString: ScriptCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,8 +482,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.002, y: 0.002, z: 0.02}
-  m_Center: {x: -0.018, y: -0.012, z: 0}
+  m_Size: {x: 0.002, y: 0.004, z: 0.02}
+  m_Center: {x: -0.018, y: -0.013, z: 0}
 --- !u!114 &4890640504168215269
 MonoBehaviour:
   m_ObjectHideFlags: 0

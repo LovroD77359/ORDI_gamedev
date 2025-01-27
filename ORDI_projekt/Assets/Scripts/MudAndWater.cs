@@ -7,6 +7,7 @@ using UnityEngine;
 public class DiscriminativeMediums : MonoBehaviour
 {
     public GameObject affectedPlayer;       // lik koji propadne
+
     private PlayerMovement movementScript;
     private float ogJump;
 
@@ -18,19 +19,27 @@ public class DiscriminativeMediums : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject == affectedPlayer)
+        if (collider.CompareTag("GroundCollider") && collider.transform.parent.gameObject == affectedPlayer)
         {
-            movementScript.speed *= 0.5f;
-            movementScript.jump = 0;
+            if (movementScript.isDebuffed == 0)
+            {
+                movementScript.speed *= 0.5f;
+                movementScript.jump = 0;
+            }
+            movementScript.isDebuffed++;
         }
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject == affectedPlayer)
+        if (collider.CompareTag("GroundCollider") && collider.transform.parent.gameObject == affectedPlayer)
         {
-            movementScript.speed *= 2;
-            movementScript.jump = ogJump;
+            movementScript.isDebuffed--;
+            if (movementScript.isDebuffed == 0)
+            {
+                movementScript.speed *= 2;
+                movementScript.jump = ogJump;
+            }
         }
     }
 }

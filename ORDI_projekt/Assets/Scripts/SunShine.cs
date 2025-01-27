@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class SunShine : MonoBehaviour
 {
     private Animator animator;
+    private Rigidbody rb;
     private PlayerMovement movementScript;
     private Light light;
     private bool isShining = false;
@@ -19,6 +20,7 @@ public class SunShine : MonoBehaviour
     void Start()
     {
         animator = GetComponentInParent<Animator>();
+        rb = GetComponentInParent<Rigidbody>();
         movementScript = GetComponentInParent<PlayerMovement>();
         light = GetComponentInParent<Light>();
     }
@@ -26,18 +28,28 @@ public class SunShine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightControl) && !isShining && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
+        if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.RightControl)) && !isShining && movementScript.isGrounded != 0)
         {
-            animator.SetTrigger("isShining");
-            StartCoroutine(shine());
-
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);        // trazimo collidere oko sunca NOTE: igrat se s ovim radijusom
-            foreach (Collider collider in colliders)
+            if (movementScript.jumpingForbidden == 0 && movementScript.inMudOrWater == 0)
             {
-                if (collider.transform.CompareTag("HookPlant"))     // ako smo nasli hook plant
+                movementScript.inputDisabled = true;
+                rb.velocity = Vector3.zero;
+
+                animator.SetTrigger("isShining");
+                StartCoroutine(shine());
+
+                Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);        // trazimo collidere oko sunca NOTE: igrat se s ovim radijusom
+                foreach (Collider collider in colliders)
                 {
-                    StartCoroutine(growPlant(collider));
+                    if (collider.transform.CompareTag("HookPlant"))     // ako smo nasli hook plant
+                    {
+                        StartCoroutine(growPlant(collider));
+                    }
                 }
+            }
+            else
+            {
+                StartCoroutine(deny());
             }
         }
     }
@@ -65,6 +77,7 @@ public class SunShine : MonoBehaviour
 
         isShining = false;
         movementScript.jumpingForbidden--;
+        movementScript.inputDisabled = false;
     }
 
     IEnumerator growPlant(Collider collider)
@@ -74,6 +87,13 @@ public class SunShine : MonoBehaviour
         yield return new WaitForSeconds(3);
         hookPlantScript = collider.GetComponent<HookPlantTrack>();      // postavljamo mu isGrown na true
         hookPlantScript.isGrown = true;
+    }
+
+    IEnumerator deny()
+    {
+        animator.SetTrigger("deny");
+        yield return new WaitForSeconds(1);
+        movementScript.inputDisabled = false;
     }
 }
 

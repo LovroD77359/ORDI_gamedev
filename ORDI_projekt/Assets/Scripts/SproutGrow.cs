@@ -6,6 +6,9 @@ using UnityEngine;
 public class SproutGrow : MonoBehaviour
 {
     public bool isGrown = false;
+    public bool isGrowing = false;
+    public Collider stemCol;
+    public Collider detectCol;
     [HideInInspector] public Vector3 climbPosition = new Vector3(-1, -1, -1);
 
     private Animator animator;
@@ -17,19 +20,22 @@ public class SproutGrow : MonoBehaviour
     {
         animator = GetComponentInParent<Animator>();
         rb = GetComponentInParent<Rigidbody>();
+        detectCol = GetComponent<Collider>();
         movementScript = GetComponentInParent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && movementScript.isGrounded != 0)
         {
-            //animator.SetTrigger("isGrowing");
+            movementScript.inputDisabled = true;
+            rb.velocity = Vector3.zero;
 
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
-                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))))
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider")
+                        && !col.transform.CompareTag("ScriptCollider"))) && movementScript.jumpingForbidden == 0 && movementScript.inMudOrWater == 0)
             {
                 // nadi prihvatljivu poziciju za "sici" s biljke na pod
                 climbPosition = findClimbPosition(transform.position);
@@ -38,7 +44,23 @@ public class SproutGrow : MonoBehaviour
                 {
                     StartCoroutine(grow(climbPosition));
                 }
+                else
+                {
+                    StartCoroutine(deny());
+                }
             }
+            else
+            {
+                StartCoroutine(deny());
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((isGrowing || isGrown) && !other.CompareTag("Player") && !other.CompareTag("GroundCollider"))
+        {
+            StartCoroutine(movementScript.degrow());
         }
     }
 
@@ -86,6 +108,8 @@ public class SproutGrow : MonoBehaviour
 
     IEnumerator grow(Vector3 climbPosition)
     {
+        movementScript.jumpingForbidden++;
+
         // rotiraj biljku prema zidu na koji ce se sunce penjati
         Vector3 climbDirection = (climbPosition - transform.position).normalized;
         climbDirection.y = 0;
@@ -102,10 +126,26 @@ public class SproutGrow : MonoBehaviour
         transform.parent.rotation = rotateTo;
 
         // playaj animaciju rasta biljke
-        // animator.SetTrigger("isGrowing");
-        yield return new WaitForSeconds(3);     // NOTE: ovo namistit ovisno o trajanju anim, ispod puknit hitbox change
-        isGrown = true;
+        animator.SetTrigger("isGrowing");
         rb.constraints = RigidbodyConstraints.FreezeAll;
+        detectCol.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        movementScript.inputDisabled = false;
+        isGrowing = true;
+        yield return new WaitForSeconds(1f);
+        if (isGrowing)
+        {
+            isGrown = true;
+            isGrowing = false;
+            stemCol.enabled = true;
+        }
+    }
+
+    IEnumerator deny()
+    {
+        animator.SetTrigger("deny");
+        yield return new WaitForSeconds(1);
+        movementScript.inputDisabled = false;
     }
 
     // Funkcija koja centrira danu poziciju (na 0.5)

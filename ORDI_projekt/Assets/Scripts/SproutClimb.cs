@@ -25,11 +25,15 @@ public class SproutClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && movementScript.isGrounded != 0 && movementScript.jumpingForbidden == 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && movementScript.isGrounded != 0)
         {
+            movementScript.inputDisabled = true;
+            rb.velocity = Vector3.zero;
+
             Vector3 centeredPosition = centerPosition(transform.position);      // ako ne postoji dva bloka iznad biljke neki objekt koji nije player (jer ce biljka uhvatit svoj collider), dakle gore je prazno
             if (!Array.Exists(Physics.OverlapCapsule(centeredPosition + new Vector3(0, 1, 0), centeredPosition + new Vector3(0, 2, 0), 0.4f),
-                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider"))))
+                col => (!col.transform.CompareTag("Player") && !col.transform.CompareTag("Decoration") && !col.transform.CompareTag("GroundCollider")
+                        && !col.transform.CompareTag("ScriptCollider"))) && movementScript.jumpingForbidden == 0 && movementScript.inMudOrWater == 0)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position + new Vector3(0, 1, 0), 1f);        // trazimo collidere iznad  biljke NOTE: igrat se s ovim radijusom
                 foreach (Collider collider in colliders)
@@ -53,7 +57,7 @@ public class SproutClimb : MonoBehaviour
             else { Debug.Log("iznad glave"); }
             if (!climbSuccess)
             {
-                // NOTE: tu ide reject animacija
+                StartCoroutine(deny());
             }
             climbSuccess = false;
         }
@@ -62,8 +66,6 @@ public class SproutClimb : MonoBehaviour
     // Funkcija koja ostvaruje penjanje
     IEnumerator climb(Vector3 climbPosition)
     {
-        movementScript.inputDisabled = true;
-
         Vector3 climbDirection = (climbPosition - transform.position).normalized;
         climbDirection.y = 0;
         Quaternion rotateTo = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(climbDirection).eulerAngles.y - 180, 0));
@@ -79,13 +81,14 @@ public class SproutClimb : MonoBehaviour
         transform.parent.rotation = rotateTo;
 
         // play climb animation
-        //animator.SetTrigger("isClimbing");
+        animator.SetTrigger("isClimbing");
+        yield return new WaitForSeconds(1.3f);
         Vector3 initialPosition = transform.parent.position;
         startTime = Time.time;
         while (Vector3.Distance(transform.parent.position, initialPosition + new Vector3(0, 2, 0)) > 0.1f)
         {
             timeDif = Time.time - startTime;
-            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), timeDif * 0.5f);      // lerp prema gore
+            transform.parent.position = Vector3.Lerp(initialPosition, initialPosition + new Vector3(0, 2, 0), timeDif * 2.25f);      // lerp prema gore
             yield return null;
         }
         transform.parent.position = initialPosition + new Vector3(0, 2, 0);
@@ -97,16 +100,22 @@ public class SproutClimb : MonoBehaviour
         Vector3 startToCenter = initialPosition - arcCenter;
         Vector3 endToCenter = climbPosition - arcCenter;
         startTime = Time.time;
-        animator.SetTrigger("isJumping");
         while (Vector3.Distance(transform.parent.position, climbPosition) > 0.1f)
         {
             timeDif = Time.time - startTime;
-            transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, timeDif * 1.5f);     // slerp biljke na poziciju za silazak
+            transform.parent.position = arcCenter + Vector3.Slerp(startToCenter, endToCenter, timeDif * 1.75f);     // slerp biljke na poziciju za silazak
             yield return null;
         }
         transform.parent.position = climbPosition;
 
         rb.velocity = Vector3.zero;
+        movementScript.inputDisabled = false;
+    }
+
+    IEnumerator deny()
+    {
+        animator.SetTrigger("deny");
+        yield return new WaitForSeconds(1);
         movementScript.inputDisabled = false;
     }
 

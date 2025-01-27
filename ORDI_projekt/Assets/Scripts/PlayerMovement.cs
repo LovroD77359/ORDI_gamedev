@@ -1,10 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.InputSystem;
 
-    
 public class PlayerMovement : MonoBehaviour
 {
     public Collider col;
@@ -13,25 +10,26 @@ public class PlayerMovement : MonoBehaviour
     public float jump = 400;
     public Transform cam;
     public string playerTag;
+    public AudioClip walkingSound; // Dodan audiozapis hodanja
     [HideInInspector] public bool inputDisabled = false;
     [HideInInspector] public int jumpingForbidden = 0;
     [HideInInspector] public int isGrounded = 0;
     [HideInInspector] public bool isTouchingRock = false;
+    [HideInInspector] public int isDebuffed = 0;
+    [HideInInspector] public int inMudOrWater = 0;
 
     private Rigidbody rb;
-
+    private AudioSource audioSource; // AudioSource za reprodukciju zvuka hodanja
     private float horizontalInput = 0;
     private float verticalInput = 0;
-    //camera direction
+
+    // Kamera smjerovi
     private Vector3 camForward;
     private Vector3 camRight;
-
     private SproutGrow sproutGrow;
 
-    //ANIMACIJE KOD:
+    // Animacije
     private Animator animator;
-    //private bool isRunning = false;
-
 
     void Start()
     {
@@ -48,31 +46,49 @@ public class PlayerMovement : MonoBehaviour
             sproutGrow = GetComponentInChildren<SproutGrow>();
         }
 
-        //ANIMACIJE KOD:
-        animator = GetComponent<Animator>();//komentirano za testiranje
+        animator = GetComponent<Animator>();
+
+        // Postavljanje AudioSourcea
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = walkingSound;
+        audioSource.loop = true; // Postavi da se loopa
+        audioSource.volume = 0.5f; // Po želji prilagodi glasnoću
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             isGrounded++;
         }
-        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden++;
+        }
+        if (other.CompareTag("MudAndWater"))
+        {
+            inMudOrWater++;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             isGrounded--;
         }
-        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden--;
+        }
+        if (other.CompareTag("MudAndWater"))
+        {
+            inMudOrWater--;
+        }
+
+        if (playerTag == "Player2" && isGrounded == 0 && (sproutGrow.isGrown || sproutGrow.isGrowing))
+        {
+            StartCoroutine(degrow());
         }
     }
 
@@ -80,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!inputDisabled)
         {
-            //inputs
+            // Inputs za pokrete
             if (playerTag == "Player1")
             {
                 horizontalInput = Input.GetAxis("Horizontal1");
@@ -91,15 +107,14 @@ public class PlayerMovement : MonoBehaviour
                 horizontalInput = Input.GetAxis("Horizontal2");
                 verticalInput = Input.GetAxis("Vertical2"); 
             }
-            
-        
-            //relative camera directions
+
+            // Kamera smjerovi
             Vector3 forwardRelative = verticalInput * speed * camForward;  
             Vector3 rightRelative = horizontalInput * speed * camRight;
-            
+
             Vector3 movementDirection = forwardRelative + rightRelative;
 
-            //movement and jumping
+            // Kretanje i rotacija
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
             if (movementDirection.magnitude > 0.1f)
             {
@@ -108,7 +123,10 @@ public class PlayerMovement : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10);
             }
 
+            // Zvuk hodanja
+            HandleWalkingSound(movementDirection.magnitude > 0.1f);
 
+            // Skakanje
             if (playerTag == "Player1")
             {
                 if (Input.GetKeyDown(KeyCode.Return) && isGrounded != 0)
@@ -128,11 +146,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) && isGrounded != 0)
                 {
-                    if (sproutGrow.isGrown)
+                    if (sproutGrow.isGrown || sproutGrow.isGrowing)
                     {
-                        sproutGrow.isGrown = false;     // NOTE: tu ide sprout degrow animacija
-                        rb.constraints = RigidbodyConstraints.None;
-                        rb.freezeRotation = true;
+                        StartCoroutine(degrow());
                     }
 
                     if (jumpingForbidden == 0)
@@ -147,46 +163,68 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (isGrounded == 0)
-            {
-                animator.SetTrigger("startFlying");
-            }
-            if(isGrounded != 0)
-            {
-                animator.SetTrigger("stopFlying");
-            }
-
-            //kod za animacije:
+            // Animacije
             bool isMoving = horizontalInput != 0 || verticalInput != 0;
             if (isMoving)
             {
                 if (isTouchingRock)
                 {
-                    animator.SetTrigger("startPushing");
+                    animator.SetBool("isPushing", true);
                 }
                 else
                 {
+                    animator.SetBool("isPushing", false);
                     animator.SetTrigger("startRunning");
                 }
 
-                if (playerTag == "Player2" && sproutGrow.isGrown)
+                if (playerTag == "Player2" && (sproutGrow.isGrown || sproutGrow.isGrowing))
                 {
-                    sproutGrow.isGrown = false;     // NOTE: tu ide sprout degrow animacija
-                    rb.constraints = RigidbodyConstraints.None;
-                    rb.freezeRotation = true;
+                    StartCoroutine(degrow());
                 }
             }
             else
             {
-                if (isTouchingRock)
-                {
-                    animator.SetTrigger("stopPushing");
-                }
-                else
-                {
-                    animator.SetTrigger("stopRunning");
-                }
+                animator.SetBool("isPushing", false);
+                animator.SetTrigger("stopRunning");
             }
         }
+
+        if (isGrounded == 0)
+        {
+            animator.SetTrigger("startFlying");
+        }
+        if (isGrounded != 0)
+        {
+            animator.SetTrigger("stopFlying");
+        }
+    }
+
+    private void HandleWalkingSound(bool isMoving)
+    {
+        if (isMoving && !audioSource.isPlaying && isGrounded > 0)
+        {
+            audioSource.Play();
+        }
+        else if (!isMoving || isGrounded == 0)
+        {
+            audioSource.Stop();
+        }
+    }
+
+    public IEnumerator degrow()
+    {
+        sproutGrow.detectCol.enabled = false;
+        inputDisabled = true;
+        sproutGrow.isGrown = false;
+        sproutGrow.isGrowing = false;
+        sproutGrow.stemCol.enabled = false;
+        animator.SetTrigger("isUngrowing");
+        yield return new WaitForSeconds(0.4f);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.None;
+        rb.freezeRotation = true;
+        jumpingForbidden--;
+        inputDisabled = false;
     }
 }
