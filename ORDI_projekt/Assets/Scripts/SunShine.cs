@@ -30,7 +30,7 @@ public class SunShine : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightControl) && !isShining && movementScript.isGrounded != 0)
         {
-            if (movementScript.jumpingForbidden == 0)
+            if (movementScript.jumpingForbidden == 0 && movementScript.inMudOrWater == 0)
             {
                 movementScript.inputDisabled = true;
                 rb.velocity = Vector3.zero;
