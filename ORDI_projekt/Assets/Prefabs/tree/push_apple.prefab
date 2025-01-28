@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 5255685110652269014}
   - component: {fileID: 275467699957635514}
   m_Layer: 0
-  m_Name: ball_rock
+  m_Name: push_apple
   m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

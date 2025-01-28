@@ -1324,7 +1324,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2768678544882052407
 MonoBehaviour:
@@ -1726,6 +1726,12 @@ PrefabInstance:
     - target: {fileID: 2351535502213815542, guid: d9d024647978712439d1691281defb2d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765547153184339584, guid: d9d024647978712439d1691281defb2d, type: 3}
+      propertyPath: m_text
+      value: 'Buttons
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 6122639733229364769, guid: d9d024647978712439d1691281defb2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
