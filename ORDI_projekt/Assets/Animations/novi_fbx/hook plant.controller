@@ -67,9 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 8554c3b4c360851479499c9cee01533e, type: 3}
+  audioClip: {fileID: 8300000, guid: ce5f2bf1a08307a4cbce9f571196acc9, type: 3}
   fadeDuration: 0
   shouldLoop: 0
+  maxVolume: 0.2
 --- !u!1101 &-2462337220199922953
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

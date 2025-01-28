@@ -100,6 +100,22 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-8309901813139923718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 1ac44f52c283d48f480720313c2028f8, type: 3}
+  fadeDuration: 0
+  shouldLoop: 1
+  maxVolume: 0.1
 --- !u!1101 &-7737507942865442439
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -309,7 +325,8 @@ AnimatorState:
   - {fileID: -8854963189812336319}
   - {fileID: 1452878465430572144}
   - {fileID: 3555179473492719488}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -8309901813139923718}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -389,6 +406,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 85e67d9887de03c4a9bc1e3e1b6c6421, type: 3}
   fadeDuration: 0
   shouldLoop: 0
+  maxVolume: 0.3
 --- !u!1102 &-750111655495940784
 AnimatorState:
   serializedVersion: 6
@@ -745,9 +763,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: f24d7cab37845f946a6bb1c4812e32f3, type: 3}
+  audioClip: {fileID: 8300000, guid: c214aed5f202b5244bb755ffff12b06d, type: 3}
   fadeDuration: 0.5
   shouldLoop: 0
+  maxVolume: 0.4
 --- !u!1101 &3555179473492719488
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -10,7 +10,8 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
     public float moveSpeed = 2.0f;       // Brzina pomicanja platforme
     public AudioClip movingSound;        // Zvuk koji se pušta dok se platforma pomiče
     public bool enableLooping = true;    // Omogućava ili onemogućava loopanje zvuka
-    public float fadeDuration = 0.06f;    // Vrijeme trajanja fade in/out efekta
+    public float fadeDuration = 0.06f;   // Vrijeme trajanja fade in/out efekta
+    public float volume = 1f;            // Maksimalna glasnoća zvuka (0-1)
 
     private Animator animator;
     private Rigidbody rb;
@@ -116,11 +117,11 @@ public class MovePlatformOnButtonPressPhys : MonoBehaviour
         while (time < fadeDuration)
         {
             time += Time.deltaTime;
-            audioSource.volume = Mathf.Lerp(startVolume, 1f, time / fadeDuration);
+            audioSource.volume = Mathf.Lerp(startVolume, volume, time / fadeDuration);
             yield return null;
         }
 
-        audioSource.volume = 1f; // Postavi glasnoću na maksimalnu
+        audioSource.volume = volume; // Postavi glasnoću na maksimalnu
     }
 
     private IEnumerator FadeOut()
