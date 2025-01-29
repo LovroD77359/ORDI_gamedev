@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3250989957815423137}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: shroom button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,6 +176,10 @@ MonoBehaviour:
   targetY: 0
   targetZ: 0
   moveSpeed: 1
+  movingSound: {fileID: 0}
+  enableLooping: 1
+  fadeDuration: 0.06
+  volume: 1
 --- !u!95 &3402918158338853621
 Animator:
   serializedVersion: 5

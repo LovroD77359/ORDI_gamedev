@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1421532144731167462}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glow shroom button pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +195,10 @@ MonoBehaviour:
   targetY: 7.5
   targetZ: 22.5
   moveSpeed: 2
+  movingSound: {fileID: 0}
+  enableLooping: 1
+  fadeDuration: 0.06
+  volume: 1
 --- !u!108 &3859313488226558313
 Light:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2099001400522506073}
   - component: {fileID: 4608906835376970330}
   - component: {fileID: 1262011009096445709}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: push script collider
   m_TagString: ScriptCollider
   m_Icon: {fileID: 0}
@@ -66,6 +66,198 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c17e4a02e970d45a9b0ed1a6c56ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5063389113914892542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3096245699556384943}
+  - component: {fileID: 4858144869344951367}
+  m_Layer: 3
+  m_Name: light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3096245699556384943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063389113914892542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0008, y: 0.00075, z: -0.0017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8949257445324340024}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &4858144869344951367
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063389113914892542}
+  m_Enabled: 0
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 0.35620904, g: 0, b: 0.5, a: 1}
+  m_Intensity: 1
+  m_Range: 1
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 1
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!1 &5131863100874640244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8949257445324340024}
+  - component: {fileID: 4575301101491165804}
+  - component: {fileID: 3727692360286788423}
+  - component: {fileID: 6665340495250914523}
+  m_Layer: 3
+  m_Name: outline stone
+  m_TagString: Rock
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8949257445324340024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131863100874640244}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3096245699556384943}
+  m_Father: {fileID: 7509371771352099171}
+  m_LocalEulerAnglesHint: {x: -90, y: 270, z: 0}
+--- !u!33 &4575301101491165804
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131863100874640244}
+  m_Mesh: {fileID: -6065862774994628656, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+--- !u!23 &3727692360286788423
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131863100874640244}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: dcd7d61afd2a2234d8532cce600da975, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6665340495250914523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131863100874640244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64cadf2e5acab641832373c1576bf7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
 --- !u!1 &5806068712009499870
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,7 +269,7 @@ GameObject:
   - component: {fileID: 1358629240598587054}
   - component: {fileID: 6442987418591828460}
   - component: {fileID: 9075974571919092943}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: col x pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +344,7 @@ GameObject:
   - component: {fileID: 2378701350971005686}
   - component: {fileID: 6479818510819885296}
   - component: {fileID: 1557326365189787068}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: push_stone
   m_TagString: Rock
   m_Icon: {fileID: 0}
@@ -172,6 +364,7 @@ Transform:
   m_LocalScale: {x: 60, y: 60, z: 90}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8949257445324340024}
   - {fileID: 1358629240598587054}
   - {fileID: 7071260153673658490}
   - {fileID: 5166683125735480029}
@@ -402,7 +595,7 @@ GameObject:
   - component: {fileID: 7071260153673658490}
   - component: {fileID: 5736215042734709596}
   - component: {fileID: 8856369172016783249}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: col x neg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +663,7 @@ GameObject:
   - component: {fileID: 5166683125735480029}
   - component: {fileID: 8096799090299980064}
   - component: {fileID: 7032314169251615655}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: col z pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +731,7 @@ GameObject:
   - component: {fileID: 6690387342539495828}
   - component: {fileID: 4249481658711564682}
   - component: {fileID: 6879565655726786625}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: platform detect collider
   m_TagString: ScriptCollider
   m_Icon: {fileID: 0}
@@ -604,7 +797,7 @@ GameObject:
   - component: {fileID: 6139884880508325038}
   - component: {fileID: 3903386175997864862}
   - component: {fileID: 3911834817448985489}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: col z neg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

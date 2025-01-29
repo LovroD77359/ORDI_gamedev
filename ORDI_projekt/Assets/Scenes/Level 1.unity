@@ -1636,6 +1636,10 @@ PrefabInstance:
       value: smallstalag (8)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -2868,7 +2872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5767773738698685761, guid: b79ad3c6c2eede24886a6f138557e76c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.75
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5767773738698685761, guid: b79ad3c6c2eede24886a6f138557e76c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2979,6 +2983,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_Name
       value: smallrock (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
@@ -5506,6 +5514,10 @@ PrefabInstance:
       value: smallrock (10)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -6222,6 +6234,10 @@ PrefabInstance:
       value: smallrock (8)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -6779,7 +6795,7 @@ Transform:
   m_GameObject: {fileID: 276287211}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -11, y: 4, z: 21.25}
+  m_LocalPosition: {x: -11, y: 4, z: 21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9525,6 +9541,10 @@ PrefabInstance:
       value: smallstalag col (6)
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -11420,6 +11440,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 752693601913159443, guid: bcd573bc933a24b4ba91ee38479cfba8, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5992618212607800671, guid: bcd573bc933a24b4ba91ee38479cfba8, type: 3}
       propertyPath: volume
       value: 0.5
@@ -11894,6 +11918,10 @@ PrefabInstance:
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_Name
       value: bigstalag col (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
@@ -13415,6 +13443,10 @@ PrefabInstance:
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_Name
       value: bigstalag col (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
@@ -15411,6 +15443,10 @@ PrefabInstance:
       value: smallstalag col (8)
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -15937,6 +15973,10 @@ PrefabInstance:
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_Name
       value: smallstalag col (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
@@ -16958,6 +16998,10 @@ PrefabInstance:
       value: bigstalag col (2)
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -17034,6 +17078,10 @@ PrefabInstance:
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_Name
       value: smallstalag col (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
@@ -17580,6 +17628,10 @@ PrefabInstance:
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_Name
       value: bigstalag col (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
@@ -18355,6 +18407,10 @@ PrefabInstance:
       value: smallstalag (6)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -18587,6 +18643,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_Name
       value: smallrock (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
@@ -19020,6 +19080,10 @@ PrefabInstance:
       value: smallstalag (7)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -19096,6 +19160,10 @@ PrefabInstance:
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_Name
       value: bigstalag col (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
@@ -19787,6 +19855,10 @@ PrefabInstance:
       value: bigstalag col (9)
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -20100,6 +20172,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0e59cc08d0610644d94aee77b2a0ecdd, type: 3}
       propertyPath: m_Name
       value: bigstalag (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0e59cc08d0610644d94aee77b2a0ecdd, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0e59cc08d0610644d94aee77b2a0ecdd, type: 3}
       propertyPath: m_TagString
@@ -21038,6 +21114,10 @@ PrefabInstance:
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_Name
       value: smallstalag col (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
@@ -22128,6 +22208,10 @@ PrefabInstance:
       value: smallstalag col (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -22206,6 +22290,10 @@ PrefabInstance:
       value: smallstalag col (10)
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -22282,6 +22370,10 @@ PrefabInstance:
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_Name
       value: bigstalag col (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
@@ -22570,6 +22662,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
       propertyPath: m_Name
       value: smallstalag (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
       propertyPath: m_TagString
@@ -23643,6 +23739,10 @@ PrefabInstance:
       value: bigstalag col (1)
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -24226,6 +24326,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_Name
       value: smallrock (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
@@ -25927,6 +26031,10 @@ PrefabInstance:
       value: bigstalag col (6)
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -26288,6 +26396,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_Name
       value: smallrock (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
@@ -27093,6 +27205,10 @@ PrefabInstance:
       value: bigrock col (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1804402401473207885, guid: a9225123b303c9a429b16a519aff767d, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804402401473207885, guid: a9225123b303c9a429b16a519aff767d, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -27735,6 +27851,10 @@ PrefabInstance:
       value: smallstalag col (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -28133,6 +28253,10 @@ PrefabInstance:
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_Name
       value: smallstalag col (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
@@ -30535,6 +30659,10 @@ PrefabInstance:
       value: smallstalag col (5)
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -32504,6 +32632,10 @@ PrefabInstance:
       value: bigstalag col (7)
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -32811,6 +32943,10 @@ PrefabInstance:
     - target: {fileID: 1804402401473207885, guid: a9225123b303c9a429b16a519aff767d, type: 3}
       propertyPath: m_Name
       value: bigrock col (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804402401473207885, guid: a9225123b303c9a429b16a519aff767d, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1804402401473207885, guid: a9225123b303c9a429b16a519aff767d, type: 3}
       propertyPath: m_TagString
@@ -35422,6 +35558,10 @@ PrefabInstance:
       value: smallstalag (13)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe2528a79d8c3bc4492bf292dbe65c81, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -36062,6 +36202,10 @@ PrefabInstance:
       value: smallstalag col (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -36563,6 +36707,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_Name
       value: smallrock (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
@@ -37304,6 +37452,10 @@ PrefabInstance:
       value: bigstalag col (8)
       objectReference: {fileID: 0}
     - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -37926,6 +38078,10 @@ PrefabInstance:
       value: smallrock (13)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62707717953f8494895b2e09e0c903ee, type: 3}
       propertyPath: m_TagString
       value: Decoration
       objectReference: {fileID: 0}
@@ -38129,9 +38285,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2116218554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: decorations lower
-  m_TagString: Untagged
+  m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40174,6 +40330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bigstalag col
       objectReference: {fileID: 0}
+    - target: {fileID: 766835163722002010, guid: c012c14540ca1e24daeb1f6fa42e5c1b, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40340,6 +40500,10 @@ PrefabInstance:
     - target: {fileID: 2866033633047812925, guid: f3012d7714b60474292e5681792865a7, type: 3}
       propertyPath: m_Name
       value: smallrock (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866033633047812925, guid: f3012d7714b60474292e5681792865a7, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3210471471404237191, guid: f3012d7714b60474292e5681792865a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40542,6 +40706,10 @@ PrefabInstance:
       propertyPath: fadeDuration
       value: 0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 2503255753932517108, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6611992392913368055, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
       propertyPath: m_Name
       value: glow shroom button pink
@@ -40612,6 +40780,10 @@ PrefabInstance:
     - target: {fileID: 1804402401473207885, guid: a9225123b303c9a429b16a519aff767d, type: 3}
       propertyPath: m_Name
       value: bigrock col
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804402401473207885, guid: a9225123b303c9a429b16a519aff767d, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41307,6 +41479,10 @@ PrefabInstance:
     - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
       propertyPath: m_Name
       value: smallstalag col
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613824958642868486, guid: aa7e0e10a4eae6f48895fd6c60aaa748, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
