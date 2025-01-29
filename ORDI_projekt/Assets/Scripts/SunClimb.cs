@@ -30,7 +30,7 @@ public class SunClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightShift) && movementScript.isGrounded != 0)
+        if (Input.GetKeyDown(KeyCode.RightShift) && !movementScript.inputDisabled && movementScript.isGrounded != 0)
         {
             movementScript.inputDisabled = true;
             rb.velocity = Vector3.zero;

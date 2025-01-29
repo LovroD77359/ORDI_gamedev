@@ -12012,7 +12012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8371938300099403805, guid: 7a40a21337276fa4f96ca43d4b232d62, type: 3}
       propertyPath: m_Name
-      value: boulder blue
+      value: 1x3x3 boulder blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8371938300099403805, guid: 7a40a21337276fa4f96ca43d4b232d62, type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38996,7 +39000,7 @@ GameObject:
   - component: {fileID: 9176680928370084966}
   - component: {fileID: 7387052406748392208}
   m_Layer: 5
-  m_Name: PauseMenu
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40599,7 +40603,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8371938300099403805, guid: 7a40a21337276fa4f96ca43d4b232d62, type: 3}
       propertyPath: m_Name
-      value: boulder pink
+      value: 1x2x1 boulder pink
+      objectReference: {fileID: 0}
+    - target: {fileID: 8371938300099403805, guid: 7a40a21337276fa4f96ca43d4b232d62, type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41362,11 +41370,11 @@ SceneRoots:
   - {fileID: 732824442}
   - {fileID: 1642028340}
   - {fileID: 247927411}
+  - {fileID: 7777579275517213843}
+  - {fileID: 547456082}
   - {fileID: 4037697098044733590}
   - {fileID: 967062408}
   - {fileID: 7846797613393898158}
   - {fileID: 324462080}
   - {fileID: 1702462483}
-  - {fileID: 7777579275517213843}
-  - {fileID: 547456082}
   - {fileID: 1407514790}

@@ -24,13 +24,9 @@ public class UnstuckRock : MonoBehaviour
     {
         if (rb.useGravity)
         {
-            if (moveXCount != 0)
+            if (moveXCount != 0 || moveZCount != 0)
             {
-                rb.MovePosition(transform.position + 0.5f * Time.fixedDeltaTime * new Vector3(1, 0, 0) * moveXCount);
-            }
-            if (moveZCount != 0)
-            {
-                rb.MovePosition(transform.position + 0.5f * Time.fixedDeltaTime * new Vector3(0, 0, 1) * moveZCount);
+                rb.AddForce(1.5f * (new Vector3(1, 0, 0) * moveXCount + new Vector3(0, 0, 1) * moveZCount), ForceMode.Acceleration);
             }
         }
     }

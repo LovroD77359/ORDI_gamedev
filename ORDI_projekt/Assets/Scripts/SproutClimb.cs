@@ -25,7 +25,7 @@ public class SproutClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && movementScript.isGrounded != 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !movementScript.inputDisabled && movementScript.isGrounded != 0)
         {
             movementScript.inputDisabled = true;
             rb.velocity = Vector3.zero;

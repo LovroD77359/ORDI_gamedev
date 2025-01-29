@@ -11,8 +11,7 @@ TagManager:
   - MudAndWater
   - GroundCollider
   - ScriptCollider
-  - Mud
-  - Water
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

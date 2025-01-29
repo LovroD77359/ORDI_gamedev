@@ -27,7 +27,7 @@ public class SproutGrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && movementScript.isGrounded != 0)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !movementScript.inputDisabled && movementScript.isGrounded != 0)
         {
             movementScript.inputDisabled = true;
             rb.velocity = Vector3.zero;
@@ -94,8 +94,8 @@ public class SproutGrow : MonoBehaviour
         // provjeravamo sad u tim smjerovima jesu li ostvareni uvjeti da se tamo moze sunce popeti
         for (int i = 0; i < directions.Length; i++)
         {
-            if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => col.transform.CompareTag("Ground")) &&    // da postoji blok koji je climbable terrain
-                !Array.Exists(Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f), col => col.transform.CompareTag("Ground")))     // da ne postoji blok iznad koji bi blokirao
+            if (Array.Exists(Physics.OverlapSphere(position + directions[i], 0.01f), col => (col.transform.CompareTag("Ground") || col.CompareTag("MovingPlatform"))) &&    // da postoji blok koji je climbable terrain
+                !Array.Exists(Physics.OverlapSphere(position + directions[i] + new Vector3(0, 1, 0), 0.01f), (col => col.transform.CompareTag("Ground") || col.CompareTag("MovingPlatform"))))     // da ne postoji blok iznad koji bi blokirao
             {
                 Debug.Log("climbing pozicija na: " + (position + directions[i] + new Vector3(0, 1, 0)).ToString());
                 return position + directions[i] + new Vector3(0, 1.38f, 0);     // vracamo odgovarajucu poziciju

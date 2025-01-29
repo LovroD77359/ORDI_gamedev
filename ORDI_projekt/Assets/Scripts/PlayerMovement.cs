@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public int inMudOrWater = 0;
 
     private Rigidbody rb;
+    private TrackVelocity trackedMovingPlatform;
 
     private float horizontalInput = 0;
     private float verticalInput = 0;
@@ -66,13 +69,17 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded++;
         }
-        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MovingPlatform") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden++;
         }
         if (other.CompareTag("MudAndWater"))
         {
             inMudOrWater++;
+        }
+        if (other.CompareTag("MovingPlatform"))
+        {
+            trackedMovingPlatform = other.GetComponent<TrackVelocity>();
         }
     }
 
@@ -82,13 +89,20 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded--;
         }
-        if (!other.CompareTag("Ground") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
+        if (!other.CompareTag("Ground") && !other.CompareTag("MovingPlatform") && !other.CompareTag("MudAndWater") && !other.CompareTag("ScriptCollider"))
         {
             jumpingForbidden--;
         }
         if (other.CompareTag("MudAndWater"))
         {
             inMudOrWater--;
+        }
+        if (other.CompareTag("MovingPlatform"))
+        {
+            if (trackedMovingPlatform == other.GetComponent<TrackVelocity>())
+            {
+                trackedMovingPlatform = null;
+            }
         }
 
         if (playerTag == "Player2" && isGrounded == 0 && (sproutGrow.isGrown || sproutGrow.isGrowing))
@@ -121,6 +135,16 @@ public class PlayerMovement : MonoBehaviour
 
             // Kretanje i rotacija
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
+            if (trackedMovingPlatform != null && trackedMovingPlatform.velocity != Vector3.zero)
+            {
+                rb.velocity += trackedMovingPlatform.velocity;
+
+                if (sproutGrow.isGrown || sproutGrow.isGrowing)
+                {
+                    StartCoroutine(degrow());
+                }
+            }
+
             if (movementDirection.magnitude > 0.1f)
             {
                 movementDirection = -movementDirection;
@@ -265,8 +289,6 @@ public class PlayerMovement : MonoBehaviour
                 audioSource.Stop();
             }
         }
-
-        
     }
 
     private void PlayWalkingSound(AudioClip clip, bool isMoving)
