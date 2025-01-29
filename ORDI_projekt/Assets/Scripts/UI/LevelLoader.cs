@@ -6,7 +6,9 @@ public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader instance;  // Singleton instance
 
-    private Animator animator;
+    public Animator animator;
+
+    public float transitionTime = 1f;
 
     void Awake()
     {
@@ -14,12 +16,10 @@ public class LevelLoader : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(gameObject);  // Destroy duplicate LevelLoader
+            return;
         }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);  // Persist across scenes
-        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);  // Persist across scenes
     }
 
     void Start()
@@ -35,7 +35,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadLevel(int levelIndex)
     {
         animator.SetTrigger("Start");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadSceneAsync(levelIndex);
         animator.SetTrigger("End");
     }
