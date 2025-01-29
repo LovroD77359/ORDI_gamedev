@@ -1,9 +1,11 @@
+
 using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
+    
 public class PlayerMovement : MonoBehaviour
 {
     public Collider col;
@@ -12,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     public float jump = 400;
     public Transform cam;
     public string playerTag;
-
     [HideInInspector] public bool inputDisabled = false;
     [HideInInspector] public int jumpingForbidden = 0;
     [HideInInspector] public int isGrounded = 0;
@@ -20,30 +21,33 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public int isDebuffed = 0;
     [HideInInspector] public int inMudOrWater = 0;
 
+    public AudioClip mudSound;
+    public AudioClip waterSound;
+    public AudioClip floorSound;
+
+
     private Rigidbody rb;
     private TrackVelocity trackedMovingPlatform;
+    private AudioSource audioSource;
 
     private float horizontalInput = 0;
     private float verticalInput = 0;
-
-    public AudioClip walkingSound;        // Zvuk hodanja po tlu
-    public AudioClip walkingInWaterSound; // Zvuk hodanja u vodi
-    public AudioClip walkingInMudSound;   // Zvuk hodanja u blatu
-
-    private AudioSource audioSource; // AudioSource za reprodukciju zvuka hodanja
-
-    // Kamera smjerovi
+    //camera direction
     private Vector3 camForward;
     private Vector3 camRight;
+
     private SproutGrow sproutGrow;
 
-    // Animacije
+    //ANIMACIJE KOD:
     private Animator animator;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        audioSource = GetComponent<AudioSource>();
+
 
         camForward = cam.forward;
         camRight = cam.right;
@@ -55,12 +59,8 @@ public class PlayerMovement : MonoBehaviour
             sproutGrow = GetComponentInChildren<SproutGrow>();
         }
 
-        animator = GetComponent<Animator>();
-
-        // Postavljanje AudioSourcea
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.loop = true; // Postavi da se loopa
-        audioSource.volume = 0.5f; // Po želji prilagodi glasnoću
+        //ANIMACIJE KOD:
+        animator = GetComponent<Animator>();//komentirano za testiranje
     }
 
     private void OnTriggerEnter(Collider other)
@@ -76,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("MudAndWater"))
         {
             inMudOrWater++;
+
+            
         }
         if (other.CompareTag("MovingPlatform"))
         {
@@ -115,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!inputDisabled)
         {
-            // Inputs za pokrete
+            //inputs
             if (playerTag == "Player1")
             {
                 horizontalInput = Input.GetAxis("Horizontal1");
@@ -126,14 +128,15 @@ public class PlayerMovement : MonoBehaviour
                 horizontalInput = Input.GetAxis("Horizontal2");
                 verticalInput = Input.GetAxis("Vertical2"); 
             }
-
-            // Kamera smjerovi
+            
+        
+            //relative camera directions
             Vector3 forwardRelative = verticalInput * speed * camForward;  
             Vector3 rightRelative = horizontalInput * speed * camRight;
-
+            
             Vector3 movementDirection = forwardRelative + rightRelative;
 
-            // Kretanje i rotacija
+            //movement and jumping
             rb.velocity = new Vector3(movementDirection.x, rb.velocity.y, movementDirection.z);
             if (trackedMovingPlatform != null && trackedMovingPlatform.velocity != Vector3.zero)
             {
@@ -152,10 +155,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10);
             }
 
-            // Zvuk hodanja
-            HandleWalkingSound(movementDirection.magnitude > 0.1f);
 
-            // Skakanje
             if (playerTag == "Player1")
             {
                 if (Input.GetKeyDown(KeyCode.Return) && isGrounded != 0)
@@ -177,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (sproutGrow.isGrown || sproutGrow.isGrowing)
                     {
+                        Debug.Log("space");
                         StartCoroutine(degrow());
                     }
 
@@ -192,8 +193,18 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            // Animacije
+            //kod za animacije:
             bool isMoving = horizontalInput != 0 || verticalInput != 0;
+
+            if (isMoving)
+            {
+                HandleWalkingSound();
+            }
+            else if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+
             if (isMoving)
             {
                 if (isTouchingRock)
@@ -208,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (playerTag == "Player2" && (sproutGrow.isGrown || sproutGrow.isGrowing))
                 {
+                    Debug.Log("move");
                     StartCoroutine(degrow());
                 }
             }
@@ -226,89 +238,43 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetTrigger("stopFlying");
         }
+
+        
     }
 
-    private void HandleWalkingSound(bool isMoving)
+  private void HandleWalkingSound()
     {
-        if (isMoving && !audioSource.isPlaying && isGrounded > 0)
+        AudioClip clipToPlay = null;
+
+        if (inMudOrWater == 0){
+            clipToPlay = floorSound;
+        }
+        // ako je player1 (sunce) i debuffed: u vodi je
+        if (playerTag == "Player1" && isDebuffed == 1 && inMudOrWater > 0){
+            clipToPlay = waterSound; 
+        }
+        // ako je player1 (sunce) i nije debuffed: u blatu je
+        if (playerTag == "Player1" && isDebuffed == 0 && inMudOrWater > 0){
+            clipToPlay = mudSound; 
+
+        }
+        // ako je player2 (biljka) i debuffed: u blatu je
+        if (playerTag == "Player2" && isDebuffed == 1 && inMudOrWater > 0){
+            clipToPlay = mudSound; 
+        }
+        // ako je player2 (biljka) i nije debuffed: u vodi je
+        if (playerTag == "Player2" && isDebuffed == 0 && inMudOrWater > 0){
+            clipToPlay = waterSound; 
+        }
+
+    
+
+        // Provjeri je li već svira isti zvuk, ako ne, zamijeni ga
+        if (audioSource.clip != clipToPlay || !audioSource.isPlaying)
         {
+            audioSource.clip = clipToPlay;
+            audioSource.loop = true;
             audioSource.Play();
-        }
-        else if (!isMoving || isGrounded == 0)
-        {
-            audioSource.Stop();
-        }
-    }
-
-    private void HandleSplashingSound (bool isMoving){
-
-
-        // ako je sunce usporeno, nalazi se u vodi: play voda zvuk
-        if(playerTag == "Player1" && isDebuffed == 1 && inMudOrWater == 1){ // && isinmudorwater
-            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
-                
-                PlayWalkingSound(walkingInWaterSound, isMoving);
-            }
-            else if (!isMoving || isGrounded == 0)
-            {
-                audioSource.Stop();
-            } 
-        }
-
-        //ako je sunce neusporeno, nalazi se u blatu: play blato zvuk
-        else if (playerTag == "Player1" && isDebuffed == 0 && inMudOrWater == 1){ // && isinmudorwater
-            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
-                
-                PlayWalkingSound(walkingInMudSound, isMoving);            }
-            else if (!isMoving || isGrounded == 0)
-            {
-                audioSource.Stop();
-            }
-        }
-
-        //ako je biljka usporena, nalazi se u blatu
-        else if (playerTag == "Player2" && isDebuffed == 1 && inMudOrWater == 1){ //&& isinmudorwater
-            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
-                
-                PlayWalkingSound(walkingInMudSound, isMoving);
-            }
-            else if (!isMoving || isGrounded == 0)
-            {
-                audioSource.Stop();
-            }
-        }
-
-        //ako ne onda je u vodi
-         else if (playerTag == "Player2" && isDebuffed == 0 && inMudOrWater == 1){ //&& isinmudorwater
-            if (isMoving && !audioSource.isPlaying && isGrounded > 0){
-                
-                PlayWalkingSound(walkingInWaterSound, isMoving);
-            }
-            else if (!isMoving || isGrounded == 0)
-            {
-                audioSource.Stop();
-            }
-        }
-    }
-
-    private void PlayWalkingSound(AudioClip clip, bool isMoving)
-    {
-        if (isMoving && isGrounded > 0)
-        {
-            if (audioSource.clip != clip) // Promijeni zvuk ako je drugačiji
-            {
-                audioSource.Stop();
-                audioSource.clip = clip;
-                audioSource.Play();
-            }
-            else if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-        }
-        else
-        {
-            audioSource.Stop();
         }
     }
 

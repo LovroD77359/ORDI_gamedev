@@ -169,6 +169,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: d3bad47fd267c42469d54a404ddfede4, type: 3}
   fadeDuration: 0
   shouldLoop: 0
+  maxVolume: 0.4
 --- !u!1102 &-1756655466628487745
 AnimatorState:
   serializedVersion: 6
@@ -266,6 +267,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 190d972deb6cea2438c8bd0635f331fa, type: 3}
   fadeDuration: 0
   shouldLoop: 0
+  maxVolume: 0.4
 --- !u!1101 &2200907946117728898
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

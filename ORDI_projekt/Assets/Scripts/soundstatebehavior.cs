@@ -6,6 +6,7 @@ public class SoundStateBehaviour : StateMachineBehaviour
     public AudioClip audioClip; // Zvuk koji se treba pustiti
     public float fadeDuration = 0.2f; // Trajanje fade in i fade out efekata
     public bool shouldLoop = false; // Određuje hoće li se zvuk petljati
+    public float maxVolume = 1f; // Maksimalna glasnoća zvuka
 
     private AudioSource audioSource;
     private Coroutine fadeCoroutine;
@@ -25,7 +26,7 @@ public class SoundStateBehaviour : StateMachineBehaviour
             // Pokreni zvuk i fade in
             audioSource.Play();
             if (fadeCoroutine != null) animator.GetComponent<MonoBehaviour>().StopCoroutine(fadeCoroutine);
-            fadeCoroutine = animator.GetComponent<MonoBehaviour>().StartCoroutine(FadeAudio(audioSource, 0f, 1f, fadeDuration));
+            fadeCoroutine = animator.GetComponent<MonoBehaviour>().StartCoroutine(FadeAudio(audioSource, 0f, maxVolume, fadeDuration));
         }
     }
 
