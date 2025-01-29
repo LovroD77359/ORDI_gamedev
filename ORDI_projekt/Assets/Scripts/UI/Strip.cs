@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Strip : MonoBehaviour
 {
@@ -62,6 +63,12 @@ public class Strip : MonoBehaviour
                 pageNumber++;                                           // Move to the next page
                 flip();                                                 // Show the new page
                 ActivateRawImage(pageNumber, rawImageIndex);            // Show the first RawImage on the new page
+                Debug.Log("Sada si na " + pageNumber  + ". stranici");
+            }
+            else if (pageNumber == pages.Length - 1) 
+            {
+                Scene nextScene = SceneManager.GetActiveScene();
+                SceneManager.LoadSceneAsync(nextScene.buildIndex + 1);
             }
         }
         

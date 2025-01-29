@@ -16,23 +16,16 @@ public class FinishGate : MonoBehaviour
 
         if (playerContact == 2)
         {
-            if (PlayerPrefs.GetInt("LevelsCompleted", 0) != 2)
+            int currentLevel = SceneManager.GetActiveScene().buildIndex;
+            int levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
+
+            // Only update PlayerPrefs if it's a playable level (not a Strip scene)
+            if (IsPlayableLevel(currentLevel) && levelsCompleted < GetLevelNumber(currentLevel))
             {
-                int currentLevel = SceneManager.GetActiveScene().buildIndex;
-
-                if (currentLevel == 3) // Assuming Level 1 is scene index 3
-                {
-                    PlayerPrefs.SetInt("LevelsCompleted", 1); // Level 1 completed
-                    Debug.Log("Level 1 Completed");
-                }
-                else if (currentLevel == 4) // Assuming Level 2 is scene index 4
-                {
-                    PlayerPrefs.SetInt("LevelsCompleted", 2); // Level 2 completed
-                    Debug.Log("Level 2 Completed");
-                }
-
-                PlayerPrefs.Save(); // Save the progress
-                Debug.Log("PlayerPrefs Saved (" + PlayerPrefs.GetInt("LevelsCompleted", 0) + ")");
+                PlayerPrefs.SetInt("LevelsCompleted", GetLevelNumber(currentLevel));
+                PlayerPrefs.Save();
+                Debug.Log("Level " + GetLevelNumber(currentLevel) + " Completed!");
+                Debug.Log("PlayerPrefs Saved: " + PlayerPrefs.GetInt("LevelsCompleted", 0));
             }
 
             LoadNextScene();
@@ -50,6 +43,35 @@ public class FinishGate : MonoBehaviour
 
     public void LoadNextScene()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (LevelLoader.instance != null)
+        {
+            LevelLoader.instance.LoadNewLevel(nextSceneIndex); // Use LevelLoader for animated transitions
+        }
+        else
+        {
+            Debug.LogWarning("LevelLoader instance not found! Loading scene directly.");
+            SceneManager.LoadSceneAsync(nextSceneIndex); // Fallback if LevelLoader is missing
+        }
+    }
+
+    private bool IsPlayableLevel(int sceneIndex)
+    {
+        // Only count actual levels (not Strip scenes)
+        return sceneIndex == 3 || sceneIndex == 4 || sceneIndex == 6 || sceneIndex == 7;
+    }
+
+    private int GetLevelNumber(int sceneIndex)
+    {
+        // Maps sceneIndex to Level Number for PlayerPrefs
+        switch (sceneIndex)
+        {
+            case 3: return 1;  // Level 1
+            case 4: return 2;  // Level 2
+            case 6: return 3;  // Level 3
+            case 7: return 4;  // Level 4
+            default: return 0; // Not a valid playable level
+        }
     }
 }
