@@ -7378,9 +7378,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 24080895}
     - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
+      propertyPath: mudSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e9ab5cd2dbc105f46b1e10c9e5a9d308, type: 3}
+    - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
+      propertyPath: floorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ac44f52c283d48f480720313c2028f8, type: 3}
     - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: waterSound
       value: 
@@ -26270,7 +26278,7 @@ AudioSource:
   m_GameObject: {fileID: 1392626074}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6892041077915196389, guid: 3add15bd978bcc9478b263f5d280a010, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -35807,7 +35815,7 @@ AudioSource:
   m_GameObject: {fileID: 1970675441}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6892041077915196389, guid: 3add15bd978bcc9478b263f5d280a010, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -37917,6 +37925,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 801165149}
     - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
+      propertyPath: mudSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e9ab5cd2dbc105f46b1e10c9e5a9d308, type: 3}
+    - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
+      propertyPath: floorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ac44f52c283d48f480720313c2028f8, type: 3}
+    - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: waterSound
       value: 
       objectReference: {fileID: 8300000, guid: d1ec8c6921b01b54dae64f3e25319fd3, type: 3}
@@ -37950,7 +37966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851909057647553210, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8851909057647553210, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: m_LocalRotation.w

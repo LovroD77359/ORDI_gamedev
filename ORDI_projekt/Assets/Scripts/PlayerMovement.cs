@@ -21,7 +21,13 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public int isDebuffed = 0;
     [HideInInspector] public int inMudOrWater = 0;
 
+    public AudioClip mudSound;
+    public AudioClip waterSound;
+    public AudioClip floorSound;
+
+
     private Rigidbody rb;
+    private AudioSource audioSource;
 
     private float horizontalInput = 0;
     private float verticalInput = 0;
@@ -39,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        audioSource = GetComponent<AudioSource>();
+
 
         camForward = cam.forward;
         camRight = cam.right;
@@ -67,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("MudAndWater"))
         {
             inMudOrWater++;
+
+            
         }
     }
 
@@ -163,6 +173,16 @@ public class PlayerMovement : MonoBehaviour
 
             //kod za animacije:
             bool isMoving = horizontalInput != 0 || verticalInput != 0;
+
+            if (isMoving)
+            {
+                HandleWalkingSound();
+            }
+            else if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+
             if (isMoving)
             {
                 if (isTouchingRock)
@@ -195,6 +215,44 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded != 0)
         {
             animator.SetTrigger("stopFlying");
+        }
+
+        
+    }
+
+  private void HandleWalkingSound()
+    {
+        AudioClip clipToPlay = null;
+
+        if (inMudOrWater == 0){
+            clipToPlay = floorSound;
+        }
+        // ako je player1 (sunce) i debuffed: u vodi je
+        if (playerTag == "Player1" && isDebuffed == 1 && inMudOrWater > 0){
+            clipToPlay = waterSound; 
+        }
+        // ako je player1 (sunce) i nije debuffed: u blatu je
+        if (playerTag == "Player1" && isDebuffed == 0 && inMudOrWater > 0){
+            clipToPlay = mudSound; 
+
+        }
+        // ako je player2 (biljka) i debuffed: u blatu je
+        if (playerTag == "Player2" && isDebuffed == 1 && inMudOrWater > 0){
+            clipToPlay = mudSound; 
+        }
+        // ako je player2 (biljka) i nije debuffed: u vodi je
+        if (playerTag == "Player2" && isDebuffed == 0 && inMudOrWater > 0){
+            clipToPlay = waterSound; 
+        }
+
+    
+
+        // Provjeri je li već svira isti zvuk, ako ne, zamijeni ga
+        if (audioSource.clip != clipToPlay || !audioSource.isPlaying)
+        {
+            audioSource.clip = clipToPlay;
+            audioSource.loop = true;
+            audioSource.Play();
         }
     }
 
