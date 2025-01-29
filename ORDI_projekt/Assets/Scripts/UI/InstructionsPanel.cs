@@ -42,8 +42,22 @@ public class Instructions_panel : MonoBehaviour
         updatePanels();
     }
 
-    public void Back() 
+    public void Back(bool isDelayed)
     {
+        if (isDelayed)
+        {
+            StartCoroutine(waitForUpdate());
+        }
+        else
+        {
+            panelNumber = 0;
+            updatePanels();
+        }
+    }
+
+    IEnumerator waitForUpdate()
+    {
+        yield return new WaitForSeconds(0.75f);
         panelNumber = 0;
         updatePanels();
     }

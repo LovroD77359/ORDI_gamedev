@@ -84,7 +84,7 @@ public class SunShine : MonoBehaviour
     {
         hookPlantAnimator = collider.GetComponent<Animator>();
         hookPlantAnimator.SetTrigger("isGrowing");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2.5f);
         hookPlantScript = collider.GetComponent<HookPlantTrack>();      // postavljamo mu isGrown na true
         hookPlantScript.isGrown = true;
     }

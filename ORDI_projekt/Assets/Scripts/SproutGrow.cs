@@ -129,7 +129,6 @@ public class SproutGrow : MonoBehaviour
         animator.SetTrigger("isGrowing");
         rb.constraints = RigidbodyConstraints.FreezeAll;
         detectCol.enabled = true;
-        yield return new WaitForSeconds(0.5f);
         movementScript.inputDisabled = false;
         isGrowing = true;
         yield return new WaitForSeconds(1f);
