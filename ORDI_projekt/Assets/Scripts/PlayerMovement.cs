@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip waterSound;
     public AudioClip floorSound;
 
+    public float floorVolume = 1.0f; // Default glasnoća poda
+    public float waterVolume = 1.0f;
+    public float mudVolume = 1.0f;
+
+
 
     private Rigidbody rb;
     private TrackVelocity trackedMovingPlatform;
@@ -196,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
             //kod za animacije:
             bool isMoving = horizontalInput != 0 || verticalInput != 0;
 
-            if (isMoving)
+            if (isMoving && isGrounded == 1)
             {
                 HandleWalkingSound();
             }
@@ -243,40 +248,47 @@ public class PlayerMovement : MonoBehaviour
     }
 
   private void HandleWalkingSound()
+{
+    AudioClip clipToPlay = null;
+    float volumeToSet = 1.0f; // Default glasnoća
+
+    if (inMudOrWater == 0)
     {
-        AudioClip clipToPlay = null;
-
-        if (inMudOrWater == 0){
-            clipToPlay = floorSound;
-        }
-        // ako je player1 (sunce) i debuffed: u vodi je
-        if (playerTag == "Player1" && isDebuffed == 1 && inMudOrWater > 0){
-            clipToPlay = waterSound; 
-        }
-        // ako je player1 (sunce) i nije debuffed: u blatu je
-        if (playerTag == "Player1" && isDebuffed == 0 && inMudOrWater > 0){
-            clipToPlay = mudSound; 
-
-        }
-        // ako je player2 (biljka) i debuffed: u blatu je
-        if (playerTag == "Player2" && isDebuffed == 1 && inMudOrWater > 0){
-            clipToPlay = mudSound; 
-        }
-        // ako je player2 (biljka) i nije debuffed: u vodi je
-        if (playerTag == "Player2" && isDebuffed == 0 && inMudOrWater > 0){
-            clipToPlay = waterSound; 
-        }
-
-    
-
-        // Provjeri je li već svira isti zvuk, ako ne, zamijeni ga
-        if (audioSource.clip != clipToPlay || !audioSource.isPlaying)
-        {
-            audioSource.clip = clipToPlay;
-            audioSource.loop = true;
-            audioSource.Play();
-        }
+        clipToPlay = floorSound;
+        volumeToSet = floorVolume;
     }
+    else if (playerTag == "Player1" && isDebuffed == 1) // Sunce debuffed → voda
+    {
+        clipToPlay = waterSound;
+        volumeToSet = waterVolume;
+    }
+    else if (playerTag == "Player1" && isDebuffed == 0) // Sunce nije debuffed → blato
+    {
+        clipToPlay = mudSound;
+        volumeToSet = mudVolume;
+    }
+    else if (playerTag == "Player2" && isDebuffed == 1) // Biljka debuffed → blato
+    {
+        clipToPlay = mudSound;
+        volumeToSet = mudVolume;
+    }
+    else if (playerTag == "Player2" && isDebuffed == 0) // Biljka nije debuffed → voda
+    {
+        clipToPlay = waterSound;
+        volumeToSet = waterVolume;
+    }
+
+    // Ako se zvuk promijenio ili nije pokrenut, resetiraj i pokreni novi
+    if (audioSource.clip != clipToPlay || !audioSource.isPlaying)
+    {
+        audioSource.Stop(); // Resetiraj trenutni zvuk
+        audioSource.clip = clipToPlay;
+        audioSource.volume = volumeToSet;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+}
+
 
     public IEnumerator degrow()
     {

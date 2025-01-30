@@ -557,6 +557,22 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &216398889540650166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: cca2dcaaedfc30d459117b34b9d37a76, type: 3}
+  fadeDuration: 0
+  shouldLoop: 0
+  maxVolume: 0.23
 --- !u!1102 &1022178953436627548
 AnimatorState:
   serializedVersion: 6
@@ -736,7 +752,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -7372934782119615535}
   - {fileID: -8517916045197286607}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 216398889540650166}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

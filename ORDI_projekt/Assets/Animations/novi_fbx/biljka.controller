@@ -50,22 +50,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &-8936709220078530586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: ce5f2bf1a08307a4cbce9f571196acc9, type: 3}
-  fadeDuration: 2
-  shouldLoop: 0
-  maxVolume: 0.4
 --- !u!1101 &-8834744522530904290
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -191,6 +175,22 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-7437247966148035663
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: ceb91b55e925b4543860d0ee26b223c8, type: 3}
+  fadeDuration: 0
+  shouldLoop: 0
+  maxVolume: 0.4
 --- !u!1102 &-6744803905293384323
 AnimatorState:
   serializedVersion: 6
@@ -410,7 +410,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -9148023578541682031}
   - {fileID: -8834744522530904290}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -7437247966148035663}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -564,6 +565,22 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-1380690966992159853
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: ce5f2bf1a08307a4cbce9f571196acc9, type: 3}
+  fadeDuration: 1
+  shouldLoop: 0
+  maxVolume: 0.4
 --- !u!1101 &-1030240462153219777
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -753,13 +770,13 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: metarig|growAction
-  m_Speed: 1.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4323487332550424261}
   - {fileID: -5921794224882584187}
   m_StateMachineBehaviours:
-  - {fileID: -8936709220078530586}
+  - {fileID: -1380690966992159853}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -809,7 +826,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
   m_Name: 
@@ -903,7 +920,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb9cc3a735f9af47858dc141f70098c, type: 3}
   m_Name: 
