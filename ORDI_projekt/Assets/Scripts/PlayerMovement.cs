@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isTouchingRock = false;
     [HideInInspector] public int isDebuffed = 0;
     [HideInInspector] public int inMudOrWater = 0;
+    [HideInInspector] public bool isMoving;
 
     public AudioClip mudSound;
     public AudioClip waterSound;
@@ -194,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //kod za animacije:
-            bool isMoving = horizontalInput != 0 || verticalInput != 0;
+            isMoving = horizontalInput != 0 || verticalInput != 0;
 
             if (isMoving)
             {
