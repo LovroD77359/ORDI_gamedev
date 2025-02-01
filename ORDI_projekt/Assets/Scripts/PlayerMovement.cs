@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isTouchingRock = false;
     [HideInInspector] public int isDebuffed = 0;
     [HideInInspector] public int inMudOrWater = 0;
+    [HideInInspector] public bool isMoving;
 
     public AudioClip mudSound;
     public AudioClip waterSound;
@@ -172,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                     else
                     {
-                        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                        StartCoroutine(deny());
                     }
                 }
             } 
@@ -193,13 +194,13 @@ public class PlayerMovement : MonoBehaviour
                     }
                     else
                     {
-                        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);    
+                        StartCoroutine(deny());
                     }
                 }
             }
 
             //kod za animacije:
-            bool isMoving = horizontalInput != 0 || verticalInput != 0;
+            isMoving = horizontalInput != 0 || verticalInput != 0;
 
             if (isMoving && isGrounded == 1)
             {
@@ -304,6 +305,13 @@ public class PlayerMovement : MonoBehaviour
         rb.constraints = RigidbodyConstraints.None;
         rb.freezeRotation = true;
         jumpingForbidden--;
+        inputDisabled = false;
+    }
+    IEnumerator deny()
+    {
+        animator.SetTrigger("deny");
+        inputDisabled = true;
+        yield return new WaitForSeconds(1);
         inputDisabled = false;
     }
 }

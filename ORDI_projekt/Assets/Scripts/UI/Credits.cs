@@ -8,7 +8,7 @@ public class Credits : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey) 
+        if (Input.anyKeyDown) 
         {
             if (LevelLoader.instance != null)
             {

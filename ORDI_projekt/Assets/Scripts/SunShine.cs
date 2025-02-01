@@ -63,7 +63,7 @@ public class SunShine : MonoBehaviour
         {
             light.intensity += 0.0625f;
             light.range += 0.0125f;
-            yield return null;
+            yield return new WaitForSeconds(0.0025f);
         }
 
         yield return new WaitForSeconds(0.4f);
@@ -72,7 +72,7 @@ public class SunShine : MonoBehaviour
         {
             light.intensity -= 0.0625f;
             light.range -= 0.0125f;
-            yield return null;
+            yield return new WaitForSeconds(0.0025f);
         }
 
         isShining = false;

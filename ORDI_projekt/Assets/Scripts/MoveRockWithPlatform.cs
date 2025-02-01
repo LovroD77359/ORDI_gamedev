@@ -12,6 +12,7 @@ public class MoveRockWithPlatform : MonoBehaviour
     {
         rb = GetComponentInParent<Rigidbody>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("MovingPlatform"))
@@ -19,6 +20,7 @@ public class MoveRockWithPlatform : MonoBehaviour
             trackedMovingPlatform = other.GetComponent<TrackVelocity>();
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("MovingPlatform"))
@@ -30,7 +32,6 @@ public class MoveRockWithPlatform : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (trackedMovingPlatform != null)
