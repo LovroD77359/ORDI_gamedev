@@ -35,16 +35,14 @@ public class StripAnimation : MonoBehaviour
     {
         if (Input.anyKeyDown) 
         {
-            if (panelNumber < panelCount)
-            {
-                panelNumber++;
-                animator.SetInteger("panelNumber", panelNumber);
-            }
-            else
-            {
-                Scene nextScene = SceneManager.GetActiveScene();
-                SceneManager.LoadSceneAsync(nextScene.buildIndex + 1);
-            }
+            panelNumber++;
+            animator.SetInteger("panelNumber", panelNumber);
+         
+        }
+        if (panelNumber > panelCount)
+        {
+            Scene nextScene = SceneManager.GetActiveScene();
+            SceneManager.LoadSceneAsync(nextScene.buildIndex + 1);
         }
     }
 }
