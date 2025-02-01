@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                     else
                     {
-                        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                        StartCoroutine(deny());
                     }
                 }
             } 
@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                     else
                     {
-                        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);    
+                        StartCoroutine(deny());
                     }
                 }
             }
@@ -293,6 +293,13 @@ public class PlayerMovement : MonoBehaviour
         rb.constraints = RigidbodyConstraints.None;
         rb.freezeRotation = true;
         jumpingForbidden--;
+        inputDisabled = false;
+    }
+    IEnumerator deny()
+    {
+        animator.SetTrigger("deny");
+        inputDisabled = true;
+        yield return new WaitForSeconds(1);
         inputDisabled = false;
     }
 }

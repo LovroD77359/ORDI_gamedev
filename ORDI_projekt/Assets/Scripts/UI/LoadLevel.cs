@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadLevel : MonoBehaviour
 {
     public GameObject Level2Button;
     public GameObject Level3Button;
     public GameObject Level4Button;
-    public GameObject Mistletoe;
+    public RawImage Background;
+    public Texture LevelSelectBg;
+    public Texture LevelSelectBgFinished;
 
     private void Start()
     {
@@ -17,7 +20,7 @@ public class LoadLevel : MonoBehaviour
             Level2Button.SetActive(false); // Disable buttons if LevelLoader is missing
             Level3Button.SetActive(false);
             Level4Button.SetActive(false);
-            Mistletoe.SetActive(false);
+            
             return;
         }
 
@@ -54,20 +57,28 @@ public class LoadLevel : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void SetLevelsComplete(int number)
     {
-        PlayerPrefs.SetInt("LevelsCompleted", 0);
+        PlayerPrefs.SetInt("LevelsCompleted", number);
         PlayerPrefs.Save();
         UpdateUI(); // Update the UI state after reset
-        Debug.Log("PlayerPrefs Saved (" + PlayerPrefs.GetInt("LevelsCompleted", 0) + ")");
+        Debug.Log("PlayerPrefs Saved (" + PlayerPrefs.GetInt("LevelsCompleted", number) + ")");
     }
 
     private void UpdateUI()
     {
         int levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
-        Level2Button.SetActive(levelsCompleted >= 1); // Show Level 2 button if Level 1 is completed
+        Level2Button.SetActive(levelsCompleted >= 1); // Show Level 2 button if Level 1 is completed etc
         Level3Button.SetActive(levelsCompleted >= 2);
         Level4Button.SetActive(levelsCompleted >= 3);
-        Mistletoe.SetActive(levelsCompleted == 4);   // Show Mistletoe if both levels are completed
+        
+        if (levelsCompleted == 4)
+        {
+            Background.texture = LevelSelectBgFinished;
+        }
+        else
+        {
+            Background.texture = LevelSelectBg;
+        }
     }
 }

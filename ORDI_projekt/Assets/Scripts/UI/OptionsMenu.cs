@@ -16,6 +16,16 @@ public class OptionsMenu : MonoBehaviour
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
+        List<Resolution> tempList = new List<Resolution>();
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (Mathf.Round(((float)resolutions[i].width / (float)resolutions[i].height) * 100) == 178)
+            {
+                tempList.Add(resolutions[i]);
+            }
+        }
+        resolutions = tempList.ToArray();
+
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++) 

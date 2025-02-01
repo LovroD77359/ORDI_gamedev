@@ -16,13 +16,16 @@ public class InstrStartUp : MonoBehaviour
     public GameObject Panel4;
     public GameObject Panel5;
     public GameObject Panel6;
+    public GameObject PauseMenu;
 
     private GameObject[] panels;
-    private bool wentToEnd = false;
+    private PauseMenu pauseMenuScript;
+
     // Start is called before the first frame update
     void Start()
     {
         int levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
+        Debug.Log(levelsCompleted);
         if (levelsCompleted == 0)
         {
             Instructions.SetActive(true);
@@ -36,6 +39,9 @@ public class InstrStartUp : MonoBehaviour
             BackwardsButton.gameObject.SetActive(false);
             ContinueButton.gameObject.SetActive(false);
             panels = new GameObject[] { Panel1, Panel2, Panel3, Panel4, Panel5, Panel6 };
+            pauseMenuScript = PauseMenu.GetComponent<PauseMenu>();
+            pauseMenuScript.isMenuDisabled = true;
+            Cursor.visible = true;
         }
         else
         { 
@@ -43,21 +49,9 @@ public class InstrStartUp : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (wentToEnd)
-        {
-            ContinueButton.gameObject.SetActive(true);    
-        }
-    }
-
     public void Forward()
     {
         panelNumber++;
-        if (panelNumber == 5) 
-        {
-            wentToEnd = true;
-        }
         updatePanels();
     }
 
@@ -70,6 +64,8 @@ public class InstrStartUp : MonoBehaviour
     public void Continue()
     {
         Instructions.SetActive(false);
+        pauseMenuScript.isMenuDisabled = false;
+        Cursor.visible = false;
     }
 
     void updatePanels()
@@ -88,17 +84,20 @@ public class InstrStartUp : MonoBehaviour
         if (panelNumber == 0)
         {
             ForwardsButton.gameObject.SetActive(true);
-            BackwardsButton.gameObject.SetActive(false); 
+            BackwardsButton.gameObject.SetActive(false);
+            ContinueButton.gameObject.SetActive(false);
         }
         else if (panelNumber == panels.Length - 1)
         {
             ForwardsButton.gameObject.SetActive(false);
             BackwardsButton.gameObject.SetActive(true);
+            ContinueButton.gameObject.SetActive(true);
         }
         else
         {
             ForwardsButton.gameObject.SetActive(true);
             BackwardsButton.gameObject.SetActive(true);
+            ContinueButton.gameObject.SetActive(false);
         }
     }
 }

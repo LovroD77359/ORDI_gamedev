@@ -718,7 +718,7 @@ CapsuleCollider:
   m_Radius: 0.05
   m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: 0, y: -0.475, z: -0.65}
+  m_Center: {x: 0, y: -0.475, z: -0.66}
 --- !u!136 &7026670541628924520
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -741,7 +741,7 @@ CapsuleCollider:
   m_Radius: 0.05
   m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: 0, y: -0.475, z: 0.65}
+  m_Center: {x: 0, y: -0.475, z: 0.66}
 --- !u!136 &1599530468572925920
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -764,7 +764,7 @@ CapsuleCollider:
   m_Radius: 0.05
   m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: -0.65, y: -0.475, z: 0}
+  m_Center: {x: -0.66, y: -0.475, z: 0}
 --- !u!136 &8554270463320886837
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -787,7 +787,7 @@ CapsuleCollider:
   m_Radius: 0.05
   m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: 0.65, y: -0.475, z: 0}
+  m_Center: {x: 0.66, y: -0.475, z: 0}
 --- !u!82 &2783343818364642993
 AudioSource:
   m_ObjectHideFlags: 0
