@@ -2943,7 +2943,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2001399520}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2351535502213815542, guid: d9d024647978712439d1691281defb2d, type: 3}
       propertyPath: m_Name
@@ -18285,6 +18285,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3562379062330246341, guid: aba15ac29d4f3d54298d0699618a34b2, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6061066612981498789, guid: aba15ac29d4f3d54298d0699618a34b2, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6267187814466901826, guid: aba15ac29d4f3d54298d0699618a34b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 406.18555
@@ -18644,11 +18652,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2351535502213815542, guid: d9d024647978712439d1691281defb2d, type: 3}
   m_PrefabInstance: {fileID: 184707206}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1059280357 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8591072606216919201, guid: d9d024647978712439d1691281defb2d, type: 3}
-  m_PrefabInstance: {fileID: 184707206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1059280358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18663,15 +18666,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Instructions: {fileID: 1059280356}
   panelNumber: 0
-  ForwardsButton: {fileID: 2061308613}
-  BackwardsButton: {fileID: 587573324}
-  ContinueButton: {fileID: 2019709003}
-  Panel1: {fileID: 1193444623}
-  Panel2: {fileID: 1654918067}
-  Panel3: {fileID: 553594816}
-  Panel4: {fileID: 1249232598}
-  Panel5: {fileID: 1785325897}
-  Panel6: {fileID: 2123858373}
+  ForwardsButton: {fileID: 0}
+  BackwardsButton: {fileID: 0}
+  ContinueButton: {fileID: 0}
+  Panel1: {fileID: 0}
+  Panel2: {fileID: 0}
+  Panel3: {fileID: 0}
+  Panel4: {fileID: 0}
+  Panel5: {fileID: 0}
+  Panel6: {fileID: 0}
+  PauseMenu: {fileID: 0}
 --- !u!82 &1059280359
 AudioSource:
   m_ObjectHideFlags: 0
@@ -38436,3 +38440,4 @@ SceneRoots:
   - {fileID: 7846797613393898158}
   - {fileID: 304343751176545232}
   - {fileID: 1407514790}
+  - {fileID: 184707206}
