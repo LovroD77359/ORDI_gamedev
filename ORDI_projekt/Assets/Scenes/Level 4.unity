@@ -5421,7 +5421,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: f3f9ba03f7d53d74b94889a3b314524a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.5
+  volume: 0.3
 --- !u!82 &267955167
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15573,7 +15573,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: f3f9ba03f7d53d74b94889a3b314524a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.5
+  volume: 0.15
 --- !u!114 &507678035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15594,7 +15594,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: f3f9ba03f7d53d74b94889a3b314524a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.5
+  volume: 0.1
 --- !u!114 &507678036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15615,7 +15615,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: f3f9ba03f7d53d74b94889a3b314524a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.5
+  volume: 0.1
 --- !u!114 &507678037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15636,7 +15636,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: f3f9ba03f7d53d74b94889a3b314524a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.5
+  volume: 0.15
 --- !u!82 &507678038
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26814,7 +26814,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: f3f9ba03f7d53d74b94889a3b314524a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.5
+  volume: 0.15
 --- !u!114 &859070772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26835,7 +26835,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: f3f9ba03f7d53d74b94889a3b314524a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.5
+  volume: 0.15
 --- !u!1001 &867488011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30948,9 +30948,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -6892041077915196389, guid: 3add15bd978bcc9478b263f5d280a010, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7cf0e92b26aa7064e8ff8cd77e0336af, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.375
+  m_Volume: 0.1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -37359,7 +37359,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1565875828604771513, guid: a2197bfba6080704cb13d38bb8b0d44e, type: 3}
       propertyPath: volume
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1565875828604771513, guid: a2197bfba6080704cb13d38bb8b0d44e, type: 3}
       propertyPath: targetX
@@ -67320,10 +67320,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 329070014623107745, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: -6892041077915196389, guid: 3add15bd978bcc9478b263f5d280a010, type: 2}
     - target: {fileID: 1194539078471512700, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: m_Layer
       value: 2

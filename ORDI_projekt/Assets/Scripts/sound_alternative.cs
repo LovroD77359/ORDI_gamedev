@@ -76,7 +76,8 @@ public class AnimationSoundPlayer : MonoBehaviour
     {
         if (soundMap.TryGetValue(animationName, out AudioClip clip) && clip != null)
         {
-            audioSource.PlayOneShot(clip); // OneShot osigurava da zvuk završi iako se animacija promijeni
+            audioSource.clip = clip;
+            audioSource.Play(); // OneShot osigurava da zvuk završi iako se animacija promijeni
         }
     }
 }

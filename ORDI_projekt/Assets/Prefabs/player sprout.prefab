@@ -656,6 +656,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6327336894565922146}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5063949952386807180}
   m_SourcePrefab: {fileID: 100100000, guid: 8ca4966104cca6444b330ea1e63a5881, type: 3}
 --- !u!4 &5031263313487980034 stripped
 Transform:
@@ -803,7 +806,7 @@ AudioSource:
   m_GameObject: {fileID: 5663685546276797624}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6892041077915196389, guid: 3add15bd978bcc9478b263f5d280a010, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1014,3 +1017,22 @@ MonoBehaviour:
   normalLiquidParticleEmitter: {fileID: 2513294949238471615}
   debuffLiquidParticleEmitter: {fileID: 4549407092308026176}
   YOffset: -0.13
+--- !u!114 &5063949952386807180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5663685546276797624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daffcf23d3479cd41845b84189c18e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 7463844577524007044}
+  animator: {fileID: 7562163186087543376}
+  animationSounds:
+  - animationName: metarig|growAction
+    soundClip: {fileID: 8300000, guid: 2d241ab57da767b40973cfc75a58262b, type: 3}
+  - animationName: metarig|ungrowAction
+    soundClip: {fileID: 8300000, guid: e985a6e43d399064b820f25ee57c8635, type: 3}

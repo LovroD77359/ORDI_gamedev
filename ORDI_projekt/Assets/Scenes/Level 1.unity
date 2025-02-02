@@ -1031,33 +1031,6 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 7574374326080566407, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
   m_PrefabInstance: {fileID: 301546744}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &24080899 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 7463844577524007044, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-  m_PrefabInstance: {fileID: 301546744}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &24080901 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7562163186087543376, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-  m_PrefabInstance: {fileID: 301546744}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &24080904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24080884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daffcf23d3479cd41845b84189c18e4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 24080899}
-  animator: {fileID: 24080901}
-  animationSounds:
-  - animationName: metarig|growAction
-    soundClip: {fileID: 8300000, guid: 2d241ab57da767b40973cfc75a58262b, type: 3}
 --- !u!1001 &25936550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7415,18 +7388,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 329070014623107745, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 329070014623107745, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 329070014623107745, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: -6892041077915196389, guid: 3add15bd978bcc9478b263f5d280a010, type: 2}
     - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: cam
       value: 
@@ -7523,17 +7484,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7463844577524007044, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-      propertyPath: MinDistance
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5663685546276797624, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 24080904}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
 --- !u!1001 &303530795
 PrefabInstance:
@@ -26920,7 +26874,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -6892041077915196389, guid: 3add15bd978bcc9478b263f5d280a010, type: 2}
   m_audioClip: {fileID: 8300000, guid: 76c9917f3c677a44cbad6c91ec497e1a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -38112,10 +38066,6 @@ PrefabInstance:
     - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: walkingInWaterSound
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2536330601233494204, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6600821601016585793, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: walkingParticleEmitter

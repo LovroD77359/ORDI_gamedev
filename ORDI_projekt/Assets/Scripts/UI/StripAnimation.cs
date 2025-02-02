@@ -29,6 +29,8 @@ public class StripAnimation : MonoBehaviour
                 panelCount += rawImagesArray.Length;
             }
         }
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
