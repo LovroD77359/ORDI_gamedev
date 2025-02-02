@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ public class InstrStartUp : MonoBehaviour
     public GameObject Panel4;
     public GameObject Panel5;
     public GameObject Panel6;
-    public GameObject PauseMenu;
+    public GameObject pauseMenu;
 
     private GameObject[] panels;
     private PauseMenu pauseMenuScript;
@@ -26,7 +27,7 @@ public class InstrStartUp : MonoBehaviour
     {
         int levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
         Debug.Log(levelsCompleted);
-        if (levelsCompleted == 0)
+        if (levelsCompleted == 0 && !PauseMenu.resetOccurred)
         {
             Instructions.SetActive(true);
             Panel1.gameObject.SetActive(true);
@@ -39,14 +40,20 @@ public class InstrStartUp : MonoBehaviour
             BackwardsButton.gameObject.SetActive(false);
             ContinueButton.gameObject.SetActive(false);
             panels = new GameObject[] { Panel1, Panel2, Panel3, Panel4, Panel5, Panel6 };
-            pauseMenuScript = PauseMenu.GetComponent<PauseMenu>();
+            pauseMenuScript = pauseMenu.GetComponent<PauseMenu>();
             pauseMenuScript.isMenuDisabled = true;
-            Cursor.visible = true;
+            StartCoroutine(waitAndPause());
         }
         else
         { 
             Instructions.SetActive(false);
         }
+    }
+
+    IEnumerator waitAndPause()
+    {
+        yield return new WaitForSeconds(0.5f);
+        pauseMenuScript.Pause();
     }
 
     public void Forward()
@@ -65,7 +72,7 @@ public class InstrStartUp : MonoBehaviour
     {
         Instructions.SetActive(false);
         pauseMenuScript.isMenuDisabled = false;
-        Cursor.visible = false;
+        pauseMenuScript.Resume();
     }
 
     void updatePanels()

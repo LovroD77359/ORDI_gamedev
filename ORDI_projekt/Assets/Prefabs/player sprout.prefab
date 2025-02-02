@@ -724,6 +724,9 @@ MonoBehaviour:
   mudSound: {fileID: 0}
   waterSound: {fileID: 0}
   floorSound: {fileID: 0}
+  floorVolume: 0.1
+  waterVolume: 0.5
+  mudVolume: 0.5
 --- !u!95 &7562163186087543376
 Animator:
   serializedVersion: 5

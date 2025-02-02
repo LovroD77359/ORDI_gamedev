@@ -8,6 +8,7 @@ public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public TMPro.TMP_Dropdown resolutionDropdown;
+    public RawImage fullscreenCheckmark;
     
     private Resolution[] resolutions;
 
@@ -19,7 +20,7 @@ public class OptionsMenu : MonoBehaviour
         List<Resolution> tempList = new List<Resolution>();
         for (int i = 0; i < resolutions.Length; i++)
         {
-            if (Mathf.Round(((float)resolutions[i].width / (float)resolutions[i].height) * 100) == 178)
+            if (Mathf.Round(((float)resolutions[i].width / (float)resolutions[i].height) * 100) == 178 && !tempList.Exists(res => res.width == resolutions[i].width))
             {
                 tempList.Add(resolutions[i]);
             }
@@ -64,5 +65,6 @@ public class OptionsMenu : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+        fullscreenCheckmark.enabled = !fullscreenCheckmark.enabled;
     }
 }

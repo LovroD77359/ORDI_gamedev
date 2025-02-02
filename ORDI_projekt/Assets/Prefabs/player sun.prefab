@@ -725,6 +725,9 @@ MonoBehaviour:
   mudSound: {fileID: 0}
   waterSound: {fileID: 0}
   floorSound: {fileID: 0}
+  floorVolume: 0.1
+  waterVolume: 0.5
+  mudVolume: 0.5
 --- !u!108 &3053577965240019216
 Light:
   m_ObjectHideFlags: 0

@@ -10,10 +10,16 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool IsGamePaused = false;
+    public static bool resetOccurred = false;
     public GameObject PauseMenuUI;
     public GameObject OptionsMenuUI;
     public GameObject InstructionsMenuUI;
     public bool isMenuDisabled = false;
+
+    void Start()
+    {
+        Resume();
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,7 +37,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void Resume()
+    public void Resume()
     {
         PauseMenuUI.SetActive(false);
         OptionsMenuUI.SetActive(false);
@@ -55,9 +61,12 @@ public class PauseMenu : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;  // Lock cursor to the center
     }
 
-    void Pause() 
-    { 
-        PauseMenuUI.SetActive(true);
+    public void Pause() 
+    {
+        if (!isMenuDisabled)
+        {
+            PauseMenuUI.SetActive(true);
+        }
         Time.timeScale = 0f;
         IsGamePaused = true;
 
@@ -85,6 +94,12 @@ public class PauseMenu : MonoBehaviour
     {
         Scene sceneIndex = SceneManager.GetActiveScene();
         SceneManager.LoadSceneAsync(sceneIndex.buildIndex);
-        IsGamePaused = false;
+        resetOccurred = true;
+    }
+
+    IEnumerator waitAndResetBool()
+    {
+        yield return new WaitForSeconds(0.1f);
+        resetOccurred = false;
     }
 }

@@ -33,11 +33,14 @@ public class StripAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown) 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadSceneAsync(1);
+        }
+        else if (Input.anyKeyDown) 
         {
             panelNumber++;
             animator.SetInteger("panelNumber", panelNumber);
-         
         }
         if (panelNumber > panelCount)
         {

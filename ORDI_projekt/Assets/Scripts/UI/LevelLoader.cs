@@ -7,7 +7,6 @@ public class LevelLoader : MonoBehaviour
     public static LevelLoader instance;  // Singleton instance
 
     public Animator animator;
-
     public float transitionTime = 1f;
 
     void Awake()
