@@ -3,20 +3,28 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Rock
+  - Ground
+  - HookPlant
+  - Decoration
+  - MudAndWater
+  - GroundCollider
+  - ScriptCollider
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Outline
   - Water
   - UI
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Voda
+  - Blato
+  - Sunce
+  - Biljka
+  - forbidenJump
   - 
   - 
   - 

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PanUp
+  m_Controller: {fileID: 9100000, guid: 41994d17018d6ba488f7713dd3771522, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: f93e21119aab0994b9557eaf82d85aec, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1b39684943856d04aa4b404e9fc05aef, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4f07336863679fb44a38333c2e0fd9d1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ba806d67200dbba478bf6d1232065c5e, type: 2}
