@@ -38,6 +38,8 @@ public class StripAnimation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Cursor.visible = true;
+
             if (LevelLoader.instance != null)
             {
                 LevelLoader.instance.LoadNewLevel(1);
