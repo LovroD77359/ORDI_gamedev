@@ -77320,7 +77320,7 @@ PrefabInstance:
     - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: floorSound
       value: 
-      objectReference: {fileID: 8300000, guid: 1ac44f52c283d48f480720313c2028f8, type: 3}
+      objectReference: {fileID: 8300000, guid: ac50e3238f3e144b4afd3e73dfe5005f, type: 3}
     - target: {fileID: 1612680478285813090, guid: db4f91a2ddecc3c4fbc579406feb35fb, type: 3}
       propertyPath: waterSound
       value: 
@@ -77637,7 +77637,7 @@ PrefabInstance:
     - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: floorSound
       value: 
-      objectReference: {fileID: 8300000, guid: 1ac44f52c283d48f480720313c2028f8, type: 3}
+      objectReference: {fileID: 8300000, guid: ac50e3238f3e144b4afd3e73dfe5005f, type: 3}
     - target: {fileID: 4287239988604080320, guid: 99d5f5213db68914b89b5bdec354427c, type: 3}
       propertyPath: waterSound
       value: 
