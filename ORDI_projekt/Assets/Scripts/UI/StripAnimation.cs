@@ -11,6 +11,7 @@ public class StripAnimation : MonoBehaviour
 
     private Animator animator;
     private int panelCount = 0;
+    private bool loadingNextScene = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,17 +36,34 @@ public class StripAnimation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadSceneAsync(1);
+            if (LevelLoader.instance != null)
+            {
+                LevelLoader.instance.LoadNewLevel(1);
+            }
+            else
+            {
+                Debug.LogError("LevelLoader instance not found! Loading scene directly.");
+                SceneManager.LoadScene("Load level");
+            }
         }
         else if (Input.anyKeyDown) 
         {
             panelNumber++;
             animator.SetInteger("panelNumber", panelNumber);
         }
-        if (panelNumber > panelCount)
+        if (panelNumber > panelCount && !loadingNextScene)
         {
-            Scene nextScene = SceneManager.GetActiveScene();
-            SceneManager.LoadSceneAsync(nextScene.buildIndex + 1);
+            loadingNextScene = true;
+            int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+            if (LevelLoader.instance != null)
+            {
+                LevelLoader.instance.LoadNewLevel(currentLevelIndex + 1);
+            }
+            else
+            {
+                Debug.LogError("LevelLoader instance not found! Loading scene directly.");
+                SceneManager.LoadSceneAsync(currentLevelIndex + 1);
+            }
         }
     }
 }
