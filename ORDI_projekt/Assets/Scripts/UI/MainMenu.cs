@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
         int yspot = cursorTex.height / 8;
         Vector2 hotSpot = new Vector2(xspot, yspot);
         Cursor.SetCursor(cursorTex, hotSpot, mode);
+        Cursor.visible = true;
     }
 
     public void LoadLevelSelect()

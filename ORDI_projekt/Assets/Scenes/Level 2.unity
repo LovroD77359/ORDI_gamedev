@@ -9114,7 +9114,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5992618212607800671, guid: bcd573bc933a24b4ba91ee38479cfba8, type: 3}
       propertyPath: volume
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5992618212607800671, guid: bcd573bc933a24b4ba91ee38479cfba8, type: 3}
       propertyPath: targetX
@@ -11678,7 +11678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2346669493171068828, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
       propertyPath: volume
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2346669493171068828, guid: 3f88190b7d272214a99ab8c5a7c20508, type: 3}
       propertyPath: targetX
@@ -11863,7 +11863,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: 2036d1ca5b5e5d242b2b0ac71f5e6f1a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.4
+  volume: 0.2
 --- !u!1001 &664494798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23679,7 +23679,7 @@ MonoBehaviour:
   movingSound: {fileID: 8300000, guid: 2036d1ca5b5e5d242b2b0ac71f5e6f1a, type: 3}
   enableLooping: 1
   fadeDuration: 0.06
-  volume: 0.4
+  volume: 0.2
 --- !u!1001 &1392685212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32326,7 +32326,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5992618212607800671, guid: f1ab705220255ac45b1cb25fbabcb819, type: 3}
       propertyPath: volume
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5992618212607800671, guid: f1ab705220255ac45b1cb25fbabcb819, type: 3}
       propertyPath: targetX

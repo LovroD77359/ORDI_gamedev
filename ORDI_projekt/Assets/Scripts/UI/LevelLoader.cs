@@ -62,7 +62,11 @@ public class LevelLoader : MonoBehaviour
             newClip = treeTheme;
         }
         float newVolume = defaultVolume;
-        if (levelIndex == 2 || levelIndex == 5 || levelIndex == 8)
+        if ((levelIndex == 0 && currentLevelIndex != 1) || (levelIndex == 1 && currentLevelIndex != 0) || levelIndex == 8 || levelIndex == 9)
+        {
+            newVolume *= 1.5f;
+        }
+        if (levelIndex == 2 || levelIndex == 5)
         {
             newVolume *= 0.5f;
         }
