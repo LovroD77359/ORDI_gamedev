@@ -56692,9 +56692,9 @@ Canvas:
   m_GameObject: {fileID: 1909626994}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 9120525070702363060}
+  m_PlaneDistance: 1
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -68002,6 +68002,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4671715093195885896, guid: 216f48b77a0e1e54cb459b58a0692af5, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 9120525070702363060}
+    - target: {fileID: 4671715093195885896, guid: 216f48b77a0e1e54cb459b58a0692af5, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
@@ -68118,6 +68122,11 @@ PrefabInstance:
 --- !u!20 &9120525070702363059 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2316288023167391770, guid: 004aa7bca9ae0b7488362ff06fad86f1, type: 3}
+  m_PrefabInstance: {fileID: 9120525070702363058}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &9120525070702363060 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7838310544865871404, guid: 004aa7bca9ae0b7488362ff06fad86f1, type: 3}
   m_PrefabInstance: {fileID: 9120525070702363058}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
