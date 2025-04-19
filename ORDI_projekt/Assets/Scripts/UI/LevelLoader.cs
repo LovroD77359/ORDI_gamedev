@@ -33,6 +33,7 @@ public class LevelLoader : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
         defaultVolume = audioSource.volume;
+        audioSource.ignoreListenerPause = true;
     }
 
     public void LoadNewLevel(int buildIndex)

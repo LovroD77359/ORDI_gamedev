@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
 
 public class PauseMenu : MonoBehaviour
@@ -15,10 +17,16 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionsMenuUI;
     public GameObject InstructionsMenuUI;
     public bool isMenuDisabled = false;
+    
+    private AudioSource audioSource;
 
     void Start()
     {
         Resume();
+        waitAndResetBool();
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.ignoreListenerPause = true;
     }
 
     // Update is called once per frame
@@ -32,7 +40,7 @@ public class PauseMenu : MonoBehaviour
             }
             else 
             {
-                Pause();;
+                Pause();
             }
         }
     }
@@ -43,6 +51,7 @@ public class PauseMenu : MonoBehaviour
         OptionsMenuUI.SetActive(false);
         InstructionsMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        AudioListener.pause = false;
         IsGamePaused = false;
 
 #if UNITY_EDITOR
@@ -68,6 +77,7 @@ public class PauseMenu : MonoBehaviour
             PauseMenuUI.SetActive(true);
         }
         Time.timeScale = 0f;
+        AudioListener.pause = true;
         IsGamePaused = true;
 
         Cursor.visible = true;
@@ -88,6 +98,7 @@ public class PauseMenu : MonoBehaviour
 
         IsGamePaused = false;
         Time.timeScale = 1f;  // Ensure time resumes correctly
+        AudioListener.pause = false;
     }
 
     public void Reset()
@@ -99,7 +110,7 @@ public class PauseMenu : MonoBehaviour
 
     IEnumerator waitAndResetBool()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1);
         resetOccurred = false;
     }
 }

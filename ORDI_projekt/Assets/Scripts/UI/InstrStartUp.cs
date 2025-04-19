@@ -21,6 +21,7 @@ public class InstrStartUp : MonoBehaviour
 
     private GameObject[] panels;
     private PauseMenu pauseMenuScript;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -48,12 +49,18 @@ public class InstrStartUp : MonoBehaviour
         { 
             Instructions.SetActive(false);
         }
+
     }
 
     IEnumerator waitAndPause()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
         pauseMenuScript.Pause();
+        if (!Instructions.activeInHierarchy)
+            Instructions.SetActive(true);
+
+        audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.ignoreListenerPause = true;
     }
 
     public void Forward()
